@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset=UTF-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSL</title>
+<link rel="shortcut icon" th:href="@{../image/caridade.ico}" />
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="dist/jquery.bootgrid.css" rel="stylesheet" />
+<link href="css/menu-customer.css" rel="stylesheet" />
+<script type="text/javascript" src="js/moderniz.2.8.1.js"></script>
+
+</head>
+<body>
+	<header id="header" class="navbar navbar-default navbar-fixed-top">
+		<div th:replace="fragmentos/header :: cabecalho"></div>
+	</header>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12"  id="usuario">
+				<table id="gridUser">
+						<tr th:each="usuario :${usuario}">
+							<td class="col">
+								<span th:text="${usuario.nome}" ></span>
+							</td>
+						</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script src="lib/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="dist/jquery.bootgrid.js"></script>
+	<script src="dist/jquery.bootgrid.fa.js"></script>
+	<script>
+	var usu =$('#usuario span').text();
+	console.log('Teste :' + usu);
+	localStorage.setItem('usuario',usu);
+	var usu2 = localStorage.getItem('usuario');
+	console.log('usu2 :' + usu2);
+	$.ajax({
+		  type: "GET",
+		  url: "doacao/preparar",
+		  //data: JSON.parse(dataSend),
+		  success: function() {
+			  alert("Enviado.");
+		  },
+		  error: function(e){
+			console.log('ERRO:' + JSON.stringify(e));
+		  }
+	});
+	</script>
+<!-- div th:replace="fragmentos/footer :: rodape"></div-->
+</body>
+</html>

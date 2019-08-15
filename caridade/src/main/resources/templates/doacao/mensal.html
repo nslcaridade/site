@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset=UTF-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSL</title>
+<link rel="shortcut icon" th:href="@{../image/caridade.ico}" />
+<link href="../css/bootstrap.css" rel="stylesheet" />
+<link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
+<link href="../css/menu-customer.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
+
+</head>
+<body>
+	<header id="header" class="navbar navbar-default navbar-fixed-top">
+		<div th:replace="fragmentos/header :: cabecalho"></div>
+	</header>
+	<div class="container-fluid">
+	<div style="text-align:center"><h4>Relatório de doação mensal por instituição</h4></div>
+		<table id="selecao" class="table table-condensed table-hover table-striped hidden-print" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
+			<thead>
+				<tr>
+					<th>
+						<h5>Mês</h5>
+						<select name="mes" class="w3-select w3-select w3-border w3-margin-bottom" id="mes" required>
+							<option selected="selected"></option>
+							<option  th:each="mes: ${mes}"  th:value="${mes.id}" th:data-mesname="${mes.nome}" th:text="${mes.nome}"></option>
+						</select>
+    				</th>
+    				<th>
+						<h5>Instituição</h5> 
+						<select id="instituicao" name="instituicao" class="w3-select w3-select w3-border w3-margin-bottom" required>
+							<option  th:each="instituicao: ${instituicoes}"  th:value="${instituicao.id}" th:data-instname="${instituicao.nome}" th:text="${instituicao.nome}" ></option>
+						</select>
+					</th>
+				</tr>
+			</thead>
+		</table>
+		<div class="row">
+			<div class="col-md-5">
+				<button id="geraPdf" type="button" class="btn btn-default hidden-print">Gera PDF</button>
+				<button id="geraLista" type="button" class="btn btn-default hidden-print">Gera Relatorio</button>
+				<button id="clear" type="button" class="btn btn-default hidden-print">Limpa</button>
+				<table id="gridRel" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true" data-show-print="false" >
+					<thead>
+						<tr>
+							<th data-column-id="mes" data-type="numeric" data-visible="false" data-width="5%">MÊS</th>
+							<th data-column-id="item" data-type="numeric" data-visible="true" data-width="20%">ITEM</th>
+							<th data-column-id="qtd" data-type="numeric" data-visible="true" data-width="5%">QUANTIDADE</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
+		</div>
+	</div>
+
+	<script src="../lib/jquery-1.11.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../dist/jquery.bootgrid.js"></script>
+	<script src="../dist/jquery.bootgrid.fa.js"></script>
+	<script>
+	
+	$('#instituicao').change(function () {
+		$("#gridRel").bootgrid("clear");
+		var instname=$(this).find('option:selected').attr('data-instname');
+		$('#instname').val(instname);
+		});
+	
+	$('#mes').change(function () {
+		$("#gridRel").bootgrid("clear");
+		var mesname=$(this).find('option:selected').attr('data-mesname');
+		$('#mesname').val(mesname);
+		});
+
+	var tabelaImpressao; 
+       
+	function preparaRelatorio(registro){
+		tabelaImpressao
+	}
+	
+	function formatNumber(valor){
+		if ( valor == 0 ){
+			return "";
+		} else {
+			var n = valor.toString();
+			var r = '';
+			var x = 0;
+				for (var i = n.length; i > 0; i--) {
+			    r += n.substr(i - 1, 1) + (x == 2 && i != 1 ? '.' : '');
+			    x = x == 2 ? 0 : x + 1;
+			}
+				return r.split('').reverse().join('');
+		}
+	}
+	
+	$(document).ready(function() {
+		
+		$(document).ready(function() {
+			$("#gridRel").bootgrid({
+					rowCount : [ 10, 50, 75, -1 ]
+				});
+		});
+	});
+	
+	$("#clear").on("click", function() {
+		$("#gridRel").bootgrid("clear");
+	});
+	
+	$("#geraPdf").click(function () {
+		window.open(encodeURI("https://nslcaridade.com.br/caridade/relatorio_"+$('#instituicao').val()+".pdf"));
+		//window.open(encodeURI("c://Users//alexandre.duarte//Documents//relatorio_"+$('#instituicao').val()+".pdf"));
+    });
+	
+	$('#geraLista').click(function () {
+		$.ajax({
+			  type: "GET",
+			  url: "mensal/"+$('#instituicao').val()+"/"+$('#mes').val(),
+			  contentType: "application/json; charset=utf-8",
+			  //data: {anoSelecionado},
+			  //data: JSON.parse(dataSend),
+			  success: function(resultado) {
+				//console.log('resultado:' + JSON.stringify(resultado));
+			  	strJson = resultado;
+				for (var i = 0; i < resultado.length; i++) {
+					$("#gridRel").bootgrid("append",[{
+						mes: $('#mesname').val(),
+						item : resultado[i].item,
+						qtd : formatNumber(resultado[i].quantidade),
+					}]);
+				}
+			  },
+			  error: function(e){
+				console.log('ERRO:' + JSON.stringify(e));
+			  }
+		});
+	}); 
+	</script>
+	
+	<!-- div th:replace="fragmentos/footer :: rodape"></div-->
+</body>
+</html>
+

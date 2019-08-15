@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title>Create an account</title>
+
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+      <link href="../css/common.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+          <h2 class="form-signin-heading">Create your account</h2>
+              <div >
+              <table id="selecao" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
+              <thead>
+				<tr>
+					<th>
+                 	 <input id="username" type="text" placeholder="Username" ></input>
+                  </th>
+                  <th>
+	                <input id="password" type="password"  placeholder="Password"></input>
+                  </th>
+                  <th>
+                    <input id="passwordConfirm" type="password" placeholder="Confirm your password"></input>
+                  </th>
+                </tr>
+                </thead>
+                </table>
+              </div>
+
+            <button id="salva"  class="btn btn-default" >Submit</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script>
+    $("#salva").on(
+			"click",
+			function() {
+				var dataSend = {
+						username: $('#username').val(),
+						password: $('#password').val(),
+						passwordConfirm: $('#passwordConfirm').val()
+				};
+				$.ajax({
+					  type: "POST",
+					  url: "registration",
+					  contentType: "application/json; charset=utf-8",
+					  data: JSON.stringify(dataSend),
+					  //data: JSON.parse(dataSend),
+					  success: function() {
+						  alert("Registrado");
+					  },
+					  error: function(e){
+						  console.log('ERRO:'+JSON.stringify(e));
+					  }
+				});
+				console.log('Teste' + JSON.stringify(dataSend));
+			});
+    </script>
+  </body>
+</html>
