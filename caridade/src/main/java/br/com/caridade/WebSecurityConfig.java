@@ -54,8 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				 							  "/Mensagem",
 				 							  "/Mensagem/**",
 				 							  "/User",
+				 							  "/User/**",
+				 							  "/User/Delete/**",
 				 							  "/User/Localiza",
+				 							  "/User/Localiza/**",
 				 							  "/User/Atualiza",
+				 							  "/User/Atualiza/**",
 				 							  "/User/Delete").permitAll()
 		  .anyRequest().authenticated() .and() .formLogin() .loginPage("/login")
 		  .permitAll() .and() .logout() .permitAll();

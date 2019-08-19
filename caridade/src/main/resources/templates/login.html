@@ -20,7 +20,7 @@
 	</header>
 <div class="home-page" th:style="'background-image:url(' + @{/image/festa_pier.jpg} + ');'">
     <div class="container-login text-center">
-    	<form class="form-signin pb-3  ${error != null ? 'has-error' : ''} " style="background-color:#ff8533; border-radius: 30px 30px 30px 30px;">
+    	<form method="POST" action="login" class="form-signin pb-3  ${error != null ? 'has-error' : ''} " style="background-color:#ff8533; border-radius: 30px 30px 30px 30px;">
 		  <h1 class="h3 mb-3 font-weight-normal">Acessar como administrador</h1>
 		  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		  <label for="username" class="sr-only">Email address</label>
