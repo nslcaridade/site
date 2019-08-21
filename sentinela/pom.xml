@@ -69,21 +69,6 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.9</version>
 		</dependency>
-		<!-- Libs para uso do log4j custom -->
-		<dependency>
-		    <groupId>javax.resource</groupId>
-		    <artifactId>connector</artifactId>
-		    <version>1.0</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-web</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>br.com.cmsoftware.log4j2.log</groupId>
-		    <artifactId>log4j2-custom</artifactId>
-		    <version>1.0</version>
-		</dependency>
 	</dependencies>
 
 	<build>
