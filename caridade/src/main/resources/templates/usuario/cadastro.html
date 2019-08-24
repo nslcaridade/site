@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="tel/html" charset=UTF-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSL</title>
+<link rel="shortcut icon" th:href="@{../image/caridade.ico}" />
+<link href="../css/bootstrap.css" rel="stylesheet" />
+<link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
+<link href="../css/menu-customer.css" rel="stylesheet" />
+<script type="tel/javascript" src="../js/moderniz.2.8.1.js"></script>
+
+</head>
+<body>
+<header id="header" class="navbar navbar-default navbar-fixed-top">
+	<div th:replace="fragmentos/header :: cabecalho"></div>
+</header>
+<div class="container-fluid">
+	<table id="selecao" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
+		<thead>
+			<tr>
+				<th><h5>Nome</h5><input id="nome" name="nome" type="tel"></th>
+				<th><h5>E-mail</h5><input id="email" name="email" type="tel"></th>
+				<th><h5>Celular</h5><input id="celular" name="celular" type="tel"></th>
+			</tr>
+			<tr>
+				<th><h5>Endereco</h5><input id="endereco" name="endereco" type="tel"></th>
+				<th><h5>Complemento</h5><input id="complemento" name="complemento" type="tel"></th>
+				<th><h5>Bairro</h5><input id="bairro" name="bairro" type="tel"></th>
+			</tr>
+			<tr>
+				<th><h5>Cidade</h5><input id="cidade" name="cidade" type="tel"></th>
+				<th><h5>UF</h5><input id="uf" name="uf" type="tel" size="2"></th>
+				<th><h5>CEP</h5><input id="cep" name="cep" type="tel"></th>
+			</tr>
+			<tr>
+				<th><h5>Data Nascimento</h5><input id="data_nascimento" name="data_nascimento" type="tel"></th>
+				<th><h5>Tipo Sanguinio</h5><input id="tipo_sangue" name="tipo_sangue" type="tel"></th>
+			</tr>
+		</thead>
+	</table>
+	<div class="row">
+			<div class="col-md-12">
+				<button id="salva" type="button" class="btn btn-default">Salva</button>
+				<button id="adciona" type="button" class="btn btn-default">Adiciona lista</button>
+				<button id="clear" type="button" class="btn btn-default">Limpa</button>
+				<button id="removeSelected" type="button" class="btn btn-default">Remove Selecionado</button>
+				<!--div class="table-responsive"-->
+				<table id="gridCad" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
+					<thead>
+						<tr>
+							<th data-column-id="id" data-identifier="true" data-type="numeric" data-width="10%">ID</th>
+							<th data-column-id="nome" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Nome</th>
+							<th data-column-id="endereco" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Endereco</th>
+							<th data-column-id="complemento" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Complemento</th>
+							<th data-column-id="bairro" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Bairro</th>
+							<th data-column-id="cidade" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Cidade</th>
+							<th data-column-id="uf" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">UF</th>
+							<th data-column-id="cep" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">CEP</th>
+							<th data-column-id="celular" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Celular</th>
+							<th data-column-id="email" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">E-mail</th>
+							<th data-column-id="data_nascimento" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Data Nascimento</th>
+							<th data-column-id="tipo_sangue" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Tipo Sangue</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<!--/div-->
+			</div>
+			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
+		</div>
+	<script src="../lib/jquery-1.11.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../dist/jquery.bootgrid.js"></script>
+	<script src="../dist/jquery.bootgrid.fa.js"></script>
+	<script>
+	var idLine = 0;
+	$(document).ready(function() {
+		$("#gridCad").bootgrid({
+				formatters : {
+					"link" : function(column, row) {
+						return "<a href=\"#\">" + column.id + ": "
+								+ row.id + "</a>";
+					}
+				},
+				rowCount : [ 10, 50, 75, -1 ]
+			});
+			$("#adciona").on("click",function() {
+					//console.log('ADD:');
+					if ( $('#nome').val() !== "" ){
+					$("#gridCad").bootgrid("append",[{
+						id :idLine,
+						nome : $('#nome').val(),
+						endereco : $('#endereco').val(),
+						complemento : $('#complemento').val(),
+						bairro : $('#bairro').val(),
+						cidade : $('#cidade').val(),
+						uf : $('#uf').val(),
+						cep : $('#cep').val(),
+						celular : $('#celular').val(),
+						email : $('#email').val(),
+						data_nascimento : $('#data_nascimento').val(),
+						tipo_sangue : $('#tipo_sangue').val(),
+					}]);
+					idLine++;
+					}
+					//console.log('ADDED:');
+				}); 
+		$("#salva").on(
+				"click",
+				function() {
+					var dataSend = $('#gridCad').bootgrid().data(
+							'.rs.jquery.bootgrid').rows;//$('#grid').bootgrid();
+							
+				    console.log('DEBUG - :dataSend'+JSON.stringify(dataSend));
+					$.ajax({
+						  type: "POST",
+						  url: "inserir",
+						  contentType: "application/json; charset=utf-8",
+						  data: JSON.stringify(dataSend),
+						  //data: JSON.parse(dataSend),
+						  success: function() {
+							  alert("Registrado");
+						  },
+						  error: function(e){
+							  console.log('ERRO - e:'+JSON.stringify(e));
+						  }
+					});
+					console.log('Teste' + JSON.stringify(dataSend));
+					$("#gridCad").bootgrid("clear");
+				});
+
+		$("#clear").on("click", function() {
+			$("#gridCad").bootgrid("clear");
+		});
+
+		$("#removeSelected").on("click", function() {
+			$("#gridCad").bootgrid("remove");
+		});
+	});
+	</script>	
+</div>
+				
+<!-- div th:replace="fragmentos/footer :: rodape"></div-->
+</body>
+</html>
