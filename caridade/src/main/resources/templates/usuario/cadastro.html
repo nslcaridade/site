@@ -37,6 +37,10 @@
 				<th><h5>Data Nascimento</h5><input id="data_nascimento" name="data_nascimento" type="tel"></th>
 				<th><h5>Tipo Sanguinio</h5><input id="tipo_sangue" name="tipo_sangue" type="tel"></th>
 			</tr>
+			<tr>
+				<th><h5>Missa para Acolhida de alimento</h5><input id="missa_acolhida" name="missa_acolhida" type="tel"></th>
+				<th><h5>Horário Acolhida</h5><input id="horario_acolhida" name="horario_acolhida" type="tel"></th>
+			</tr>
 		</thead>
 	</table>
 	<div class="row">
@@ -59,8 +63,10 @@
 							<th data-column-id="cep" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">CEP</th>
 							<th data-column-id="celular" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Celular</th>
 							<th data-column-id="email" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">E-mail</th>
-							<th data-column-id="data_nascimento" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Data Nascimento</th>
-							<th data-column-id="tipo_sangue" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Tipo Sangue</th>
+							<th data-column-id="dataNascimento" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Data Nascimento</th>
+							<th data-column-id="tipoSangue" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Tipo Sangue</th>
+							<th data-column-id="missaAcolhida" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Missa Acolhida</th>
+							<th data-column-id="horarioAcolhida" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Horário Acholhida</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -100,8 +106,10 @@
 						cep : $('#cep').val(),
 						celular : $('#celular').val(),
 						email : $('#email').val(),
-						data_nascimento : $('#data_nascimento').val(),
-						tipo_sangue : $('#tipo_sangue').val(),
+						dataNascimento : $('#data_nascimento').val(),
+						tipoSangue : $('#tipo_sangue').val(),
+						missaAcolhida: $('#missa_acolhida').val(),
+						horarioAcolhida: $('#horario_acolhida').val()
 					}]);
 					idLine++;
 					}
