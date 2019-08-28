@@ -18,6 +18,9 @@ public class Bazar {
 	@Column(name = "valor")
 	private Long valor;
 	
+	@Column(name = "descricao")
+	private String descricao;
+
 	public Long getIdBazar() {
 		return idBazar;
 	}
@@ -34,10 +37,19 @@ public class Bazar {
 		this.valor = valor;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((idBazar == null) ? 0 : idBazar.hashCode());
 		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
@@ -52,6 +64,11 @@ public class Bazar {
 		if (getClass() != obj.getClass())
 			return false;
 		Bazar other = (Bazar) obj;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
 		if (idBazar == null) {
 			if (other.idBazar != null)
 				return false;
@@ -67,7 +84,7 @@ public class Bazar {
 
 	@Override
 	public String toString() {
-		return "Bazar [idBazar=" + idBazar + ", valor=" + valor + "]";
+		return "Bazar [idBazar=" + idBazar + ", valor=" + valor + ", descricao=" + descricao + "]";
 	}
 	
 }

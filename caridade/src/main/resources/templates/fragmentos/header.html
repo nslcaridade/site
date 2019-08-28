@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-<nav th:fragment="cabecalho">
-	<ul class="menu">
-		<li><a href="/caridade">Home</a></li>
-		<!-- li th:if="${usuFound != null}"-->
-		<li>
-		<a href="#" >Cadastro Doações</a>
-			<ul>
-				<li><a id="cadastro" href="/caridade/doacao/preparar" >Retirada</a></li>
-				<li><a href="/caridade/doacao/listar">Itens</a></li>
-			</ul>
-		</li>
-		<li><a href="#">Relatórios</a>
-			<ul>
-				<li><a href="/caridade/doacao/anual">Geral Anual</a></li>
-				<li><a href="/caridade/doacao/mensal">Mensal por Instituição</a></li>
-				<li><a href="/caridade/instituicao/listar">Instituições</a></li>
-			</ul></li>
-	</ul>
-</nav>
-=======
 <nav th:fragment="cabecalho">
 	<ul class="menu">
 		<li><a href="/caridade">Home</a></li>
@@ -36,6 +15,7 @@
 				<li><a href="/caridade/doacao/anual">Geral Anual</a></li>
 				<li><a href="/caridade/doacao/mensal">Mensal por Instituição</a></li>
 				<li><a href="/caridade/instituicao/listar">Instituições</a></li>
+				<li><a href="/caridade/calendario/listar">Calendario Atividades</a>
 			</ul></li>
 	</ul>
 </nav>

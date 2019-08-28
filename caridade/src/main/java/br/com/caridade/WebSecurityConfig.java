@@ -34,6 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				 							  "/Bazar/Todos",
 				 							  "/Bazar/Todos/**",
 				 							  "/Cadastro",
+				 							  "/calendario/listar",
+				 							  "/calendario/calendario/**",
 				 							  "/doacao/Periodo",
 				 							  "/doacao/Periodo/**",
 				 							  "/relatorio*",
