@@ -34,8 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				 							  "/Bazar/Todos",
 				 							  "/Bazar/Todos/**",
 				 							  "/Cadastro",
-				 							  "/Calendario/Todos",
-				 							  "/Calendario/Todos/**",
 				 							  "/doacao/Periodo",
 				 							  "/doacao/Periodo/**",
 				 							  "/relatorio*",
@@ -96,5 +94,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationEntryPoint authenticationEntryPoint(){
         return new CustomAuthenticationEntryPoint();
     }
-
 }
