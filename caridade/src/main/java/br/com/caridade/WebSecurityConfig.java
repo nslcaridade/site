@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				 							  "/doacao/Periodo",
 				 							  "/doacao/Periodo/**",
 				 							  "/documento/diretriz",
-				 							 "/documento/diretriz/**",
+				 							  "/documento/diretriz/**",
 				 							  "/relatorio*",
 				 							  "/Diretriz*",
 				 							  "/css/**",
