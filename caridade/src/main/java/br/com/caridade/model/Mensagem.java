@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity	
-@Table(name = "mensagem	")
+@Table(name = "mensagem	", schema = "db_nsl")
 public class Mensagem {
 	
 	@Id

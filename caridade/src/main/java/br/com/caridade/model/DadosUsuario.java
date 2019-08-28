@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "dados_usuario")
+@Table(name = "dados_usuario", schema = "db_nsl")
 public class DadosUsuario {
 
 	@Id
