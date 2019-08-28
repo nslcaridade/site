@@ -42,18 +42,6 @@ public class UsuarioController {
 		return mv;
 	}
     
-    @GetMapping("/lista") 
-	public ModelAndView listaParticipantes() {
-    	ModelAndView mv = new ModelAndView();
-		  
-		mv.setViewName("usuario/lista");
-		List<PastoralCaridade> findPC = pastoralCaridadeRepository.findAll();
-		mv.addObject("participante", findPC);
-		mv.setStatus(HttpStatus.OK);
-		
-		return mv;
-	}
-    
     @PostMapping("/inserir")
 	public ModelAndView insere(@RequestBody List<PastoralCaridade> ltPast) {
 		ModelAndView mv = new ModelAndView();

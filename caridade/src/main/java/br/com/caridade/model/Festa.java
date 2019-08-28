@@ -8,33 +8,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "bazar", schema = "db_nsl")
-public class Bazar {
+@Table(name = "festa", schema = "db_nsl")
+public class Festa {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id_bazar")
-	private Long idBazar;
-	
-	@Column(name = "valor")
-	private Long valor;
+	@Column(name = "id_festa")
+	private Long idFesta;
 	
 	@Column(name = "descricao")
 	private String descricao;
-
-	public Long getIdBazar() {
-		return idBazar;
+	
+	public Long getIdFesta() {
+		return idFesta;
 	}
 
-	public void setIdBazar(Long idBazar) {
-		this.idBazar = idBazar;
-	}
-
-	public Long getValor() {
-		return valor;
-	}
-
-	public void setValor(Long valor) {
-		this.valor = valor;
+	public void setIdFesta(Long idFesta) {
+		this.idFesta = idFesta;
 	}
 
 	public String getDescricao() {
@@ -50,8 +40,7 @@ public class Bazar {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((idBazar == null) ? 0 : idBazar.hashCode());
-		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+		result = prime * result + ((idFesta == null) ? 0 : idFesta.hashCode());
 		return result;
 	}
 
@@ -63,28 +52,23 @@ public class Bazar {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Bazar other = (Bazar) obj;
+		Festa other = (Festa) obj;
 		if (descricao == null) {
 			if (other.descricao != null)
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
-		if (idBazar == null) {
-			if (other.idBazar != null)
+		if (idFesta == null) {
+			if (other.idFesta != null)
 				return false;
-		} else if (!idBazar.equals(other.idBazar))
-			return false;
-		if (valor == null) {
-			if (other.valor != null)
-				return false;
-		} else if (!valor.equals(other.valor))
+		} else if (!idFesta.equals(other.idFesta))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Bazar [idBazar=" + idBazar + ", valor=" + valor + ", descricao=" + descricao + "]";
+		return "Festa [idFesta=" + idFesta + ", descricao=" + descricao + "]";
 	}
 	
 }

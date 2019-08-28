@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset=UTF-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSL</title>
+<link rel="shortcut icon" th:href="@{../image/caridade.ico}" />
+<link href="../css/bootstrap.css" rel="stylesheet" />
+<link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
+<link href="../css/menu-customer.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
+
+</head>
+<body>
+	<header id="header" class="navbar navbar-default navbar-fixed-top">
+		<div th:replace="fragmentos/header :: cabecalho"></div>
+	</header>
+
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- div class="table-responsive"-->
+				<table id="gridInst" class="table table-condensed table-hover table-striped" data-row-select="true" data-keep-selection="true">
+					<thead>
+						<tr>
+							<th data-column-id="id" data-identifier="true" data-type="numeric" data-visible="false" data-width="5%">ID</th>
+							<th data-column-id="descricao" data-type="text" data-visible="true" data-filterable="true" data-width="20%" >NOME</th>
+							<th data-column-id="data_calendario" data-type="text" data-visible="true" data-width="10%" >DATA</th>
+							<th data-column-id="atividades" data-type="text" data-visible="true" data-width="10%" >ATIVIDADES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="calendario: ${calendario}">
+							<td class="col">
+								<span th:text="${calendario.idCalendarioCaridade}"></span>
+							</td>
+							<td class="col">
+								<span th:text="${calendario.descricao}"></span>
+							</td>
+							<td class="col">
+							<span th:text="${calendario.dataCalendario}"></span>
+							</td>
+							<td class="col">
+							<span th:each="atividade: ${calendario.bazar}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
+							<span th:each="atividade: ${calendario.bingo}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
+							<span th:each="atividade: ${calendario.festa}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
+							<span th:each="atividade: ${calendario.passeio}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- /div-->
+			</div>
+			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.11.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../dist/jquery.bootgrid.js"></script>
+	<script src="../dist/jquery.bootgrid.fa.js"></script>
+<script>
+$(document).ready(function() {
+	$("#gridInst").bootgrid({
+			formatters : {
+				"link" : function(column, row) {
+					return "<a href=\"#\">" + column.id + ": "
+							+ row.id + "</a>";
+				}
+			},
+			rowCount : [ 10, 50, 75, -1 ]
+		});
+});
+</script>	
+	
+<!-- div th:replace="fragmentos/footer :: rodape"></div--></body>
+</html>
