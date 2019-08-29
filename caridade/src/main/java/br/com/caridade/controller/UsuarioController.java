@@ -39,6 +39,17 @@ public class UsuarioController {
 		mv.setViewName("usuario/cadastro");
 		mv.addObject("usuario", "Duarte");
 		mv.addObject("mensagem", "Mensagem do controller");
+		mv.setStatus(HttpStatus.OK);
+		return mv;
+	}
+    
+    @GetMapping("/lista")
+	public ModelAndView lista() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("usuario/lista");
+		List<PastoralCaridade> ltPast = pastoralCaridadeRepository.findAll();
+		mv.addObject("participante", ltPast);
+		mv.setStatus(HttpStatus.OK);
 		return mv;
 	}
     
