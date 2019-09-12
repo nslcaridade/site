@@ -14,24 +14,11 @@
 .bootgrid-header .search,
 .bootgrid-footer .search {
   display: inline-block;
-  margin: 0 20px 0 0;
+  margin: 0 40px 0 0;
   vertical-align: middle;
   width: 180px;
 }
-.bootgrid-header .search .glyphicon,
-.bootgrid-footer .search .glyphicon {
-  top: 0;
-}
-.bootgrid-header .search .fa,
-.bootgrid-footer .search .fa {
-  display: table-cell;
-}
-.bootgrid-header .search.search-field::-ms-clear,
-.bootgrid-footer .search.search-field::-ms-clear,
-.bootgrid-header .search .search-field::-ms-clear,
-.bootgrid-footer .search .search-field::-ms-clear {
-  display: none;
-}
+
 .bootgrid-header .pagination,
 .bootgrid-footer .pagination {
   margin: 0 !important;
@@ -71,9 +58,7 @@
 .bootgrid-footer .infoBar .btn-group > .btn-group .dropdown-menu .dropdown-item.disabled {
   cursor: not-allowed;
 }
-.bootgrid-table {
-  table-layout: fixed;
-}
+
 .bootgrid-table a {
   outline: 0;
 }

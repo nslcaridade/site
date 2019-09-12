@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     	 http.cors().and().csrf().disable();
 		 http.authorizeRequests().antMatchers("/registration",
-				 							  "/registration/registration",
+				 							  "/registration/**",
 				 							  "/",
 				 							  "/Bazar/Todos",
 				 							  "/Bazar/Todos/**",

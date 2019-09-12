@@ -1165,7 +1165,7 @@
          * @for defaults
          * @since 1.1.0
          **/
-        caseSensitive: true,
+        caseSensitive: false,
 
         // note: The following properties should not be used via data-api attributes
 
