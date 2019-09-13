@@ -2042,7 +2042,8 @@ fieldset[disabled] .btn {
 }
 .btn-default {
   color: #333;
-  background-color: #D5F3F4;/*Cor defout dos botoes*/
+  background-color: #E3A789;
+  /* background-color: #D5F3F4; *//*aduarte Cor defout dos botoes*/
   border-color: #ccc;
 }
 .btn-default:hover,
@@ -3941,7 +3942,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default {
   background-color: #0042ab; 
-  background-image: linear-gradient(to bottom right, #ddf6fa,  #f9ffff); /* Aduarte Standard*/
+  /* background-image: linear-gradient(to bottom right, #ddf6fa,  #f9ffff); */ /* Aduarte Standard*/
+  background-image: linear-gradient(to bottom right, white, #D78257);
 }
 .navbar-default .navbar-brand {
   color: #777;
