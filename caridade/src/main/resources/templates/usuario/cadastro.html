@@ -21,7 +21,7 @@
 			<tr>
 				<th><h5>Nome</h5><input id="nome" name="nome" type="tel"></th>
 				<th><h5>E-mail</h5><input id="email" name="email" type="tel"></th>
-				<th><h5>Celular</h5><input id="celular" name="celular" type="tel"></th>
+				<th><h5>Celular</h5><input id="celular" name="celular" type="tel" placeholder="(99) 9999-9999"></th>
 			</tr>
 			<tr>
 				<th><h5>Endereco</h5><input id="endereco" name="endereco" type="tel"></th>
@@ -30,16 +30,63 @@
 			</tr>
 			<tr>
 				<th><h5>Cidade</h5><input id="cidade" name="cidade" type="tel"></th>
-				<th><h5>UF</h5><input id="uf" name="uf" type="tel" size="2"></th>
-				<th><h5>CEP</h5><input id="cep" name="cep" type="tel"></th>
+				<th><h5>UF</h5>
+					<select id="uf" name="uf">
+						<option ></option>
+						<option >SP</option>
+						<option >RJ</option>
+						<option >PR</option>
+						<option >SC</option>
+						<option >RS</option>
+						<option >DF</option>
+						<option >RO</option>
+						<option >AC</option>
+						<option >AM</option>
+						<option >RR</option>
+						<option >PA</option>
+						<option >AP</option>
+						<option >TO</option>
+						<option >MA</option>
+						<option >PI</option>
+						<option >CE</option>
+						<option >RN</option>
+						<option >PB</option>
+						<option >PE</option>
+						<option >AL</option>
+						<option >SE</option>
+						<option >BA</option>
+						<option >MG</option>
+						<option >ES</option>
+						<option >MS</option>
+						<option >MT</option>
+						<option >GO</option>
+					</select>
+				</th>
+				<th><h5>CEP</h5><input id="cep" name="cep" type="tel" placeholder="99.999-999"></th>
 			</tr>
 			<tr>
-				<th><h5>Data Nascimento</h5><input id="data_nascimento" name="data_nascimento" type="tel"></th>
-				<th><h5>Tipo Sanguinio</h5><input id="tipo_sangue" name="tipo_sangue" type="tel"></th>
-			</tr>
-			<tr>
-				<th><h5>Missa para Acolhida de alimento</h5><input id="missa_acolhida" name="missa_acolhida" type="tel"></th>
-				<th><h5>Horário Acolhida</h5><input id="horario_acolhida" name="horario_acolhida" type="tel"></th>
+				<th><h5>Data Nascimento</h5><input id="data_nascimento" name="data_nascimento" type="tel" placeholder="11/11/2000"></th>
+				<th><h5>Tipo Sanguinio</h5>
+					<select id="tipo_sangue" name="tipo_sangue">
+						<option ></option>
+						<option >O+</option>
+						<option >O-</option>
+						<option >A+</option>
+						<option >A-</option>
+						<option >AB+</option>
+						<option >AB-</option>
+					</select>
+				</th>
+				<th><h5>Missa para Acolhida de alimento</h5>
+					<select id="missa_acolhida" name="missa_acolhida">
+						<option ></option>
+	      				<option >Quinta  20:00h</option>
+	      				<option >Sabado  16:00h</option>
+	      				<option >Domingo 09:00h</option>
+	      				<option >Domingo 11:00h</option>
+	      				<option >Domingo 19:30h</option>
+					</select>
+				</th>
 			</tr>
 		</thead>
 	</table>
@@ -80,9 +127,13 @@
 	<script src="../js/bootstrap.js"></script>
 	<script src="../dist/jquery.bootgrid.js"></script>
 	<script src="../dist/jquery.bootgrid.fa.js"></script>
+	<script src="../dist/jquery.mask.js"></script>
 	<script>
 	var idLine = 0;
 	$(document).ready(function() {
+		$("#data_nascimento").mask("99/99/9999");
+		$("#celular").mask("(99) 99999-9999");
+		$("#cep").mask("99.999-999");
 		$("#gridCad").bootgrid({
 				formatters : {
 					"link" : function(column, row) {
@@ -93,7 +144,17 @@
 				rowCount : [ -1, 10, 50, 75 ]
 			});
 			$("#adciona").on("click",function() {
-					//console.log('ADD:');
+					var missa = $('#missa_acolhida').val()+'';
+					var horario = $('#missa_acolhida').val()+'';
+					missa = missa.split(" ",1).pop(1);
+					horario = horario.split(" ",2).pop(-1).replace('h','');
+					var data_nascimento = $('#data_nascimento').val()+'';
+					if ( data_nascimento != '' ){
+						data_nascimento = data_nascimento.split("/",3).pop(3) + "-" +data_nascimento.split("/",2).pop(2) + "-" + data_nascimento.split("/",1).pop(1);
+					}
+					var telefone = $('#celular').val()+'';
+					telefone = telefone.replace('(','').replace(')','').replace('-','');
+					//console.log('missa:'+missa+", horario:"+horario);
 					if ( $('#nome').val() !== "" ){
 					$("#gridCad").bootgrid("append",[{
 						id :idLine,
@@ -104,12 +165,12 @@
 						cidade : $('#cidade').val(),
 						uf : $('#uf').val(),
 						cep : $('#cep').val(),
-						celular : $('#celular').val(),
+						celular : telefone,
 						email : $('#email').val(),
-						dataNascimento : $('#data_nascimento').val(),
+						dataNascimento : data_nascimento,
 						tipoSangue : $('#tipo_sangue').val(),
-						missaAcolhida: $('#missa_acolhida').val(),
-						horarioAcolhida: $('#horario_acolhida').val()
+						missaAcolhida: missa,
+						horarioAcolhida: horario
 					}]);
 					idLine++;
 					}
@@ -121,7 +182,7 @@
 					var dataSend = $('#gridCad').bootgrid().data(
 							'.rs.jquery.bootgrid').rows;//$('#grid').bootgrid();
 							
-				    console.log('DEBUG - :dataSend'+JSON.stringify(dataSend));
+				    //console.log('DEBUG - :dataSend'+JSON.stringify(dataSend));
 					$.ajax({
 						  type: "POST",
 						  url: "inserir",
@@ -135,7 +196,7 @@
 							  console.log('ERRO - e:'+JSON.stringify(e));
 						  }
 					});
-					console.log('Teste' + JSON.stringify(dataSend));
+					//console.log('Teste' + JSON.stringify(dataSend));
 					$("#gridCad").bootgrid("clear");
 				});
 
