@@ -56,22 +56,12 @@ public class PastoralCaridade {
 	
 	@Column(name = "horario_acolhida")
 	private String horarioAcolhida;
-
-	public String getMissaAcolhida() {
-		return missaAcolhida;
-	}
-
-	public void setMissaAcolhida(String missaAcolhida) {
-		this.missaAcolhida = missaAcolhida;
-	}
-
-	public String gethorarioAcolhida() {
-		return horarioAcolhida;
-	}
-
-	public void sethorarioAcolhida(String horarioAcolhida) {
-		this.horarioAcolhida = horarioAcolhida;
-	}
+	
+	@Column(name = "gt")
+	private String gt;
+	
+	@Column(name = "order_gt")
+	private int orderGt;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -169,6 +159,38 @@ public class PastoralCaridade {
 		this.tipoSangue = tipoSangue;
 	}
 
+	public String getMissaAcolhida() {
+		return missaAcolhida;
+	}
+
+	public void setMissaAcolhida(String missaAcolhida) {
+		this.missaAcolhida = missaAcolhida;
+	}
+
+	public String getHorarioAcolhida() {
+		return horarioAcolhida;
+	}
+
+	public void setHorarioAcolhida(String horarioAcolhida) {
+		this.horarioAcolhida = horarioAcolhida;
+	}
+
+	public String getGt() {
+		return gt;
+	}
+
+	public void setGt(String gt) {
+		this.gt = gt;
+	}
+
+	public int getOrderGt() {
+		return orderGt;
+	}
+
+	public void setOrderGt(int orderGt) {
+		this.orderGt = orderGt;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -181,10 +203,12 @@ public class PastoralCaridade {
 		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
+		result = prime * result + ((gt == null) ? 0 : gt.hashCode());
+		result = prime * result + ((horarioAcolhida == null) ? 0 : horarioAcolhida.hashCode());
 		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
 		result = prime * result + ((missaAcolhida == null) ? 0 : missaAcolhida.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((horarioAcolhida == null) ? 0 : horarioAcolhida.hashCode());
+		result = prime * result + orderGt;
 		result = prime * result + ((tipoSangue == null) ? 0 : tipoSangue.hashCode());
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
 		return result;
@@ -239,6 +263,16 @@ public class PastoralCaridade {
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
+		if (gt == null) {
+			if (other.gt != null)
+				return false;
+		} else if (!gt.equals(other.gt))
+			return false;
+		if (horarioAcolhida == null) {
+			if (other.horarioAcolhida != null)
+				return false;
+		} else if (!horarioAcolhida.equals(other.horarioAcolhida))
+			return false;
 		if (idUsuario == null) {
 			if (other.idUsuario != null)
 				return false;
@@ -254,10 +288,7 @@ public class PastoralCaridade {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (horarioAcolhida == null) {
-			if (other.horarioAcolhida != null)
-				return false;
-		} else if (!horarioAcolhida.equals(other.horarioAcolhida))
+		if (orderGt != other.orderGt)
 			return false;
 		if (tipoSangue == null) {
 			if (other.tipoSangue != null)
@@ -278,7 +309,7 @@ public class PastoralCaridade {
 				+ ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + ", cep="
 				+ cep + ", celular=" + celular + ", email=" + email + ", dataNascimento=" + dataNascimento
 				+ ", tipoSangue=" + tipoSangue + ", missaAcolhida=" + missaAcolhida + ", horarioAcolhida="
-				+ horarioAcolhida + "]";
+				+ horarioAcolhida + ", gt=" + gt + ", orderGt=" + orderGt + "]";
 	}
 
 }

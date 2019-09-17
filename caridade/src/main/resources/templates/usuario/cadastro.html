@@ -80,8 +80,8 @@
 				<th><h5>Missa para Acolhida de alimento</h5>
 					<select id="missa_acolhida" name="missa_acolhida">
 						<option ></option>
-	      				<option >Quinta  20:00h</option>
-	      				<option >Sabado  16:00h</option>
+	      				<option >Quinta 20:00h</option>
+	      				<option >Sabado 16:00h</option>
 	      				<option >Domingo 09:00h</option>
 	      				<option >Domingo 11:00h</option>
 	      				<option >Domingo 19:30h</option>
@@ -114,6 +114,8 @@
 							<th data-column-id="tipoSangue" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Tipo Sangue</th>
 							<th data-column-id="missaAcolhida" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Missa Acolhida</th>
 							<th data-column-id="horarioAcolhida" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Horário Acholhida</th>
+							<th data-column-id="gt" data-type="text" data-visible="false">order</th>
+							<th data-column-id="orderGt" data-type="numeric" data-visible="false">order</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -154,7 +156,7 @@
 					}
 					var telefone = $('#celular').val()+'';
 					telefone = telefone.replace('(','').replace(')','').replace('-','');
-					//console.log('missa:'+missa+", horario:"+horario);
+					console.log('missa:'+missa+", horario:"+horario);
 					if ( $('#nome').val() !== "" ){
 					$("#gridCad").bootgrid("append",[{
 						id :idLine,
@@ -170,7 +172,9 @@
 						dataNascimento : data_nascimento,
 						tipoSangue : $('#tipo_sangue').val(),
 						missaAcolhida: missa,
-						horarioAcolhida: horario
+						horarioAcolhida: horario,
+						gt: $('#gt').val(),
+						orderGt: 100
 					}]);
 					idLine++;
 					}

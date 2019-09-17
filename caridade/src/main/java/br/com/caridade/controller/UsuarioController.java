@@ -53,6 +53,16 @@ public class UsuarioController {
 		return mv;
 	}
     
+    @GetMapping("/lista/gt")
+	public ModelAndView listaGt() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("usuario/listagt");
+		List<PastoralCaridade> ltPast = pastoralCaridadeRepository.findByGtIsNotNullOrderByOrderGt();
+		mv.addObject("participante", ltPast);
+		mv.setStatus(HttpStatus.OK);
+		return mv;
+	}
+    
     @PostMapping("/inserir")
 	public ModelAndView insere(@RequestBody List<PastoralCaridade> ltPast) {
 		ModelAndView mv = new ModelAndView();
