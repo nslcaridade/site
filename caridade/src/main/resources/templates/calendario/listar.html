@@ -19,6 +19,26 @@
 	
 	<div class="container-fluid">
 		<div class="row">
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 			<div class="col-md-12">
 				<!-- div class="table-responsive"-->
 				<table id="gridInst" class="table table-condensed table-hover table-striped" data-row-select="true" data-keep-selection="true">
@@ -35,7 +55,7 @@
 							<td class="col">
 								<span th:text="${calendario.idCalendarioCaridade}"></span>
 							</td>
-							<td class="col">
+							<td class="col" >
 								<span th:text="${calendario.descricao}"></span>
 							</td>
 							<td class="col">
@@ -46,6 +66,10 @@
 							<span th:each="atividade: ${calendario.bingo}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
 							<span th:each="atividade: ${calendario.festa}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
 							<span th:each="atividade: ${calendario.passeio}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
+							</td>
+							<td class="col" >
+								<span th:if="${calendario.confirmado == 1}" class="badge" data-toggle="modal" data-target="#exampleModal" th:text="${calendario.confirmado}"></span>
+								<!-- <span class="badge" data-toggle="modal" data-target="#exampleModal" th:text="${calendario.descricao}"></span> -->
 							</td>
 						</tr>
 					</tbody>
@@ -60,7 +84,7 @@
 	<script src="../dist/jquery.bootgrid.js"></script>
 	<script src="../dist/jquery.bootgrid.fa.js"></script>
 <script>
-$(document).ready(function() {
+/* $(document).ready(function() {
 	$("#gridInst").bootgrid({
 			formatters : {
 				"link" : function(column, row) {
@@ -71,6 +95,20 @@ $(document).ready(function() {
 			rowCount : [ -1, 10, 50, 75 ]
 		});
 });
+$("span").click(function(){
+    alert($(this).attr("id"));
+  });
+function mostra(){
+	alert("teste");
+}
+$("#gridInst").bootgrid()
+.on("span", function (e)
+{
+	alert("teste:"+e);
+}); */
+function mostra(){
+	alert("teste");
+}
 </script>	
 	
 <!-- div th:replace="fragmentos/footer :: rodape"></div--></body>

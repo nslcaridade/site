@@ -44,4 +44,12 @@ public class CalendarioCaridadeController {
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(retorno);
 	}
+	
+	@GetMapping("/videos")
+	public ModelAndView getVideos() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("calendario/videos");
+		mv.setStatus(HttpStatus.OK);
+		return mv;
+	}
 }

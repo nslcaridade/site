@@ -4340,7 +4340,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  background-color: #999;
+  background-color: #91B39E;
+  background-image: url("../image/caridade.gif");
+  /* background-color: #999; *//* aduarte alteardo color */
   border-radius: 10px;
 }
 .badge:empty {
