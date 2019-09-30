@@ -16,35 +16,33 @@
 		<div th:replace="fragmentos/header :: cabecalho"></div>
 	</header>
 
-	
-	<div class="container-fluid">
-		<div class="row">
-
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      <div class="modal-body">
-        ...
+      <div id="modalVideo" class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-</div>
+</div> -->
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div  id="videoModal" >
+				<div id="modalVideo"></div>
+			</div>
 			<div class="col-md-12">
 				<!-- div class="table-responsive"-->
-				<table id="gridInst" class="table table-condensed table-hover table-striped" data-row-select="true" data-keep-selection="true">
+				<table id="gridInst" class="table table-condensed table-hover table-striped">
 					<thead>
 						<tr>
-							<th data-column-id="id" data-identifier="true" data-type="numeric" data-visible="false" data-width="5%">ID</th>
 							<th data-column-id="descricao" data-type="text" data-visible="true" data-filterable="true" data-width="10%" >NOME</th>
 							<th data-column-id="data_calendario" data-type="text" data-visible="true" data-width="5%" >DATA</th>
 							<th data-column-id="atividades" data-type="text" data-visible="true" data-width="30%" >ATIVIDADES</th>
@@ -52,9 +50,6 @@
 					</thead>
 					<tbody>
 						<tr th:each="calendario: ${calendario}">
-							<td class="col">
-								<span th:text="${calendario.idCalendarioCaridade}"></span>
-							</td>
 							<td class="col" >
 								<span th:text="${calendario.descricao}"></span>
 							</td>
@@ -68,7 +63,7 @@
 							<span th:each="atividade: ${calendario.passeio}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
 							</td>
 							<td class="col" >
-								<span th:if="${calendario.confirmado == 1}" class="badge" data-toggle="modal" data-target="#exampleModal" th:text="${calendario.confirmado}"></span>
+								<span id="urlVideo" th:each="videos: ${calendario.videos}" th:if="${videos.url}" class="badge" data-target="#videoModal" th:text="v" th:onclick="mostra([[${videos.url}]]);"></span>
 								<!-- <span class="badge" data-toggle="modal" data-target="#exampleModal" th:text="${calendario.descricao}"></span> -->
 							</td>
 						</tr>
@@ -105,9 +100,44 @@ $("#gridInst").bootgrid()
 .on("span", function (e)
 {
 	alert("teste:"+e);
-}); */
-function mostra(){
-	alert("teste");
+});
+$("span").click(function(entrada){
+	$("#idCal").text(function(index){
+		console.log("DEBUG - index:"+index);
+	});
+    console.log("DEBUG - "+entrada);
+  });*/
+function mostra(urlVideo){
+	
+    console.log("urlVideo :"+urlVideo);
+    
+    var x = document.createElement("IFRAME");
+    x.setAttribute("width", "420");
+    x.setAttribute("height", "345");
+    x.setAttribute("src", urlVideo);
+    x.setAttribute("frameborder","0");
+    x.setAttribute("allowscriptaccess","always");
+    x.setAttribute("allow","autoplay");
+    document.getElementById("modalVideo").appendChild(x);
+    
+    /* var x = document.createElement("OBJECT");
+    x.setAttribute("data", "horse.wav");
+    x.setAttribute("id", "myObject");
+
+    var p = document.createElement("PARAM");
+    p.setAttribute("name", "movie");
+    p.setAttribute("value", urlVideo);
+    
+    var e = document.createElement("EMBED");
+    e.setAttribute("src", urlVideo);
+    e.setAttribute("type", "application/x-shockwave-flash");
+    e.setAttribute("width", "425");
+    e.setAttribute("height", "350");
+    
+    x.appendChild(p);
+    x.appendChild(e);
+    
+    document.getElementById("modalVideo").appendChild(x); */
 }
 </script>	
 	
