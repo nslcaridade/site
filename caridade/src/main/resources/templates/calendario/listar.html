@@ -8,138 +8,46 @@
 <link href="../css/bootstrap.css" rel="stylesheet" />
 <link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
 <link href="../css/menu-customer.css" rel="stylesheet" />
-<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
+<link href="../css/card-customer.css" rel="stylesheet" />
+<script src="../js/card-customer.js"></script>
 
 </head>
 <body>
 	<header id="header" class="navbar navbar-default navbar-fixed-top">
 		<div th:replace="fragmentos/header :: cabecalho"></div>
 	</header>
-
-<!-- <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div id="modalVideo" class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->
 	
-	<div class="container-fluid">
-		<div class="row">
-			<div  id="videoModal" >
-				<div id="modalVideo"></div>
-			</div>
-			<div class="col-md-12">
-				<!-- div class="table-responsive"-->
-				<table id="gridInst" class="table table-condensed table-hover table-striped">
-					<thead>
-						<tr>
-							<th data-column-id="descricao" data-type="text" data-visible="true" data-filterable="true" data-width="10%" >NOME</th>
-							<th data-column-id="data_calendario" data-type="text" data-visible="true" data-width="5%" >DATA</th>
-							<th data-column-id="atividades" data-type="text" data-visible="true" data-width="30%" >ATIVIDADES</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="calendario: ${calendario}">
-							<td class="col" >
-								<span th:text="${calendario.descricao}"></span>
-							</td>
-							<td class="col">
-							<span th:text="${calendario.dataCalendario}"></span>
-							</td>
-							<td class="col">
-							<span th:each="atividade: ${calendario.bazar}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
-							<span th:each="atividade: ${calendario.bingo}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
-							<span th:each="atividade: ${calendario.festa}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
-							<span th:each="atividade: ${calendario.passeio}" th:if="${atividade.descricao}" th:text="${atividade.descricao}"></span>
-							</td>
-							<td class="col" >
-								<span id="urlVideo" th:each="videos: ${calendario.videos}" th:if="${videos.url}" class="badge" data-target="#videoModal" th:text="v" th:onclick="mostra([[${videos.url}]]);"></span>
-								<!-- <span class="badge" data-toggle="modal" data-target="#exampleModal" th:text="${calendario.descricao}"></span> -->
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<!-- /div-->
-			</div>
-			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
+<div class="container">
+    <div class="row">    
+        <div class="col-md-4 " th:each="calendario: ${calendario}">
+            <div class="card">
+                <div class="card-image">
+                    <div class="embed-responsive embed-responsive-16by9" th:if="${calendario.videos}" >
+                    	<div th:each="videos: ${calendario.videos}">
+							<iframe width="300" height="200" th:src="${videos.url}"></iframe>
+						</div>
+					</div>
+					<div th:unless="${calendario.videos}">
+						<div>
+							<img width="300" height="200" th:src="@{../image/ImgSemVideo.png}"></img>
+						</div>
+					</div>
+                </div><!-- card image -->
+                <div class="card-content">
+                    <!-- <span class="card-title" th:text=" ${calendario.dataCalendario}"></span> -->
+                    <span class="card-title" th:text="${#temporals.format(calendario.dataCalendario, 'dd-MMM-yyyy')}"></span>
+                    <p></p>
+                    <span class="card-sub" th:text="${calendario.descricao}"></span>
+                    <p></p>
+                    <span class="card-text" th:each="bazar: ${calendario.bazar}" th:if="${bazar.descricao}" th:text="${bazar.descricao}"></span>
+                    <span class="card-text" th:each="festa: ${calendario.festa}" th:if="${festa.descricao}" th:text="${festa.descricao}"></span>
+                    <span class="card-text" th:each="bingo: ${calendario.bingo}" th:if="${bingo.descricao}" th:text="${bingo.descricao}"></span>
+                    <span class="card-text" th:each="passeio: ${calendario.passeio}" th:if="${passeio.descricao}" th:text="${passeio.descricao}"></span>
+                </div><!-- card content -->
+            </div>
 		</div>
 	</div>
-	<script src="../lib/jquery-1.11.1.min.js"></script>
-	<script src="../js/bootstrap.js"></script>
-	<script src="../dist/jquery.bootgrid.js"></script>
-	<script src="../dist/jquery.bootgrid.fa.js"></script>
-<script>
-/* $(document).ready(function() {
-	$("#gridInst").bootgrid({
-			formatters : {
-				"link" : function(column, row) {
-					return "<a href=\"#\">" + column.id + ": "
-							+ row.id + "</a>";
-				}
-			},
-			rowCount : [ -1, 10, 50, 75 ]
-		});
-});
-$("span").click(function(){
-    alert($(this).attr("id"));
-  });
-function mostra(){
-	alert("teste");
-}
-$("#gridInst").bootgrid()
-.on("span", function (e)
-{
-	alert("teste:"+e);
-});
-$("span").click(function(entrada){
-	$("#idCal").text(function(index){
-		console.log("DEBUG - index:"+index);
-	});
-    console.log("DEBUG - "+entrada);
-  });*/
-function mostra(urlVideo){
-	
-    console.log("urlVideo :"+urlVideo);
-    
-    var x = document.createElement("IFRAME");
-    x.setAttribute("width", "420");
-    x.setAttribute("height", "345");
-    x.setAttribute("src", urlVideo);
-    x.setAttribute("frameborder","0");
-    x.setAttribute("allowscriptaccess","always");
-    x.setAttribute("allow","autoplay");
-    document.getElementById("modalVideo").appendChild(x);
-    
-    /* var x = document.createElement("OBJECT");
-    x.setAttribute("data", "horse.wav");
-    x.setAttribute("id", "myObject");
-
-    var p = document.createElement("PARAM");
-    p.setAttribute("name", "movie");
-    p.setAttribute("value", urlVideo);
-    
-    var e = document.createElement("EMBED");
-    e.setAttribute("src", urlVideo);
-    e.setAttribute("type", "application/x-shockwave-flash");
-    e.setAttribute("width", "425");
-    e.setAttribute("height", "350");
-    
-    x.appendChild(p);
-    x.appendChild(e);
-    
-    document.getElementById("modalVideo").appendChild(x); */
-}
-</script>	
-	
-<!-- div th:replace="fragmentos/footer :: rodape"></div--></body>
+</div>
+        
+</body>
 </html>
