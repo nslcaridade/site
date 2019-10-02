@@ -24,7 +24,11 @@
                 <div class="card-image">
                     <div class="embed-responsive embed-responsive-16by9" th:if="${calendario.videos}" >
                     	<div th:each="videos: ${calendario.videos}">
-							<iframe width="300" height="200" th:src="${videos.url}"></iframe>
+							<iframe width="300" height="200" th:allowfullscreen="allowfullscreen"
+        th:mozallowfullscreen="mozallowfullscreen" 
+        th:msallowfullscreen="msallowfullscreen" 
+        th:oallowfullscreen="oallowfullscreen" 
+        th:webkitallowfullscreen="webkitallowfullscreen" th:src="${videos.url}"></iframe>
 						</div>
 					</div>
 					<div th:unless="${calendario.videos}">
