@@ -18,27 +18,23 @@
 	</header>
 	
 <div class="container">
-    <div class="row">    
-        <div class="col-md-4 " th:each="calendario: ${calendario}">
+    <div class="row">
+        <div class="col-md-4" th:each="calendario: ${calendario}" style="height:400px">
             <div class="card">
                 <div class="card-image">
-                    <div class="embed-responsive embed-responsive-16by9" th:if="${calendario.videos}" >
-                    	<div th:each="videos: ${calendario.videos}">
-							<iframe width="300" height="200" th:allowfullscreen="allowfullscreen"
-        th:mozallowfullscreen="mozallowfullscreen" 
-        th:msallowfullscreen="msallowfullscreen" 
-        th:oallowfullscreen="oallowfullscreen" 
-        th:webkitallowfullscreen="webkitallowfullscreen" th:src="${videos.url}"></iframe>
-						</div>
+                    <div class="embed-responsive embed-responsive-16by9" th:if="${calendario.videos}" th:each="videos: ${calendario.videos}">
+						<iframe width="300" height="200" th:allowfullscreen="allowfullscreen"
+        												 th:mozallowfullscreen="mozallowfullscreen" 
+        												 th:msallowfullscreen="msallowfullscreen" 
+        											     th:oallowfullscreen="oallowfullscreen" 
+        												 th:webkitallowfullscreen="webkitallowfullscreen" 
+        												 th:src="${videos.url}"></iframe>
 					</div>
 					<div th:unless="${calendario.videos}">
-						<div>
-							<img width="300" height="200" th:src="@{../image/ImgSemVideo.png}"></img>
-						</div>
+						<img width="300" height="200" th:src="@{../image/ImgSemVideo.png}"></img>
 					</div>
                 </div><!-- card image -->
                 <div class="card-content">
-                    <!-- <span class="card-title" th:text=" ${calendario.dataCalendario}"></span> -->
                     <span class="card-title" th:text="${#temporals.format(calendario.dataCalendario, 'dd-MMM-yyyy')}"></span>
                     <p></p>
                     <span class="card-sub" th:text="${calendario.descricao}"></span>
