@@ -52,6 +52,13 @@
 					<tbody>
 					</tbody>
 				</table>
+				<div class="row">
+					<div class="col-md-5"></div>
+					<div class="col-md-2">
+						<div class="heart" id="AjaxLoader" ></div>
+					</div>
+					<div class="col-md-5"></div>
+				</div>
 			</div>
 			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
 		</div>
@@ -97,7 +104,7 @@
 	}
 	
 	$(document).ready(function() {
-		
+		$('#AjaxLoader').hide();
 		$(document).ready(function() {
 			$("#gridRel").bootgrid({
 					rowCount : [ -1, 10, 50, 75 ]
@@ -115,6 +122,7 @@
     });
 	
 	$('#geraLista').click(function () {
+		$('#AjaxLoader').show(); 
 		$.ajax({
 			  type: "GET",
 			  url: "mensal/"+$('#instituicao').val()+"/"+$('#mes').val(),
@@ -131,6 +139,7 @@
 						qtd : formatNumber(resultado[i].quantidade),
 					}]);
 				}
+				$('#AjaxLoader').hide();
 			  },
 			  error: function(e){
 				console.log('ERRO:' + JSON.stringify(e));

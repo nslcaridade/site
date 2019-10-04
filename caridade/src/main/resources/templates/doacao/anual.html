@@ -16,6 +16,7 @@
 		<div th:replace="fragmentos/header :: cabecalho"></div>
 	</header>
 	<div class="container-fluid">
+	
 	<div style="text-align:center"><h4>Relatório de doação anual em Kg</h4></div>
 		<table id="selecao" class="table table-condensed table-hover table-striped hidden-print" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
 			<thead>
@@ -58,6 +59,13 @@
 					<tbody>
 					</tbody>
 				</table>
+				<div class="row">
+					<div class="col-md-5"></div>
+					<div class="col-md-2">
+						<div class="heart" id="AjaxLoader" ></div>
+					</div>
+					<div class="col-md-5"></div>
+				</div>
 			</div>
 			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
 		</div>
@@ -69,7 +77,7 @@
 	<script src="../dist/jquery.bootgrid.fa.js"></script>
 	<script>
 	var tabelaImpressao; 
-       
+
 	function preparaRelatorio(registro){
 		tabelaImpressao
 	}
@@ -90,7 +98,7 @@
 	}
 	
 	$(document).ready(function() {
-		
+		$('#AjaxLoader').hide(); 
 		$(document).ready(function() {
 			$("#gridRel").bootgrid({
 					formatters : {
@@ -106,6 +114,7 @@
 		$('#ano').change(function() {
 			var anoSelecionado = $(this).children("option:selected").val();
 			//console.log('anoSelecionado:'+anoSelecionado);
+			$('#AjaxLoader').show();  
 			$.ajax({
 				  type: "GET",
 				  url: "anual/"+anoSelecionado,
@@ -134,6 +143,7 @@
 								total : formatNumber(resultado[i].totAno),
 							}]);
 						}
+						$('#AjaxLoader').hide();
 				  }/* ,
 				  error: function(e){
 					console.log('ERRO:' + JSON.stringify(e));
