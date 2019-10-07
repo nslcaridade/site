@@ -113,6 +113,7 @@
 			
 		$('#ano').change(function() {
 			var anoSelecionado = $(this).children("option:selected").val();
+			$("#gridRel").bootgrid("clear");
 			//console.log('anoSelecionado:'+anoSelecionado);
 			$('#AjaxLoader').show();  
 			$.ajax({
