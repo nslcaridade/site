@@ -126,8 +126,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<meminitial>512m</meminitial>
-					<maxmem>1024m</maxmem>
+					<meminitial>1024m</meminitial>
+					<maxmem>2024m</maxmem>
 				</configuration>
 			</plugin>
 		</plugins>
