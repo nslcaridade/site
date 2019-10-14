@@ -1,0 +1,216 @@
+sudo desktop-file-install eclipse.desktop
+
+openssl x509 -inform DER -in ios_distribution.cer -out  ios_distribution.pem
+
+openssl rsa -outform pem -in ios_distribution.pem -out ios_distribution.key
+
+openssl req -out CSR.csr -new -newkey rsa:2048 -nodes -keyout privateKey.key
+openssl rsa -outform der -in ios_distribution.pem -out ios_distribution.key
+
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout privateKey.key
+openssl pkcs12 -export -inkey ios_distribution.pem -in ios_distributionKey.key -out ios_distribution.p12
+
+openssl pkcs12 -export -inkey ios_distribution.key  -in ios_distribution.pem -name my_name -out ios_distribution.pfx
+
+openssl pkcs12 -export  -inkey ios_distribution.key -in ios_distribution.cer -certfile ios_distribution.pem -out ios_distribution.pfx
+
+openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert ./ios_distribution.pem -key ./gochk_push_notification_certificate.p12
+
+
+Server
+
+1
+2
+3
+$ keytool -genkey -keypass password \
+                  -storepass password \
+                  -keystore serverkeystore.jks
+
+We can further use keytool to extract the public certificate from the generated keystore file:
+1
+2
+3
+$ keytool -export -storepass password \
+                  -file server.cer \
+                  -keystore serverkeystore.jks
+
+The above command exports the public certificate from keystore as a file server.cer. Let’s use the exported certificate for the client by adding it to its truststore:
+1
+2
+3
+4
+5
+$ keytool -import -v -trustcacerts \
+                     -file server.cer \
+                     -keypass password \
+                     -storepass password \
+                     -keystore clienttruststore.jks
+
+Suzana dias 348
+
+'SELECT id_cadastro', json_array_elements(json_array_elements ( dados_json -> \'rotinas\') -> \'deveres\') as jsin from rocketmax.processo where id_cadastro = '.$id_cadastro;
+
+
+ssh mqm@10.1.200.17
+runmqsc QM.ROCKET
+DISPLAY QLOCAL(???)
+END
+exit
+
+Bradesco 1382/46182-2
+
+José 2278-0 cc 26758-9
+
+Claro
+848500000013 465201622017 902211100394 929000611234
+848200000018 694701622012 902211100394 929000611234
+848600000015 758201622013 902211100394 929000611234
+
+sonda 6048913046830000
+
+Rua Antônio Chalupe  ,Vila Boa Vista  ,Barueri/SP  ,06411-080
+
+Mylena UNIP 9812/D94FFD4 57175573-2 476358858-39
+
+
+ssh cmopr@BLADE-B-WEB-1/cmsoftware
+
+ng update (lembrar de copiar o node_modules\@angular\core\src)
+
+npm i -g @angular/cli
+npm install @angular/cli --save-dev
+
+npm i -g @ionic/angular
+npm install --serve-dev @ionic/angular
+
+npm i -g @angular-devkit/build-angular
+npm install --save-dev @angular-devkit/build-angular
+
+npm i -g @angular-devkit/schematics
+npm install --save-dev @angular-devkit/schematics
+
+npm i -g @ionic/angular-toolkit
+npm install --save-dev @ionic/angular-toolkit
+
+ionic cordova plugin add cordova-plugin-device
+npm install @ionic-native/device
+
+
+
+ionic cordova plugin add cordova-sqlite-storage --save
+npm install @ionic/storage
+
+ionic cordova plugin add cordova-plugin-file-transfer
+npm install @ionic-native/file-transfer
+
+ionic cordova plugin add cordova-plugin-document-viewer
+npm install @ionic-native/document-viewer
+
+npm install br-mask --save -E
+
+ionic cordova plugin add cordova-plugin-fcm-with-dependecy-updated
+npm install @ionic-native/fcm
+
+ionic cordova plugin add cordova-plugin-file-opener2
+npm install @ionic-native/file-opener
+
+---
+cordova plugin add cordova-support-google-services --save
+----
+--- change ---
+apply plugin: com.google.gms.googleservices.GoogleServicesPlugin
+
+in platforms\android\cordova-plugin-fcm-with-dependecy-updated
+
+to this:
+
+ext.postBuildExtras = {
+    apply plugin: com.google.gms.googleservices.GoogleServicesPlugin
+}
+
+---
+ionic 
+---
+
+
+
+    $ git init : Faça isso já dentro do diretório desejado
+
+    $ git remote add -f origin https://github.com/andredsn/ArquiteturaSoftware.git
+
+    $ git add .
+
+    $ git commit -m "First commit - send project"
+
+    $ git push origin master
+
+
+
+
+alter sequence rocketmax.servico_status_seq restart with 2000;
+
+senha BCB_REGISTRATO kyWlIvYV/drhErv0r
+kyWlIvYV
+
+xmlns:android="http://schemas.android.com/apk/res/android" colocar no config.xml
+
+
+    Município: Santana De Parnaíba
+
+    CEP do imóvel: 06533-170
+
+    Bairro: Chácara Jaguari
+
+http://10.1.12.8/cm/web2project/ \/123456
+
+GIT CMSW alexandre.duarte@cmsw.com/Mylena01git
+
+MAX SCORE drhErv0r
+MAXPJ token 00074173
+
+git nslcaridade/alexandre.duarte@nslcaridade.com.br/Mylena@1
+
+4003 9011 UOL / Cloud
+
+
+rede acesso speed "ssh -f -N cmopr@10.1.200.19 -D 8000"
+
+configura telefone *40326691833
+
+
+
+npm i -g @ionic-native/camera
+npm install --save @ionic-native/camera
+
+ionic cordova plugin add cordova-plugin-fcm-with-dependecy-updated
+npm install @ionic-native/fcm
+
+ionic cordova plugin add cordova-plugin-ionic-webview
+npm install @ionic-native/ionic-webview
+
+ionic cordova plugin add cordova-plugin-file
+npm install @ionic-native/file
+
+ionic cordova plugin add cordova-plugin-filepath
+npm install @ionic-native/file-path
+
+ionic cordova plugin add cordova-plugin-x-socialsharing
+npm install @ionic-native/social-sharing
+
+ionic cordova plugin add cordova-plugin-device
+npm install @ionic-native/device
+
+ionic cordova plugin add cordova-plugin-nativestorage
+npm install @ionic-native/native-storage
+
+ionic cordova plugin add cordova-sqlite-storage
+npm install @ionic-native/sqlite
+
+ionic cordova plugin add uk.co.workingedge.cordova.plugin.sqliteporter
+npm install @ionic-native/sqlite-porter
+
+mvn install:install-file -Dfile=MQPoolProject.jar -DgroupId=com.cmsw -DartifactId=MQPoolProject -Dversion=0.0.1 -Dpackaging=jar -DgeneratePom=true
+
+NSL caridade
+nsladmin@nslcaridade.com.br
+admin2019
