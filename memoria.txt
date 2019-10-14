@@ -16,6 +16,8 @@ openssl pkcs12 -export  -inkey ios_distribution.key -in ios_distribution.cer -ce
 
 openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert ./ios_distribution.pem -key ./gochk_push_notification_certificate.p12
 
+Key google API
+AIzaSyCC0NnoZ14CkmvKS6tNJp6lpJ1JKr0IO3c
 
 Server
 

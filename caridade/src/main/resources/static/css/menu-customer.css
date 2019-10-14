@@ -142,8 +142,9 @@ footer {
    bottom:0px;
    height:40px;
    width:100%;
-   background-color: #0042ab;
-   background-image: linear-gradient(to bottom right, #ddf6fa,  #f9ffff);
+   background-color: transparent;
+   /* background-image: linear-gradient(to bottom right, #ddf6fa,  #f9ffff); */
+   /* background-image: linear-gradient(to bottom right, white, #D78257); */
    /*background-image: linear-gradient(to bottom right, #00ccff,  #f9ffff);*/
 }
 
