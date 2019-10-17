@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset=UTF-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSL</title>
+<link rel="shortcut icon" th:href="@{../image/caridade.ico}" />
+<link href="../css/bootstrap.css" rel="stylesheet" />
+<link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
+<link href="../css/menu-customer.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
+
+</head>
+<body>
+	<header id="header" class="navbar navbar-default navbar-fixed-top">
+		<div th:replace="fragmentos/header :: cabecalho"></div>
+	</header>
+	
+
+	<div class="container-fluid">
+		<table id="selecao" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
+			<thead>
+				<tr>
+					<th>
+						<h5>Tipo Item</h5> <select id="tipoDoacao" name="tipoDoacao" class="w3-select w3-select w3-border w3-margin-bottom" required>
+							<option value="" >Selecione</option>
+							<option th:each="tipoDoacao: ${tipoDoacao}" th:value="${tipoDoacao.idTipoDoacao}" th:data-tdoaid= "${tipoDoacao.idTipoDoacao}" th:data-tdoaname="${tipoDoacao.descricao}" th:text="${tipoDoacao.descricao}" ></option>
+					</select>
+					<input type=hidden name=instname id=instname />
+					<input type=hidden name=doaname id=doaname />
+					</th>
+					<th><h5>Nome do Item</h5>
+						<input id="item" name="item" type="tel">
+					</th>
+					<th><h5>Peso (em gramas)</h5>
+						<input id="pesoGramas" name="pesoGramas" type="number">
+					</th>
+					
+				</tr>
+			</thead>
+		</table>
+		<div class="row">
+			<div class="col-md-12">
+				<button id="salva" type="button" class="btn btn-default">Salva Doacao</button>
+				<button id="adciona" type="button" class="btn btn-default">Add</button>
+				<button id="clear" type="button" class="btn btn-default">Limpa</button>
+				<button id="removeSelected" type="button" class="btn btn-default">Remove Selecionado</button>
+				<table id="grid" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
+					<thead>
+						<tr>
+							<th data-column-id="id" data-identifier="true" data-type="numeric" data-width="10%">ID</th>
+							<th data-column-id="idTipoDoacao" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Tipo Doacao</th>
+							<th data-column-id="item" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Produto</th>
+							<th data-column-id="pesoGramas" data-width="10%" data-visible="true" data-edit="true" data-input="true">Peso</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.11.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../dist/jquery.bootgrid.js"></script>
+	<script src="../dist/jquery.bootgrid.fa.js"></script>
+<script>
+var idLine = 0;
+$('#tipoDoacao').change(function () {
+	var tdoaname=$(this).find('option:selected').attr('data-tdoaname');
+	$('#tdoaname').val(tdoaname);
+	var tdoaid=$(this).find('option:selected').attr('data-tdoaid');
+});
+
+$(document).ready(function() {
+
+	$("#grid").bootgrid({
+			formatters : {
+				"link" : function(column, row) {
+					return "<a href=\"#\">" + column.id + ": "
+							+ row.id + "</a>";
+				}
+			},
+			rowCount : [ -1, 10, 50, 75 ]
+		});
+		$("#adciona").on("click",function() {
+				if ( $('#tipoDoacao').val() !== "" &&
+					 $('#item').val() !== "" &&
+					 $('#qtdItem').val() !== "" ){
+				$("#grid").bootgrid("append",[{
+					id :idLine,
+					idTipoDoacao: $('#tipoDoacao').val(),
+					item : $('#item').val(),
+					pesoGramas : $('#pesoGramas').val()
+				}]);
+				idLine++;
+				}
+			}); 
+	$("#salva").on(
+			"click",
+			function() {
+				var dataSend = $('#grid').bootgrid().data(
+						'.rs.jquery.bootgrid').rows;
+				$.ajax({
+					  type: "POST",
+					  url: "inserir/itens",
+					  contentType: "application/json; charset=utf-8",
+					  data: JSON.stringify(dataSend),
+					  success: function() {
+						  alert("Registrado");
+					  }
+				});
+				$("#grid").bootgrid("clear");
+			});
+
+	$("#clear").on("click", function() {
+		$("#grid").bootgrid("clear");
+	});
+
+	$("#removeSelected").on("click", function() {
+		$("#grid").bootgrid("remove");
+	});
+});
+</script>	
+	
+<!-- div th:replace="fragmentos/footer :: rodape"></div--></body>
+</html>
+
