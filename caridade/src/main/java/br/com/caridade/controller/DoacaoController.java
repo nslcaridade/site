@@ -84,6 +84,15 @@ public class DoacaoController {
 		return mv;
 	}
 	
+	@GetMapping("/itens")
+	public ModelAndView buscaTipoDoacao() {
+		ModelAndView mv = new ModelAndView();
+		
+		List<TipoDoacao> findAll3 = tipoDoacaoRepository.findAll();
+		mv.addObject("tipoDoacao", findAll3);
+		return mv;
+	}
+	
 	@PostMapping("/inserir")
 	public ModelAndView insere(@RequestBody List<HistoricoDoacao> ltHist) {
 		ModelAndView mv = new ModelAndView();
@@ -91,6 +100,18 @@ public class DoacaoController {
 		mv.setStatus(HttpStatus.OK);
 		for (HistoricoDoacao historicoDoacao : ltHist) {
 			historicoDoacaoRepository.saveAndFlush(historicoDoacao);
+		}
+		
+		return mv;
+	}
+	
+	@PostMapping("/inserir/itens")
+	public ModelAndView insereItens(@RequestBody List<Doacao> ltDoacao) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("doacao/itens");
+		mv.setStatus(HttpStatus.OK);
+		for (Doacao doacao : ltDoacao) {
+			doacaoRepository.saveAndFlush(doacao);
 		}
 		
 		return mv;
