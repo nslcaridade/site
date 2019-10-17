@@ -29,10 +29,12 @@ import br.com.caridade.model.HistoricoDoacao;
 import br.com.caridade.model.Instituicao;
 import br.com.caridade.model.Mensagem;
 import br.com.caridade.model.RelatorioDoacao;
+import br.com.caridade.model.TipoDoacao;
 import br.com.caridade.repository.DoacaoRepository;
 import br.com.caridade.repository.HistoricoDoacaoRepository;
 import br.com.caridade.repository.InstituicaoRepository;
 import br.com.caridade.repository.RelatorioDoacaoRepository;
+import br.com.caridade.repository.TipoDoacaoRepository;
 import br.com.caridade.util.GravaRelatorioAnual;
 import br.com.caridade.util.GravaRelatorioMensal;
 import br.com.caridade.util.UtilsTools;
@@ -54,6 +56,9 @@ public class DoacaoController {
 	@Autowired
 	RelatorioDoacaoRepository relatorioDoacaoRepository;
 	
+	@Autowired
+	TipoDoacaoRepository tipoDoacaoRepository;
+	
 	@GetMapping("/listar")
 	public ModelAndView lista() {
 		ModelAndView mv = new ModelAndView();
@@ -71,6 +76,8 @@ public class DoacaoController {
 		mv.setViewName("doacao/preparar");
 		List<Instituicao> findAll = instituicaoRepository.findAll();
 		mv.addObject("instituicoes", findAll);
+		List<TipoDoacao> findAll3 = tipoDoacaoRepository.findAll();
+		mv.addObject("tipoDoacao", findAll3);
 		List<Doacao> findAll2 = doacaoRepository.findAll();
 		mv.addObject("itensDoacao", findAll2);
 		mv.setStatus(HttpStatus.OK);

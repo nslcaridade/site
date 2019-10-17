@@ -23,7 +23,7 @@ public class DoacaoDTO {
 
 	@Override
 	public String toString() {
-		return "DoacaoDTO [doacao=" + doacao + "]";
+		return "{\"doacao\":" + doacao + "}";
 	}
 	
 }

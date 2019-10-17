@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -26,6 +28,9 @@ public class Doacao {
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "peso_gramas")
 	private double pesoGramas;
+	
+	@Column(name = "id_tipo_doacao")
+	private Long idTipoDoacao;
 
 	public Long getCodItem() {
 		return codItem;
@@ -51,11 +56,20 @@ public class Doacao {
 		this.pesoGramas = pesoGramas;
 	}
 
+	public Long getIdTipoDoacao() {
+		return idTipoDoacao;
+	}
+
+	public void setIdTipoDoacao(Long idTipoDoacao) {
+		this.idTipoDoacao = idTipoDoacao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codItem == null) ? 0 : codItem.hashCode());
+		result = prime * result + ((idTipoDoacao == null) ? 0 : idTipoDoacao.hashCode());
 		result = prime * result + ((item == null) ? 0 : item.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(pesoGramas);
@@ -77,6 +91,11 @@ public class Doacao {
 				return false;
 		} else if (!codItem.equals(other.codItem))
 			return false;
+		if (idTipoDoacao == null) {
+			if (other.idTipoDoacao != null)
+				return false;
+		} else if (!idTipoDoacao.equals(other.idTipoDoacao))
+			return false;
 		if (item == null) {
 			if (other.item != null)
 				return false;
@@ -89,8 +108,8 @@ public class Doacao {
 
 	@Override
 	public String toString() {
-		return "Doacao [codItem=" + codItem + ", item=" + item + ", pesoGramas=" + pesoGramas + "]";
+		return "Doacao [codItem=" + codItem + ", item=" + item + ", pesoGramas=" + pesoGramas + ", idTipoDoacao="
+				+ idTipoDoacao + "]";
 	}
 
-	
 }

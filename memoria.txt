@@ -18,6 +18,12 @@ openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert ./ios_distri
 
 Key google API
 AIzaSyCC0NnoZ14CkmvKS6tNJp6lpJ1JKr0IO3c
+AIzaSyCC0NnoZ14CkmvKS6tNJp6lpJ1JKr0IO3c
+Key google API java 
+AIzaSyCv9-leWiTBzs75zZoM21GTO3sRfSqHM8Q
+AIzaSyBPUqY-v6vKUnR62bMMbGSJe2yjXBvkwPk
+
+ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID=AIzaSyCC0NnoZ14CkmvKS6tNJp6lpJ1JKr0IO3c
 
 Server
 
