@@ -23,6 +23,12 @@ Key google API java
 AIzaSyCv9-leWiTBzs75zZoM21GTO3sRfSqHM8Q
 AIzaSyBPUqY-v6vKUnR62bMMbGSJe2yjXBvkwPk
 
+pis/pasep
+170.19534.56-0
+
+ibis accor
+3081031793577868
+
 ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID=AIzaSyCC0NnoZ14CkmvKS6tNJp6lpJ1JKr0IO3c
 
 Server
@@ -227,3 +233,15 @@ mvn install:install-file -Dfile=MQPoolProject.jar -DgroupId=com.cmsw -DartifactI
 NSL caridade
 nsladmin@nslcaridade.com.br
 admin2019
+
+50463691172
+62753117-9
+
+#####
+Passo 1: cheque se recebeu uma notificação de compartilhamento no Google drive.
+Passo 2: Veja se está disponível o arquivo com extensão APK.
+Passo 3: Há necessidade de liberação da instalação, acesse a loja App Store do Google e no menu encontre a opção "Play Protect", acesse e no canto direito no ícone de engrenagem, clique e desabilite a proteção.
+Passo 4: Baixe e instale o arquivo de extensão APK compartilhando da opção 2.
+Pronto agora e executar e se cadastrar.
+Obs. Após a instalação pode voltar a proteção do Play Protect.
+#####
