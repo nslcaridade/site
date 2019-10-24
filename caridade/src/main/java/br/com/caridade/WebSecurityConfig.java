@@ -46,6 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				 							  "/Diretrizes_NSL.pdf**",
 				 							  "/css/**",
 				 							  "/dist/**",
+				 							  "/fonts/**",
 				 							  "/image/**",
 				 							  "/js/**",
 				 							  "/lib/**",
