@@ -14,7 +14,7 @@
     width: 50px;
     height: 80px;
     background: #D78257;
-    -moz-border-radius: 50px 50px 0 0;
+/*     -moz-border-radius: 50px 50px 0 0; */
     border-radius: 50px 50px 0 0;
     -webkit-transform: rotate(-45deg);
        -moz-transform: rotate(-45deg);
@@ -70,7 +70,7 @@
     transform: scale( .75 );
   }
 }
-.column .text {
+/* .column .text {
 	color: #f00 !important;
 }
 
@@ -143,31 +143,53 @@ footer {
    height:40px;
    width:100%;
    background-color: transparent;
-   /* background-image: linear-gradient(to bottom right, #ddf6fa,  #f9ffff); */
-   /* background-image: linear-gradient(to bottom right, white, #D78257); */
-   /*background-image: linear-gradient(to bottom right, #00ccff,  #f9ffff);*/
+   background-image: linear-gradient(to bottom right, #ddf6fa,  #f9ffff);
+   background-image: linear-gradient(to bottom right, white, #D78257);
+   background-image: linear-gradient(to bottom right, #00ccff,  #f9ffff);
 }
-
+ */
 .home-page
 {
-    background-image: url('image/festa_pier.jpg');
+    background-image: url('../image/festa_pier.jpg');
     background-repeat: no-repeat;
     background-size:100%;
-    bottom: 0;
     color: black;
-    left: 0;
     overflow: auto;
-    padding: 3em;
     position: absolute;
-    right: 0;
     text-align: center;
-    top: 0;
     background-size: cover;
-    box-shadow: 0px 2700px rgba(255, 255, 255, 0.8) inset;
-    
+    background-color: #C2B69D;
+    /* box-shadow: 0px 2700px rgba(255, 255, 255, 0.8) inset; */
 }
 
-body {font-family: Kalam; }
+.home-page-login
+{
+	background-image: url('../image/festa_pier.jpg');
+    background-repeat: no-repeat;
+    background-size:100%;
+    color: black;
+    box-shadow: 0px 2700px rgba(255, 255, 255, 0.8) inset;
+}
+
+footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:40px;
+   width:100%;
+   text-align: left;
+   background-color: transparent;
+}
+
+.icon-bar {
+    height: 100%;
+    width: 90px;
+    text-align: center;
+    background-color: #555;
+}
+body {
+	font-family: Kalam; 
+}
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -181,7 +203,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
  button {
-  background-color: #4CAF50;
+  background-color: #C2B69D;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

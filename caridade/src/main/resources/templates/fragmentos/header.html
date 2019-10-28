@@ -1,27 +1,89 @@
-<nav th:fragment="cabecalho">
-	<ul class="menu">
-		<li><a href="/caridade">Home</a></li>
-		<!-- li th:if="${usuFound != null}"-->
-		<li>
-		<a href="#" >Cadastros</a>
-			<ul>
-				<li><a href="/caridade/doacao/preparar">Retirada</a></li>
-				<li><a href="/caridade/doacao/listar">Lisa de Itens</a></li>
-				<li><a href="/caridade/usuario/lista">Lista de Participantes</a></li>
-				<li><a href="/caridade/usuario/listagt">Lista Coordenadores</a></li>
-				<li><a href="/caridade/usuario/cadastro">Cadastro Participante</a></li>
-				<li><a href="/caridade/doacao/itens">Cadastro Itens</a></li>
-			</ul>
-		</li>
-		<li><a href="#">Relatórios</a>
-			<ul>
-				<li><a href="/caridade/doacao/anual">Geral Anual</a></li>
-				<li><a href="/caridade/doacao/mensal">Mensal por Instituição</a></li>
-				<li><a href="/caridade/instituicao/listar">Instituições</a></li>
-				<li><a href="/caridade/usuario/listagtcontato">Contato Coordenadores</a></li>
-			</ul>
-		</li>
-		<li><a href="/caridade/calendario/listar">Calendario</a></li>
-		<li><a href="/caridade/documento/diretriz">Diretriz</a></li>
-	</ul>
+<nav th:fragment="cabecalho" class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- Navbar content -->
+      <a class="navbar-brand" href="/caridade">
+	      <img id="img_menu" src="./image/caridade.PNG" height="30" style="margin-left: 8px">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="sr-only" style="color=black">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarCadastros" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Cadastros
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarCadastros">
+              <a class="dropdown-item" href="/caridade/doacao/preparar">Retirada</a>
+              <a class="dropdown-item" href="/caridade/doacao/listar">Lisa de Itens	</a>
+              <a class="dropdown-item" href="/caridade/usuario/lista">Lista de Participantes</a>
+              <a class="dropdown-item" href="/caridade/usuario/listagt">Lista Coordenadores</a>
+              <a class="dropdown-item" href="/caridade/usuario/cadastro">Cadastro Participante</a>
+              <a class="dropdown-item" href="/caridade/doacao/itens">Cadastro Itens</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarRelatorio" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Relatórios
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarRelatorio">
+              <a class="dropdown-item" href="/caridade/doacao/anual">Geral Anual</a>
+              <a class="dropdown-item" href="/caridade/doacao/mensal">Mensal por Instituição</a>
+              <a class="dropdown-item" href="/caridade/instituicao/listar">Instituições</a>
+              <a class="dropdown-item" href="/caridade/usuario/listagtcontato">Contato Coordenadores</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarMissao" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Missão de rua
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarMissao">
+              <a class="dropdown-item" href="/caridade/missao/carapicuiba">Rota Carapcuíba</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarCalendario" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Calendário
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarCalendario">
+              <a class="dropdown-item" href="/caridade/calendario/listar">2019</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDocumentos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Documentos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDocumentos">
+              <a class="dropdown-item" href="/caridade/documento/diretriz">Diretriz</a>
+            </div>
+          </li>
+        </ul>
+           <!--
+    <form class="form-inline mt-2 mt-md-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  -->
+</div>
+<script type="text/javascript">
+function is_img(file1, file2) {
+	var img1 = document.createElement('img');
+	img1.src = file1;
+	var img2 = document.createElement('img');
+	img2.src = file2;
+
+	img1.onload = function() {
+		document.getElementById("img_menu").src = file1;
+	}
+	img2.onload = function() {
+		document.getElementById("img_menu").src = file2;
+	}
+
+}
+is_img("./image/caridade.PNG","../image/caridade.PNG");
+</script>
 </nav>

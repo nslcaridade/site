@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html" charset=UTF-8>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>NSL</title>
 <link rel="shortcut icon" th:href="@{../image/caridade.ico}" />
 <link href="../css/bootstrap.css" rel="stylesheet" />
 <link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
 <link href="../css/menu-customer.css" rel="stylesheet" />
 <link href="../css/fontes-customer.css" rel="stylesheet" />
-<script type="text/javascript" src="../../js/moderniz.2.8.1.js"></script>
+<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
 
 </head>
 <body>
@@ -61,10 +61,10 @@
 			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
 		</div>
 	</div>
-	<script src="../../lib/jquery-1.11.1.min.js"></script>
-	<script src="../../js/bootstrap.js"></script>
-	<script src="../../dist/jquery.bootgrid.js"></script>
-	<script src="../../dist/jquery.bootgrid.fa.js"></script>
+<script src="../lib/jquery-1.11.1.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../dist/jquery.bootgrid.js"></script>
+<script src="../dist/jquery.bootgrid.fa.js"></script>
 <script>
 $(document).ready(function() {
 	$("#gridUserGt").bootgrid({
@@ -77,7 +77,7 @@ $(document).ready(function() {
 			rowCount : [ -1, 10, 50, 75 ]
 		});
 });
-</script>	
+</script>		
 	
 <!-- div th:replace="fragmentos/footer :: rodape"></div-->
 </body>

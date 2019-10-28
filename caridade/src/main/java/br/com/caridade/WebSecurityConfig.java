@@ -61,6 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				 							  "/instituicao/listar",
 				 							  "/Mensagem",
 				 							  "/Mensagem/**",
+				 							  "/missao",
+				 							  "/missao/**",
 				 							  "/User",
 				 							  "/User/**",
 				 							  "/User/Delete/**",

@@ -21,7 +21,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<table id="gridInst" class="table table-condensed table-hover table-striped" data-row-select="true" data-keep-selection="true">
+				<table id="gridDoa" class="table table-condensed table-hover table-striped" data-row-select="true" data-keep-selection="true">
 					<thead>
 						<tr>
 							<th data-column-id="id" data-identifier="true" data-type="numeric" data-visible="false" data-width="5%">ID</th>
@@ -53,7 +53,7 @@
 	<script src="../dist/jquery.bootgrid.fa.js"></script>
 <script>
 $(document).ready(function() {
-	$("#gridInst").bootgrid({
+	$("#gridDoa").bootgrid({
 			formatters : {
 				"link" : function(column, row) {
 					return "<a href=\"#\">" + column.id + ": "
@@ -65,5 +65,5 @@ $(document).ready(function() {
 });
 </script>	
 	
-<!-- div th:replace="fragmentos/footer :: rodape"></div--></body>
+</body>
 </html>
