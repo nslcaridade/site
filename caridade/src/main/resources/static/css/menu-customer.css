@@ -150,7 +150,8 @@ footer {
  */
 .home-page
 {
-    background-image: url('../image/festa_pier.jpg');
+    /*background-image: url('../image/festa_pier.jpg');*/
+    background-imag: url('../image/image-nslcaridade.png');
     background-repeat: no-repeat;
     background-size:100%;
     color: black;

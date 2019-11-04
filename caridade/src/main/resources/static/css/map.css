@@ -1,0 +1,104 @@
+
+:root {
+  
+  --orange: #BB532E;
+  --blue: #7bcfd0;
+}
+
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+	
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+
+html { 
+  background: white;/*linear-gradient(
+      #181818 , 
+      #CCCCCC
+    );*/
+
+  background-color: white;/*#181818;*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right;
+  background-size: 100%;
+  
+  /* Fallback (could use .jpg/.png alternatively)
+  background: url(../image/imagem_circular.svg) ;
+  background-color: red;
+  background-color: #181818;
+  url(../image/imagem_circular.svg) ,
+  background-image: url(imagem_circular.svg); 
+  
+
+  background-image:
+    -webkit-gradient(linear, left top, right top, from(red), to(#f06d06));
+  
+  background-image:
+    -webkit-linear-gradient(left, red, #f06d06);
+
+  background-image:
+    -moz-linear-gradient(left, red, #f06d06);
+
+  background-image:
+    -o-linear-gradient(left, red, #f06d06);
+
+  background-image:
+    linear-gradient(to right, red, #f06d06);*/
+}
+
+.row{
+	/* border-top: 1px solid #dee2e6; */
+}
+
+.col-md-2{
+	border-top: 1px solid #dee2e6;
+}
+
+img {
+  border-radius: 20%;
+}
+
+span {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+span.titulo{
+    font-size: 20px;
+}
+
+h1-nsl, h2-nsl, h3-nsl, h4-nsl, h5-nsl, h6-nsl {
+  position: relative; 
+  top: 30px; 
+  width: 100%;
+}
+
+h1-nsl, h2-nsl, h3-nsl, h4-nsl, h5-nsl, h6-nsl span-nsl { 
+   color: black; 
+   letter-spacing: 0.5px;  
+}
+
+h1-nsl, .h1 {
+  font-size: 4rem;
+}
+
+h2-nsl, .h2 {
+  font-size: 3rem;
+}
+
+h3-nsl, .h3 {
+	color: var(--orange);
+	font-size: 2rem;
+	font-family: Acme;
+}
+
+h5-nsl, .h5 {
+	font-family: Acme;
+	font-weight: 400;
+}
+
