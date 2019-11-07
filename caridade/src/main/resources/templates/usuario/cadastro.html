@@ -9,13 +9,17 @@
 <link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
 <link href="../css/menu-customer.css" rel="stylesheet" />
 <link href="../css/fontes-customer.css" rel="stylesheet" />
-<script type="tel/javascript" src="../js/moderniz.2.8.1.js"></script>
+<link href="../css/map.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
 
 </head>
 <body>
-<header id="header" class="navbar navbar-default navbar-fixed-top">
-	<div th:replace="fragmentos/header :: cabecalho"></div>
-</header>
+	<header>
+		<div th:replace="fragmentos/header :: cabecalho"></div>
+	</header>
+	<header id="header" class="navbar navbar-default navbar-fixed-top">
+		<div th:replace="fragmentos/header :: menu"></div>
+	</header>
 <div class="container-fluid">
 	<table id="selecao" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
 		<thead>

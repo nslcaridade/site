@@ -11,40 +11,53 @@
 <link href="./css/menu-customer.css" rel="stylesheet" />
 <link href="./css/fontes-customer.css" rel="stylesheet" />
 <link href="./css/map.css" rel="stylesheet" />
-<link href="./css/card-customer.css" rel="stylesheet" />
 <!-- <script type="text/javascript" src="js/moderniz.2.8.1.js"></script> -->
 <head>
 <body>
-<header id="header" class="navbar navbar-default navbar-fixed-top">
+<header>
 	<div th:replace="fragmentos/header :: cabecalho"></div>
 </header>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-2 col-lg-2">
-			<div class="card-image">
-				<img width="300" height="200" th:src="@{./image/pier_giorgio.jpg}" style="width: 100px;border-radius: 50%;"></img>
-			
-			</div>
-		</div>
-		<div class="col-md-2 col-lg-2"  th:each="mensagem: ${mensagem}" >
-			<div class="card-content"  th:if="${mensagem.texto}">
-				<span class="card-text" th:text="${mensagem.texto}"></span>
-			</div>
-		</div>
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-4">
-			<div class="card-image">
-				<img width="300" height="200" th:src="@{./image/comunicacao.jpg}"></img>
-			</div>
+<header id="header" class="navbar navbar-default navbar-fixed-top">
+	<div th:replace="fragmentos/header :: menu"></div>
+</header>
+<div class="slideshow-container">
+	<div th:if="${imagens}" th:each="imagem: ${imagens}">
+		<div class="mySlides fade">
+			<img th:src="@{${#strings.concat('./image/',imagem)}}" style="width:100%">
 		</div>
 	</div>
+	<br>
+	<div style="text-align:center" >
+   		<span class="dot" th:if="${imagens}" th:each="imagem: ${imagens}"></span> 
+	</div>
 </div>
+		
 <div th:replace="fragmentos/footer :: rodape"></div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
- 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
 </body>
 </head>
 </html>

@@ -8,12 +8,16 @@
 <link href="../css/bootstrap.css" rel="stylesheet" />
 <link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
 <link href="../css/menu-customer.css" rel="stylesheet" />
-<link href="../css/fontes-customer.css" rel="stylesheet" />
+<link href="../css/map.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
 
 </head>
 <body>
-	<header id="header" class="navbar navbar-default navbar-fixed-top">
+	<header>
 		<div th:replace="fragmentos/header :: cabecalho"></div>
+	</header>
+	<header id="header" class="navbar navbar-default navbar-fixed-top">
+		<div th:replace="fragmentos/header :: menu"></div>
 	</header>
 	<div class="container-fluid">
 		<div style="text-align:center; color: #B94F19;"><h4><b>DIRETRIZES PARA PASTORAL DA CARIDADE</b></h4></div>
