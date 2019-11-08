@@ -22,15 +22,20 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("home/index");
 		mv.addObject("usuario", "Duarte");
-		//File folder = new File("C:\\Users\\alexandre.duarte\\estudo\\site\\caridade\\src\\main\\resources\\static\\image");
-		File folder = new File("/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/");
-		
-		List<String> result = new ArrayList<>();
-		for (File f : folder.listFiles()) {
-			if ( f.getName().substring(0,5).equals("camp_"))
-				result.add(f.getName());
+		File folder;
+		try {
+			//File folder = new File("C:\\Users\\alexandre.duarte\\estudo\\site\\caridade\\src\\main\\resources\\static\\image");
+			folder = new File("/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/");
+			List<String> result = new ArrayList<>();
+			for (File f : folder.listFiles()) {
+				if ( f.getName().substring(0,5).equals("camp_"))
+					result.add(f.getName());
+			}
+			mv.addObject("imagens",result);
+		} catch ( Exception e ) {
+			System.out.println("ERRO: Diretorio inexistente");
 		}
-		mv.addObject("imagens",result);
+		
 		//Optional<Mensagem> findById = mensagemRepository.findByTipo("menu");
 		//mv.addObject("mensagem", findById.get());
 		return mv;

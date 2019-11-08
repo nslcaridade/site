@@ -26,9 +26,11 @@
 			<img th:src="@{${#strings.concat('./image/',imagem)}}" style="width:100%">
 		</div>
 	</div>
+	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	<a class="next" onclick="plusSlides(1)">&#10095;</a>
 	<br>
 	<div style="text-align:center" >
-   		<span class="dot" th:if="${imagens}" th:each="imagem: ${imagens}"></span> 
+   		<span class="dot" th:if="${imagens}" th:each="imagem, iter : ${imagens}" th:onclick="'currentSlide('+${iter.index}+')'"></span> 
 	</div>
 </div>
 		
@@ -39,6 +41,7 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
 var slideIndex = 0;
+var posicao = 0;
 showSlides();
 
 function showSlides() {
@@ -49,13 +52,38 @@ function showSlides() {
     slides[i].style.display = "none";  
   }
   slideIndex++;
+  posicao = 0;
   if (slideIndex > slides.length) {slideIndex = 1}    
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
+  setTimeout(showSlides, 4000);
+}
+
+function plusSlides(n) {
+  showSlidesPos(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlidesPos(slideIndex = n+1);
+}
+
+function showSlidesPos(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
 }
 </script>
 </body>
