@@ -26,8 +26,8 @@
 			<img th:src="@{${#strings.concat('./image/',imagem)}}" style="width:100%">
 		</div>
 	</div>
-	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-	<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	<!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	<a class="next" onclick="plusSlides(1)">&#10095;</a> -->
 	<br>
 	<div style="text-align:center" >
    		<span class="dot" th:if="${imagens}" th:each="imagem, iter : ${imagens}" th:onclick="'currentSlide('+${iter.index}+')'"></span> 
