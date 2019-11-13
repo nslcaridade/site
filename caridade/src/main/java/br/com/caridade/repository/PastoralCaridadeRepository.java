@@ -8,5 +8,6 @@ import br.com.caridade.model.PastoralCaridade;
 
 public interface PastoralCaridadeRepository extends JpaRepository<PastoralCaridade, Long> {
 	List<PastoralCaridade> findByGtIsNotNullOrderByOrderGt();
+	List<PastoralCaridade> findBySemana(int semana);
 
 }

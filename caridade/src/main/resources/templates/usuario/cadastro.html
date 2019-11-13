@@ -9,7 +9,6 @@
 <link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
 <link href="../css/menu-customer.css" rel="stylesheet" />
 <link href="../css/fontes-customer.css" rel="stylesheet" />
-<link href="../css/map.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
 
 </head>
@@ -92,6 +91,16 @@
 	      				<option >Domingo 19:30h</option>
 					</select>
 				</th>
+				<th><h5>Semana para Acolhida de alimento</h5>
+					<select id="semana_acolhida" name="semana_acolhida">
+						<option ></option>
+	      				<option >1</option>
+	      				<option >2</option>
+	      				<option >3</option>
+	      				<option >4</option>
+	      				<option >5</option>
+					</select>
+				</th>
 			</tr>
 		</thead>
 	</table>
@@ -118,6 +127,7 @@
 							<th data-column-id="dataNascimento" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Data Nascimento</th>
 							<th data-column-id="tipoSangue" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Tipo Sangue</th>
 							<th data-column-id="missaAcolhida" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Missa Acolhida</th>
+							<th data-column-id="semana" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Semana Acolhida</th>
 							<th data-column-id="horarioAcolhida" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Horário Acholhida</th>
 							<th data-column-id="gt" data-type="text" data-visible="false">order</th>
 							<th data-column-id="orderGt" data-type="numeric" data-visible="false">order</th>
@@ -179,7 +189,8 @@
 						missaAcolhida: missa,
 						horarioAcolhida: horario,
 						gt: $('#gt').val(),
-						orderGt: 100
+						orderGt: 100,
+						semana: $('#semana_acolhida').val()
 					}]);
 					idLine++;
 					}

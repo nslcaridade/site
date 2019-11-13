@@ -62,6 +62,9 @@ public class PastoralCaridade {
 	
 	@Column(name = "order_gt")
 	private int orderGt;
+	
+	@Column(name = "semana")
+	private int semana;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -191,6 +194,14 @@ public class PastoralCaridade {
 		this.orderGt = orderGt;
 	}
 
+	public int getSemana() {
+		return semana;
+	}
+
+	public void setSemana(int semana) {
+		this.semana = semana;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -209,6 +220,7 @@ public class PastoralCaridade {
 		result = prime * result + ((missaAcolhida == null) ? 0 : missaAcolhida.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + orderGt;
+		result = prime * result + semana;
 		result = prime * result + ((tipoSangue == null) ? 0 : tipoSangue.hashCode());
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
 		return result;
@@ -290,6 +302,8 @@ public class PastoralCaridade {
 			return false;
 		if (orderGt != other.orderGt)
 			return false;
+		if (semana != other.semana)
+			return false;
 		if (tipoSangue == null) {
 			if (other.tipoSangue != null)
 				return false;
@@ -309,7 +323,7 @@ public class PastoralCaridade {
 				+ ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + ", cep="
 				+ cep + ", celular=" + celular + ", email=" + email + ", dataNascimento=" + dataNascimento
 				+ ", tipoSangue=" + tipoSangue + ", missaAcolhida=" + missaAcolhida + ", horarioAcolhida="
-				+ horarioAcolhida + ", gt=" + gt + ", orderGt=" + orderGt + "]";
+				+ horarioAcolhida + ", gt=" + gt + ", orderGt=" + orderGt + ", semana=" + semana + "]";
 	}
 
 }
