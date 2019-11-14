@@ -41,7 +41,7 @@ public class HomeController {
 		} catch ( Exception e ) {
 			System.out.println("ERRO: Diretorio inexistente");
 		}
-		List<PastoralCaridade> lstPC = pastoralCaridadeRepository.findBySemana(RUTIL.semanaAtual());
+		List<PastoralCaridade> lstPC = pastoralCaridadeRepository.findBySemana(new Long(RUTIL.semanaAtual()));
 		List<PastoralCaridade> lstQuinta = new ArrayList<PastoralCaridade>();
 		List<PastoralCaridade> lstSabado = new ArrayList<PastoralCaridade>();
 		List<PastoralCaridade> lstDomingoM = new ArrayList<PastoralCaridade>();

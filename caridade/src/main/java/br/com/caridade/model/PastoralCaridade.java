@@ -64,7 +64,7 @@ public class PastoralCaridade {
 	private int orderGt;
 	
 	@Column(name = "semana")
-	private int semana;
+	private Long semana;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -194,11 +194,11 @@ public class PastoralCaridade {
 		this.orderGt = orderGt;
 	}
 
-	public int getSemana() {
+	public Long getSemana() {
 		return semana;
 	}
 
-	public void setSemana(int semana) {
+	public void setSemana(Long semana) {
 		this.semana = semana;
 	}
 
@@ -220,7 +220,7 @@ public class PastoralCaridade {
 		result = prime * result + ((missaAcolhida == null) ? 0 : missaAcolhida.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + orderGt;
-		result = prime * result + semana;
+		result = prime * result + ((semana == null) ? 0 : semana.hashCode());
 		result = prime * result + ((tipoSangue == null) ? 0 : tipoSangue.hashCode());
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
 		return result;
@@ -302,7 +302,10 @@ public class PastoralCaridade {
 			return false;
 		if (orderGt != other.orderGt)
 			return false;
-		if (semana != other.semana)
+		if (semana == null) {
+			if (other.semana != null)
+				return false;
+		} else if (!semana.equals(other.semana))
 			return false;
 		if (tipoSangue == null) {
 			if (other.tipoSangue != null)
