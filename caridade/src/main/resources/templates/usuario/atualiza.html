@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset=UTF-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSL</title>
+<link rel="shortcut icon" th:href="@{../image/caridade.ico}" />
+<link href="../css/bootstrap.css" rel="stylesheet" />
+<link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
+<link href="../css/menu-customer.css" rel="stylesheet" />
+<link href="../css/fontes-customer.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
+
+</head>
+<body>
+	<header>
+		<div th:replace="fragmentos/header :: cabecalho"></div>
+	</header>
+	<header id="header" class="navbar navbar-default navbar-fixed-top">
+		<div th:replace="fragmentos/header :: menu"></div>
+	</header>
+	
+
+	<div class="container-fluid">
+		<table id="selecao" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
+			<thead>
+				<tr>
+					<th>
+						<h5>Participante</h5>
+						<select id="participantes" name="participantes" class="w3-select w3-select w3-border w3-margin-bottom" required>
+							<option value="" >Selecione</option>
+							<option th:each="participante: ${participante}" th:value="${participante.nome}" th:data-tonome="${participante.nome}" th:data-toid= "${participante.idUsuario}" th:data-tosemana = "${participante.semana}" th:data-tomissa = "${participante.missaAcolhida}" th:data-tohora = "${participante.horarioAcolhida}" th:data-tocelular = "${participante.celular}" th:text="${participante.nome}" ></option>
+						</select>
+						<input type=hidden name=idPart id=idPart />
+						<input type=hidden name=nomePart id=nomePart />
+					</th>
+					<th><h5>Semana acolhida</h5>
+						<select id="semana" name="semana" type="number">
+							<option value="" >Selecione</option>
+						</select>
+					</th>
+					<th><h5>Missa acolhida</h5>
+						<select id="missa" name="missa" type="tel">
+							<option value="" >Selecione</option>
+						</select>
+					</th>
+					<th><h5>Hora acolhida</h5>
+						<select id="hora" name="hora" type="tel">
+							<option value="" >Selecione</option>
+						</select>
+					</th>
+					<th><h5>Contato</h5>
+						<input id="celular" name="celular" type="tel">
+					</th>
+				</tr>
+			</thead>
+		</table>
+		<div class="row">
+			<div class="col-md-12">
+				<button id="atualiza" type="button" class="btn btn-default">Altualiza</button>
+				<button id="adciona" type="button" class="btn btn-default">Prepara Gravação</button>
+				<button id="clear" type="button" class="btn btn-default">Limpa</button>
+				<button id="removeSelected" type="button" class="btn btn-default">Remove Selecionado</button>
+				<table id="grid" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
+					<thead>
+						<tr>
+							<th data-column-id="idUsuario" data-identifier="true" data-type="numeric" data-width="10%">ID</th>
+							<th data-column-id="nome" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Nome</th>
+							<th data-column-id="semana" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Semana</th>
+							<th data-column-id="missaAcolhida" data-width="10%" data-visible="true" data-edit="true" data-input="true">Missa</th>
+							<th data-column-id="horarioAcolhida" data-width="10%" data-visible="true" data-edit="true" data-input="true">Hora</th>
+							<th data-column-id="celular" data-width="10%" data-visible="true" data-edit="true" data-input="true">Contato</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
+		</div>
+	</div>
+	<script src="../lib/jquery-1.11.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../dist/jquery.bootgrid.js"></script>
+	<script src="../dist/jquery.bootgrid.fa.js"></script>
+	<script src="../dist/jquery.mask.js"></script>
+<script>
+var idLine = 0;
+var horaQ = ["19:30"];
+var horaQD = ["19:30/09:00","19:30/11:00", "19:30/19:00"];
+var horaQS = ["19:30/16:00"];
+var horaSD = ["16:00/09:00","16:00/11:00","16:00/19:00"];
+var horaS = ["16:00"];
+var horaD = ["09:00","11:00","19:00"];
+var semanas = [1,2,3,4,5];
+var selectS = document.getElementById("semana");
+var selectM = document.getElementById("missa");
+var selectH = document.getElementById("hora");
+var missas = ["Quinta","Quinta/Sabado","Quinta/Domingo","Sabado","Sabado/Domingo","Domingo"];
+
+$(document).ready(function() {
+	$("#celular").mask("(99) 99999-9999");
+});
+
+$('#participantes').change(function () {
+	var toid=$(this).find('option:selected').attr('data-toid');
+	$('#idPart').val(toid);
+	var tonome=$(this).find('option:selected').attr('data-tonome');
+	$('#nomePart').val(tonome);
+	var tosemana=$(this).find('option:selected').attr('data-tosemana');
+	var tomissa=$(this).find('option:selected').attr('data-tomissa');
+	var tohora=$(this).find('option:selected').attr('data-tohora');
+	var tocelular=$(this).find('option:selected').attr('data-tocelular');
+	console.log('toid:'+toid+", tosemana:"+tosemana+", tomissa:"+tomissa+", tohora:"+tohora);
+	
+	//deleta
+	while (selectS.hasChildNodes()) {
+		selectS.removeChild(selectS.firstChild);
+	}
+	while (selectM.hasChildNodes()) {
+		selectM.removeChild(selectM.firstChild);
+	}
+	while (selectH.hasChildNodes()) {
+		selectH.removeChild(selectH.firstChild);
+	}
+	
+	if ( tocelular ) {
+		document.getElementById("celular").value = tocelular;
+	}
+	if ( tosemana ) {
+		carregaSemanas(tosemana,tomissa,tohora);
+	} else {
+		carregaTodasSemana();
+	}
+	
+});
+
+$('#missa').change(function () {
+	var tomissa=$(this).find('option:selected').val();
+	var tohora = null;
+	switch(tomissa){
+	case "Quinta":
+		carregaHora(horaQ,tohora);
+	break;
+	case "Quinta/Sabado":
+		carregaHora(horaQS,tohora);
+	break;
+	case "Quinta/Domingo":
+		carregaHora(horaQD,tohora);
+	break;
+	case "Sabado/Domingo":
+		carregaHora(horaSD,tohora);
+	break;
+	case "Sabado":
+		carregaHora(horaS,tohora);
+	break;
+	case "Domingo":
+		carregaHora(horaD,tohora);
+	break;
+	}
+});
+function carregaTodasSemana(){
+	optionS = document.createElement("option");
+	optionS.text = 'Selecione';
+	selectS.appendChild(optionS);
+	for (var s in semanas) {
+		if (semanas.hasOwnProperty(s) ) {
+			var option = document.createElement("option");
+			option.text = semanas[s];
+			carregaTodasMissas();
+			selectS.appendChild(option);
+		}
+	}
+}
+function carregaSemanas(tosemana,tomissa,tohora){
+	for (var s in semanas) {
+		if (semanas.hasOwnProperty(s) ) {
+			var option = document.createElement("option");
+			option.text = semanas[s];
+		    if ( semanas[s] == tosemana ) {
+		    	option.setAttribute('selected', 'selected');
+		    	carregaListaMissa(tomissa);
+		    	switch(tomissa){
+		    	case "Quinta":
+		    		carregaHora(horaQ,tohora);
+		    	break;
+		    	case "Quinta/Sabado":
+		    		carregaHora(horaQS,tohora);
+		    	break;
+		    	case "Quinta/Domingo":
+		    		carregaHora(horaQD,tohora);
+		    	break;
+		    	case "Sabado/Domingo":
+		    		carregaHora(horaSD,tohora);
+		    	break;
+		    	case "Sabado":
+		    		carregaHora(horaS,tohora);
+		    	break;
+		    	case "Domingo":
+		    		carregaHora(horaD,tohora);
+		    	break;
+		    	case "full":
+		    		carregaHora(horaD,tohora);
+		    	break;
+		    	}
+		    } 
+			selectS.appendChild(option);
+		}
+	}
+}
+
+function carregaTodasMissas(){
+	optionS = document.createElement("option");
+	optionS.text = 'Selecione';
+	selectM.appendChild(optionS);
+	for (var m in missas) {
+		if (missas.hasOwnProperty(m) ) {
+			var option = document.createElement("option");
+			option.text = missas[m];
+			selectM.appendChild(option);
+		}
+	}
+}
+
+function carregaListaMissa(tomissa){
+	for (var m in missas) {
+		if (missas.hasOwnProperty(m) ) {
+			var option = document.createElement("option");
+			option.text = missas[m];
+		    if ( missas[m] == tomissa ) {
+		    	option.setAttribute('selected', 'selected');
+		    }
+		    selectM.appendChild(option);
+		}
+	}
+}
+
+function carregaHora(hora,tohora){
+
+	var length = selectH.options.length;
+
+	for (i = length - 1	; i >= 0; i--) {
+		selectH.options[i] = null;
+	}
+	selectH.options[length] = null;
+	
+	for (var h in hora) {
+		if (hora.hasOwnProperty(h) ) {
+			var option = document.createElement("option");
+			option.text = hora[h];
+		    if ( hora[h] == tohora ) {
+		    	option.setAttribute('selected', 'selected');
+		    } 
+		    selectH.appendChild(option);
+		}
+	}
+}
+
+$(document).ready(function() {
+
+	$("#grid").bootgrid({
+			formatters : {
+				"link" : function(column, row) {
+					return "<a href=\"#\">" + column.id + ": "
+							+ row.id + "</a>";
+				}
+			},
+			rowCount : [ -1, 10, 50, 75 ]
+	});
+	$("#adciona").on("click",function() {
+		var semanax = "";
+		if (document.getElementById("semana").options[document.getElementById("semana").selectedIndex] ){
+			semanax = document.getElementById("semana").options[document.getElementById("semana").selectedIndex].text;
+			semanax.replace("Selecione","teste");
+		}
+		var missax = "";
+		if (document.getElementById("missa").options[document.getElementById("missa").selectedIndex] ){
+			missax = document.getElementById("missa").options[document.getElementById("missa").selectedIndex].text;
+			missax = missax.split('Selecione').join('');
+		}
+		var horax = "";
+		if (document.getElementById("hora").options[document.getElementById("hora").selectedIndex] ){
+			horax = document.getElementById("hora").options[document.getElementById("hora").selectedIndex].text;
+			horax = horax.split('Selecione').join('');
+		}
+		
+		if ( $('#idPart').val() !== "" &&
+			 $('#nomePart').val() !== "" ) {
+			$("#grid").bootgrid("append",[{
+				idUsuario: $('#idPart').val(),
+				nome: $('#nomePart').val(),
+				semana: semanax,
+				missaAcolhida: missax,
+				horarioAcolhida: horax,
+				celular: $('#celular').val()
+			}]);
+		}
+
+	}); 
+	$("#atualiza").on(
+			"click",
+			function() {
+				var dataSend = $('#grid').bootgrid().data(
+						'.rs.jquery.bootgrid').rows;
+				$.ajax({
+					  type: "POST",
+					  url: "atualiza",
+					  contentType: "application/json; charset=utf-8",
+					  data: JSON.stringify(dataSend),
+					  success: function() {
+						  alert("Registrado");
+					  }
+				});
+				$("#grid").bootgrid("clear");
+			});
+
+	$("#clear").on("click", function() {
+		$("#grid").bootgrid("clear");
+	});
+
+	$("#removeSelected").on("click", function() {
+		$("#grid").bootgrid("remove");
+	});
+});
+</script>	
+	
+<!-- div th:replace="fragmentos/footer :: rodape"></div--></body>
+</html>
+
