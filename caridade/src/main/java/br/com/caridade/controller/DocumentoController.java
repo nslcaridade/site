@@ -1,6 +1,6 @@
 package br.com.caridade.controller;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +24,9 @@ public class DocumentoController {
 	@GetMapping("/diretriz")
 	public ModelAndView lista() {
 		ModelAndView mv = new ModelAndView();
-		Optional<Mensagem> mensagem = mensagemRepository.findByTipo("diretriz");
-		if ( mensagem != null && mensagem.isPresent() )
-			mv.addObject("diretriz", mensagem.get());
+		List<Mensagem> mensagem = mensagemRepository.findByTipo("diretriz");
+		if ( mensagem != null && !mensagem.isEmpty() )
+			mv.addObject("diretriz", mensagem);
 		mv.setViewName("documento/diretriz");
 		mv.setStatus(HttpStatus.OK);
 		return mv;

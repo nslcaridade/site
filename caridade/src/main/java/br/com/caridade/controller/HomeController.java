@@ -3,12 +3,14 @@ package br.com.caridade.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.caridade.model.Mensagem;
 import br.com.caridade.model.PastoralCaridade;
 import br.com.caridade.repository.MensagemRepository;
 import br.com.caridade.repository.PastoralCaridadeRepository;
@@ -74,8 +76,8 @@ public class HomeController {
 			mv.addObject("participantesDomingoN",lstDomingoN);
 		}
 		
-		//Optional<Mensagem> findById = mensagemRepository.findByTipo("menu");
-		//mv.addObject("mensagem", findById.get());
+		List<Mensagem> findById = mensagemRepository.findByTipo("oracao");
+		mv.addObject("oracao", findById);
 		return mv;
 	}
 
