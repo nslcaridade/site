@@ -81,9 +81,9 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-			<div class="slideshow-container">
+			<div class="slideshow-container" onmouseenter="pauseSlides()" onmouseleave="startSlides()">
 				<div th:if="${imagens}" th:each="imagem: ${imagens}">
-					<div class="mySlides fade">
+					<div class="mySlides">
 						<img th:src="@{${#strings.concat('./image/',imagem)}}" style="width:100%">
 					</div>
 				</div>
@@ -116,48 +116,64 @@
 	<script>
 	var slideIndex = 0;
 	var posicao = 0;
-	showSlides();
+	var interval;
+	var slideIndex = 1;
+	var millis = 5000;
+  
+	startSlides();
+	  
+	function startSlides(){
+	    pauseSlides();
+	    nextSlide();
+	    interval = setInterval(nextSlide, millis);
+	}
 	
-	function showSlides() {
-	  var i;
-	  var slides = document.getElementsByClassName("mySlides");
-	  var dots = document.getElementsByClassName("dot");
-	  for (i = 0; i < slides.length; i++) {
-	    slides[i].style.display = "none";  
-	  }
-	  slideIndex++;
-	  posicao = 0;
-	  if (slideIndex > slides.length) {slideIndex = 1}    
-	  for (i = 0; i < dots.length; i++) {
-	    dots[i].className = dots[i].className.replace(" active", "");
-	  }
-	  slides[slideIndex-1].style.display = "block";  
-	  dots[slideIndex-1].className += " active";
-	  setTimeout(showSlides, 4000);
+	
+	function resumeSlides() {
+		nextSlide();
+	}
+	
+	function pauseSlides() {
+	    clearInterval(interval);
+	}
+	
+	function nextSlide() {
+	    showSlide();
+	    slideIndex++;
 	}
 	
 	function plusSlides(n) {
-	  showSlidesPos(slideIndex += n);
+	    clearInterval(interval);
+	    slideIndex += n;
+	    nextSlide();
+	    interval = setInterval(nextSlide, millis);
 	}
 	
 	function currentSlide(n) {
-	  showSlidesPos(slideIndex = n+1);
+	    clearInterval(interval);
+	    slideIndex = n + 1;
+	    nextSlide();
+	    interval = setInterval(nextSlide, millis);
 	}
 	
-	function showSlidesPos(n) {
-	  var i;
-	  var slides = document.getElementsByClassName("mySlides");
-	  var dots = document.getElementsByClassName("dot");
-	  if (n > slides.length) {slideIndex = 1}    
-	  if (n < 1) {slideIndex = slides.length}
-	  for (i = 0; i < slides.length; i++) {
-	      slides[i].style.display = "none";  
-	  }
-	  for (i = 0; i < dots.length; i++) {
+	function showSlide() {
+	    var i;
+	    var slides = document.getElementsByClassName("mySlides");
+	    var dots = document.getElementsByClassName("dot");
+	    for (i = 0; i < slides.length; i++) {
+	      slides[i].style.display = "none";
+	    }
+	    if (slideIndex > slides.length) {
+	      slideIndex = 1;
+	    }
+	    if (slideIndex < 1) {
+	      slideIndex = slides.length;
+	    }
+	    for (i = 0; i < dots.length; i++) {
 	      dots[i].className = dots[i].className.replace(" active", "");
-	  }
-	  slides[slideIndex-1].style.display = "block";  
-	  dots[slideIndex-1].className += " active";
+	    }
+	    slides[slideIndex - 1].style.display = "block";
+	    dots[slideIndex - 1].className += " active";
 	}
 	</script>
 </body>
