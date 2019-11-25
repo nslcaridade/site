@@ -6,4 +6,11 @@ public final class Constantes {
 	public static final int ESCALA = 5;
 	public static final int ANIVERSARIO = 6;
 	public static final int DIASSEMANA = 7;
+	
+	/*Common*/
+	public static final String MAYEMAIL = "nslcaridade@gmail.com";
+	public static final String MAYKEY   = "admin2019";
+	public static final Long MSGANIVERSARIO = new Long(10);
+	public static final String TYPEEMAIL = "email";
+	
 }

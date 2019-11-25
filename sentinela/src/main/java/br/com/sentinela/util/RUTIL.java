@@ -9,7 +9,9 @@ import br.com.sentinela.defines.Constantes;
 import br.com.sentinela.model.DadosUsuario;
 import br.com.sentinela.model.Mensagem;
 import br.com.sentinela.model.MensagemEnviada;
+import br.com.sentinela.model.PastoralCaridade;
 import br.com.sentinela.repository.MensagemEnviadaRepository;
+import br.com.sentinela.rotina.SendEmail;
 import br.com.sentinela.rotina.SendPush;
 
 public final class RUTIL {
@@ -89,5 +91,36 @@ public final class RUTIL {
 	public static int semanaAtual() {
 		return Calendar.getInstance().get(Calendar.WEEK_OF_MONTH); 
 	}
-
+	
+	public static String hoje() {
+		String retorno;
+		retorno = Calendar.getInstance().get(Calendar.YEAR) +"-"+Calendar.getInstance().get(Calendar.MONTH)+""+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		return retorno;
+	}
+	
+	
+	public static void filtraEnvioEmail(PastoralCaridade pastoralCaridade, Mensagem mensagem, MensagemEnviadaRepository mensagemEnviadaRepository) throws Exception {
+		
+		SendEmail send = new SendEmail();
+		MensagemEnviada msgEnviada = new MensagemEnviada();
+		
+		if ( mensagem != null ) {
+			List<MensagemEnviada> findByIdUsuario = mensagemEnviadaRepository.findByIdUsuarioAndIdMensagem(pastoralCaridade.getIdUsuario(), mensagem.getIdMensagem());
+			if ( findByIdUsuario != null && !findByIdUsuario.isEmpty() ) {
+				for (MensagemEnviada mensagemEnviada :findByIdUsuario) {
+					if ( ! jaEnviadoNaSemana(mensagemEnviada.getDataMensagemEnviada()) ) {
+						send.sendEmail(pastoralCaridade, mensagem);
+						mensagemEnviada.setDataMensagemEnviada(new Timestamp(new Date().getTime()));
+						mensagemEnviadaRepository.saveAndFlush(mensagemEnviada);
+					} 
+				}
+			} else {
+				send.sendEmail(pastoralCaridade, mensagem);
+				msgEnviada.setDataMensagemEnviada(new Timestamp(new Date().getTime()));
+				msgEnviada.setIdUsuario(pastoralCaridade.getIdUsuario());
+				msgEnviada.setIdMensagem(mensagem.getIdMensagem());
+				mensagemEnviadaRepository.saveAndFlush(msgEnviada);
+			}
+		}
+	}
 }

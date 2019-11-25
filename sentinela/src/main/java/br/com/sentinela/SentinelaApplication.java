@@ -13,9 +13,11 @@ import org.springframework.context.annotation.Bean;
 import br.com.sentinela.defines.Constantes;
 import br.com.sentinela.model.DadosUsuario;
 import br.com.sentinela.model.Mensagem;
+import br.com.sentinela.model.PastoralCaridade;
 import br.com.sentinela.repository.DadosUsuarioRepository;
 import br.com.sentinela.repository.MensagemEnviadaRepository;
 import br.com.sentinela.repository.MensagemRepository;
+import br.com.sentinela.repository.PastoralCaridadeRepository;
 import br.com.sentinela.util.RUTIL;
 
 @SpringBootApplication
@@ -29,6 +31,10 @@ public class SentinelaApplication {
 	
 	@Autowired
 	MensagemRepository mensagemRepository;
+	
+	/*
+	 * @Autowired PastoralCaridadeRepository pastoralCaridadeRepository;
+	 */
 
 	public static void main(String[] args) {
 		SpringApplication.run(SentinelaApplication.class, args);
@@ -64,7 +70,12 @@ public class SentinelaApplication {
 				for (DadosUsuario dadosUsuario : findAll) {
 					toLigado(dadosUsuario);
 				}
-				Thread.sleep(10000);
+				/*List<PastoralCaridade> listPastoral = pastoralCaridadeRepository.findByBirthday(RUTIL.hoje());
+				for (PastoralCaridade pastoralCaridade : listPastoral) {
+					Optional<Mensagem> opMensagem = mensagemRepository.findByIdMensagemAndTipo(Constantes.MSGANIVERSARIO, Constantes.TYPEEMAIL);
+					if ( opMensagem != null && opMensagem.isPresent() )
+						RUTIL.filtraEnvioEmail(pastoralCaridade, opMensagem.get(), mensagemEnviadaRepository);
+				}*/
 			}
 		};
 	}
