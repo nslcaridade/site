@@ -48,7 +48,7 @@ public class UsuarioController {
 	public ModelAndView lista() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("usuario/lista");
-		List<PastoralCaridade> ltPast = pastoralCaridadeRepository.findAll();
+		List<PastoralCaridade> ltPast = pastoralCaridadeRepository.findAllByOrderByNomeAsc();
 		mv.addObject("participante", ltPast);
 		mv.setStatus(HttpStatus.OK);
 		return mv;
