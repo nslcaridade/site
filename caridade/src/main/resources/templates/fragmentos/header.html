@@ -66,7 +66,20 @@
               Documentos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDocumentos">
-              <a class="dropdown-item" href="/caridade/documento/diretriz">Diretriz</a>
+              <a class="dropdown-item" href="/caridade/documento/diretriz">Diretriz
+              </a>
+            </div>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDocumentos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Links
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDocumentos">
+              <a class="dropdown-item" href="http://www.lourdesalpha.com.br/">
+              <img id="img_site1" src="./image/nsl_site.png" height="50" style="margin-left:0"></img>
+              </a>
+              <a class="dropdown-item" href="https://www.youtube.com/channel/UCbQuIhR0FEo-cBkYLuqq_5Q/">
+              <img id="img_site2" src="./image/youtube.png" style="margin-left:10px"></img>
+              </a>
             </div>
           </li>
         </ul>
@@ -78,7 +91,7 @@
   -->
 </div>
 <script type="text/javascript">
-function is_img(file1, file2) {
+function is_img_car(file1, file2) {
 	var img1 = document.createElement('img');
 	img1.src = file1;
 	var img2 = document.createElement('img');
@@ -86,12 +99,15 @@ function is_img(file1, file2) {
 
 	img1.onload = function() {
 		document.getElementById("img_menu").src = file1;
+		document.getElementById("img_site1").src = "./image/nsl_site.png";
+		document.getElementById("img_site2").src = "./image/youtube.png";
 	}
 	img2.onload = function() {
 		document.getElementById("img_menu").src = file2;
+		document.getElementById("img_site1").src = "../image/nsl_site.png";
+		document.getElementById("img_site2").src = "../image/youtube.png";
 	}
-
 }
-is_img("./image/caridade.PNG","../image/caridade.PNG");
+is_img_car("./image/caridade.PNG","../image/caridade.PNG");
 </script>
 </nav>
