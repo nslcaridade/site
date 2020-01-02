@@ -27,7 +27,7 @@ pis/pasep
 170.19534.56-0
 
 ibis accor
-3081031793577868
+3081031793577868/Mylena01
 
 ionic cordova plugin add cordova-plugin-googlemaps --variable API_KEY_FOR_ANDROID=AIzaSyCC0NnoZ14CkmvKS6tNJp6lpJ1JKr0IO3c
 
@@ -163,7 +163,7 @@ ionic
 
 alter sequence rocketmax.servico_status_seq restart with 2000;
 
-senha BCB_REGISTRATO kyWlIvYV/drhErv0r
+senha BCB_REGISTRATO kyWlIvYV/drhErv0r/ymUV8XjB/ymUV8MmC
 kyWlIvYV
 
 xmlns:android="http://schemas.android.com/apk/res/android" colocar no config.xml
@@ -182,6 +182,11 @@ GIT CMSW alexandre.duarte@cmsw.com/Mylena01git
 MAX SCORE drhErv0r
 MAXPJ token 00074173
 
+5453776800025088/1024/433
+
+casas bahia
+191227001485
+191227001557
 
 Rua Antônio Chalupe  ,Vila Boa Vista  ,Barueri/SP  ,06411-080
 
@@ -233,6 +238,9 @@ mvn install:install-file -Dfile=MQPoolProject.jar -DgroupId=com.cmsw -DartifactI
 NSL caridade
 nsladmin@nslcaridade.com.br
 admin2019
+
+disdi
+ssh.uhserver.com/Mylena@1
 
 50463691172
 62753117-9

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caridade.dto.DoacaoDTO;
 import br.com.caridade.dto.HistoricoDoacoesDTO;
+import br.com.caridade.dto.RelatorioDoacaoDTO;
 import br.com.caridade.dto.RetornoDTO;
 import br.com.caridade.mensagem.RelatorioMensal;
 import br.com.caridade.model.Doacao;
@@ -37,6 +38,7 @@ import br.com.caridade.repository.RelatorioDoacaoRepository;
 import br.com.caridade.repository.TipoDoacaoRepository;
 import br.com.caridade.util.GravaRelatorioAnual;
 import br.com.caridade.util.GravaRelatorioMensal;
+import br.com.caridade.util.RUTIL;
 import br.com.caridade.util.UtilsTools;
 
 @Controller
@@ -127,18 +129,56 @@ public class DoacaoController {
 	
 	
 	@GetMapping("/anual/{ano}") 
-	public ResponseEntity<List<RelatorioDoacao>> buscaDoacaoAnual(@PathVariable Long ano,HttpServletResponse response) {
+	public ResponseEntity<List<RelatorioDoacaoDTO>> buscaDoacaoAnual(@PathVariable Long ano,HttpServletResponse response) {
 		
 		ModelAndView mv = new ModelAndView();
-		  
+		RelatorioDoacaoDTO relatorioDoacaoDTO = new RelatorioDoacaoDTO();
+		List<RelatorioDoacaoDTO> lstRelatorioDoacaoDTO = new ArrayList<RelatorioDoacaoDTO>();
 		mv.setViewName("doacao/ano");
-		List<RelatorioDoacao> findByAno = relatorioDoacaoRepository.findByAnoOrderByTotAno(ano);
+		List<RelatorioDoacao> findByAno = relatorioDoacaoRepository.findByAnoOrderByInstituicao(ano);
+		for (RelatorioDoacao relatorioDoacao : findByAno) {
+			relatorioDoacaoDTO = new RelatorioDoacaoDTO();
+			
+			relatorioDoacaoDTO.setTotAno(relatorioDoacao.getJan()+
+										 relatorioDoacao.getFev()+
+										 relatorioDoacao.getMar()+
+										 relatorioDoacao.getAbr()+
+										 relatorioDoacao.getMai()+
+										 relatorioDoacao.getJun()+
+										 relatorioDoacao.getJul()+
+										 relatorioDoacao.getAgo()+
+										 relatorioDoacao.getSet()+
+										 relatorioDoacao.getOut()+
+										 relatorioDoacao.getNov()+
+										 relatorioDoacao.getDec());
+			
+			relatorioDoacaoDTO.setJan(relatorioDoacao.getJan());
+			relatorioDoacaoDTO.setFev(relatorioDoacao.getFev());
+			relatorioDoacaoDTO.setMar(relatorioDoacao.getMar());
+			relatorioDoacaoDTO.setAbr(relatorioDoacao.getAbr());
+			relatorioDoacaoDTO.setMai(relatorioDoacao.getMai());
+			relatorioDoacaoDTO.setJun(relatorioDoacao.getJun());
+			relatorioDoacaoDTO.setJul(relatorioDoacao.getJul());
+			relatorioDoacaoDTO.setAgo(relatorioDoacao.getAgo());
+			relatorioDoacaoDTO.setSet(relatorioDoacao.getSet());
+			relatorioDoacaoDTO.setOut(relatorioDoacao.getOut());
+			relatorioDoacaoDTO.setNov(relatorioDoacao.getNov());
+			relatorioDoacaoDTO.setDec(relatorioDoacao.getDec());
+			relatorioDoacaoDTO.setInstituicao(relatorioDoacao.getInstituicao());
+			lstRelatorioDoacaoDTO.add(relatorioDoacaoDTO);
+		}
+		if (! lstRelatorioDoacaoDTO.isEmpty() ) {
+			relatorioDoacaoDTO = RUTIL.somatoriaTotal(findByAno);
+			lstRelatorioDoacaoDTO.add(relatorioDoacaoDTO);
+		}
+			
+		
 		GravaRelatorioAnual grava = new GravaRelatorioAnual();
-		grava.record(findByAno);
+		grava.record(lstRelatorioDoacaoDTO);
 		mv.setStatus(HttpStatus.OK);
-		mv.addObject("relatorioDoacao", findByAno);
+		mv.addObject("relatorioDoacao", lstRelatorioDoacaoDTO);
 		  
-		return ResponseEntity.status(HttpStatus.OK).body(findByAno);
+		return ResponseEntity.status(HttpStatus.OK).body(lstRelatorioDoacaoDTO);
  
 	}
 	

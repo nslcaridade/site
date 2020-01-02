@@ -81,7 +81,7 @@
 	<script src="../dist/jquery.bootgrid.fa.js"></script>
 	<script src="../js/bootstrap.bundle.js"></script>
 	<script>
-	var tabelaImpressao; 
+	var tabelaImpressao;
 
 	function preparaRelatorio(registro){
 		tabelaImpressao
@@ -101,6 +101,7 @@
 				return r.split('').reverse().join('');
 		}
 	}
+	
 	
 	$(document).ready(function() {
 		$('#AjaxLoader').hide(); 
@@ -129,7 +130,8 @@
 				  //data: JSON.parse(dataSend),
 				  success: function(resultado) {
 					  strJson = resultado;
-						for (var i = 0; i < resultado.length; i++) {
+					  var i;
+					  for (i = 0; i < resultado.length; i++) {
 							$("#gridRel").bootgrid("append",[{
 								id : i,
 								ano : resultado[i].ano,
@@ -149,6 +151,7 @@
 								total : formatNumber(resultado[i].totAno),
 							}]);
 						}
+					  	
 						$('#AjaxLoader').hide();
 				  }/* ,
 				  error: function(e){

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "relatorio_anual_caridade_nsl", schema = "db_nsl")
+@Table(name = "consolida_doacoes", schema = "db_nsl")
 public class RelatorioDoacao {
 	
 	@JsonInclude(Include.NON_NULL)
@@ -68,9 +68,6 @@ public class RelatorioDoacao {
 	@Column(name = "Dec")
 	private Long dec;
 	
-	@JsonInclude(Include.NON_NULL)
-	@Column(name = "Tot_Ano")
-	private Long totAno;
 	public Long getAno() {
 		return ano;
 	}
@@ -155,12 +152,7 @@ public class RelatorioDoacao {
 	public void setDec(Long dec) {
 		this.dec = dec;
 	}
-	public Long getTotAno() {
-		return totAno;
-	}
-	public void setTotAno(Long totAno) {
-		this.totAno = totAno;
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -179,7 +171,6 @@ public class RelatorioDoacao {
 		result = prime * result + ((nov == null) ? 0 : nov.hashCode());
 		result = prime * result + ((out == null) ? 0 : out.hashCode());
 		result = prime * result + ((set == null) ? 0 : set.hashCode());
-		result = prime * result + ((totAno == null) ? 0 : totAno.hashCode());
 		return result;
 	}
 	@Override
@@ -261,19 +252,13 @@ public class RelatorioDoacao {
 				return false;
 		} else if (!set.equals(other.set))
 			return false;
-		if (totAno == null) {
-			if (other.totAno != null)
-				return false;
-		} else if (!totAno.equals(other.totAno))
-			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "{\"ano\":" + ano + ", \"instituicao\":\"" + instituicao + "\", \"jan\":" + jan + ", \"fev\":"
 				+ fev + ", \"mar\":" + mar + ", \"abr\":" + abr + ", \"mai\":" + mai + ", \"jun\":" + jun + ", \"jul\":" + jul + ", \"ago\":"
-				+ ago + ", \"set\":" + set + ", \"out\":" + out + ", \"nov\":" + nov + ", \"dec\":" + dec + ", \"totAno\":" + totAno
-				+ "}";
+				+ ago + ", \"set\":" + set + ", \"out\":" + out + ", \"nov\":" + nov + ", \"dec\":" + dec + "}";
 	}
 	
 	

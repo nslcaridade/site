@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,7 +26,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import br.com.caridade.model.RelatorioDoacao;
+import br.com.caridade.dto.RelatorioDoacaoDTO;
 
 	public class GravaRelatorioAnual {
 		
@@ -180,7 +179,7 @@ import br.com.caridade.model.RelatorioDoacao;
 		return table;
 	}
 	
-	public void record(List<RelatorioDoacao> ltRel) {
+	public void record(List<RelatorioDoacaoDTO> ltRel) {
 		
 		float left = 0;
         float right = 0;
@@ -217,7 +216,7 @@ import br.com.caridade.model.RelatorioDoacao;
 	              document.add(img);
 				 
 	              
-	              Iterator<RelatorioDoacao> itRel = ltRel.iterator();
+	              Iterator<RelatorioDoacaoDTO> itRel = ltRel.iterator();
 	              Long ano = new Long(2019);
 	              
 	              if ( ltRel.size() > 0 && 
@@ -247,8 +246,10 @@ import br.com.caridade.model.RelatorioDoacao;
 	              document.addAuthor("Alexandre Costa Duarte");
 	              BaseColor baseColor, baseColorCesta;
 	              int  iCount = 0;
+	              Long totalAno = new Long(0);
+	              Long totalAno12 = new Long(0);
 	              while ( itRel.hasNext() ) {
-	            	RelatorioDoacao relatorio = itRel.next();
+	            	RelatorioDoacaoDTO relatorio = itRel.next();
 		            Font f = FontFactory.getFont(FontFactory.HELVETICA, 4);
 		            f.setColor(new BaseColor(25,40,116));
 		            Font forte = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 4);
@@ -269,6 +270,31 @@ import br.com.caridade.model.RelatorioDoacao;
 	            		baseColorCesta  = new BaseColor(201,191,170);
 	            	}
 	            	
+	            	totalAno = relatorio.getJan() + 
+	            			   relatorio.getFev() +
+	            			   relatorio.getMar() +
+	            			   relatorio.getAbr() +
+	            			   relatorio.getMai() +
+	            			   relatorio.getJun() +
+	            			   relatorio.getJul() +
+	            			   relatorio.getAgo() +
+	            			   relatorio.getSet() +
+	            			   relatorio.getOut() +
+	            			   relatorio.getNov() +
+	            			   relatorio.getDec() ;
+	            	
+	            	totalAno12 = ( relatorio.getJan()/12 ) + 
+	            			     ( relatorio.getFev()/12 ) +
+	            			     ( relatorio.getMar()/12 ) +
+	            			     ( relatorio.getAbr()/12 ) +
+	            			     ( relatorio.getMai()/12 ) +
+	            			     ( relatorio.getJun()/12 ) +
+	            			     ( relatorio.getJul()/12 ) +
+	            			     ( relatorio.getAgo()/12 ) +
+	            			     ( relatorio.getSet()/12 ) +
+	            			     ( relatorio.getOut()/12 ) +
+	            			     ( relatorio.getNov()/12 ) +
+	            			     ( relatorio.getDec()/12 ) ;
 	            	
 	          		PdfPCell celulaNome = new PdfPCell(new Phrase(relatorio.getInstituicao(),forte));
 	          		celulaNome.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -359,10 +385,10 @@ import br.com.caridade.model.RelatorioDoacao;
 	          		des2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		des2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell tot = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getTotAno()),forte));
+	          		PdfPCell tot = new PdfPCell(new Phrase(UtilsTools.formatNumber(totalAno),forte));
 	          		tot.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		tot.setBackgroundColor(baseColor);
-	          		PdfPCell tot2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getTotAno()/12))),forte));
+	          		PdfPCell tot2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(totalAno12),forte));
 	          		tot2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		tot2.setBackgroundColor(baseColorCesta);
 	          		

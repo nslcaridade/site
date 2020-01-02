@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.caridade.dto.RelatorioDoacaoDTO;
 import br.com.caridade.model.PastoralCaridade;
+import br.com.caridade.model.RelatorioDoacao;
 
 public final class RUTIL {
 	
@@ -76,6 +78,53 @@ public final class RUTIL {
 			}
 		}
 			
+		return retorno;
+	}
+	
+	public static RelatorioDoacaoDTO somatoriaTotal(List<RelatorioDoacao> lstRelatorioDoacao) {
+		RelatorioDoacaoDTO retorno = new RelatorioDoacaoDTO();
+		Long jan = new Long(0);
+		Long fev = new Long(0);
+		Long mar = new Long(0);
+		Long abr = new Long(0);
+		Long mai = new Long(0);
+		Long jun = new Long(0);
+		Long jul = new Long(0);
+		Long ago = new Long(0);
+		Long set = new Long(0);
+		Long out = new Long(0);
+		Long nov = new Long(0);
+		Long des = new Long(0);
+		Long tot = new Long(0);
+		for (RelatorioDoacao relatorioDoacao : lstRelatorioDoacao) {
+			jan += relatorioDoacao.getJan();
+			fev += relatorioDoacao.getFev();
+			mar += relatorioDoacao.getMar();
+			abr += relatorioDoacao.getAbr();
+			mai += relatorioDoacao.getMai();
+			jun += relatorioDoacao.getJun();
+			jul += relatorioDoacao.getJul();
+			ago += relatorioDoacao.getAgo();
+			set += relatorioDoacao.getSet();
+			out += relatorioDoacao.getOut();
+			nov += relatorioDoacao.getNov();
+			des += relatorioDoacao.getDec();
+			tot = jan+fev+mar+abr+mai+jun+jul+ago+set+out+nov+des;
+		}
+		retorno.setInstituicao("TOTAL");
+		retorno.setJan(jan);
+		retorno.setFev(fev);
+		retorno.setMar(mar);
+		retorno.setAbr(abr);
+		retorno.setMai(mai);
+		retorno.setJun(jun);
+		retorno.setJul(jul);
+		retorno.setAgo(ago);
+		retorno.setSet(set);
+		retorno.setOut(out);
+		retorno.setNov(nov);
+		retorno.setDec(des);
+		retorno.setTotAno(tot);
 		return retorno;
 	}
 	
