@@ -24,6 +24,13 @@
 		<table id="selecao" class="table table-condensed table-hover table-striped hidden-print" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
 			<thead>
 				<tr>
+    				<th>
+    					<h5>Ano</h5>
+						<select name="ano" class="w3-select w3-select w3-border w3-margin-bottom" id="ano" required>
+							<option selected="selected"></option>
+							<option value=""/>
+						</select>
+    				</th>
 					<th>
 						<h5>Mês</h5>
 						<select name="mes" class="w3-select w3-select w3-border w3-margin-bottom" id="mes" required>
@@ -93,6 +100,16 @@
 		tabelaImpressao
 	}
 	
+	for( y = 2017; y <= 2500 ; y++){
+		var optn = document.createElement("OPTION");
+		optn.text = y;
+		optn.value = y;
+		if ( y == 2018 ){
+			optn.selected = true;	
+		}
+		document.getElementById('ano').options.add(optn);
+	}
+	
 	function formatNumber(valor){
 		if ( valor == 0 ){
 			return "";
@@ -130,7 +147,7 @@
 		$('#AjaxLoader').show(); 
 		$.ajax({
 			  type: "GET",
-			  url: "mensal/"+$('#instituicao').val()+"/"+$('#mes').val(),
+			  url: "mensal/"+$('#instituicao').val()+"/"+$('#mes').val()+"/"+$('#ano').val(),
 			  contentType: "application/json; charset=utf-8",
 			  //data: {anoSelecionado},
 			  //data: JSON.parse(dataSend),

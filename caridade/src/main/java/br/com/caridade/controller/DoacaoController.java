@@ -194,14 +194,12 @@ public class DoacaoController {
 		return mv;
 	}
 	
-	@GetMapping("/mensal/{inst}/{mes}")
-	public ResponseEntity<List<RelatorioMensal>> buscaInstMes(@PathVariable int inst, @PathVariable int mes, HttpServletResponse response) {
+	@GetMapping("/mensal/{inst}/{mes}/{ano}")
+	public ResponseEntity<List<RelatorioMensal>> buscaInstMes(@PathVariable int inst, @PathVariable int mes,  @PathVariable int ano, HttpServletResponse response) {
 		List<RelatorioMensal> ltRel = new ArrayList<RelatorioMensal>();
 		
-		LocalDate initial = LocalDate.now();
-
-		LocalDate startDate = LocalDate.of(initial.getYear(), mes,1);
-		LocalDate endDate = LocalDate.of(initial.getYear(), mes, 1).plusMonths(1).minusDays(1);
+		LocalDate startDate = LocalDate.of(ano, mes,1);
+		LocalDate endDate = LocalDate.of(ano, mes, 1).plusMonths(1).minusDays(1);
 		
 		List<Object[]> lRelatorio = historicoDoacaoRepository.findByBetweenDataDoacao(inst, startDate, endDate);
 		for (Object[] objects : lRelatorio) {
