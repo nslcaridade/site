@@ -26,7 +26,7 @@ public class UtilsTools {
 		mes = new Mes();mes.setId(9); mes.setNome("SET");ltMes.add(mes);
 		mes = new Mes();mes.setId(10); mes.setNome("OUT");ltMes.add(mes);
 		mes = new Mes();mes.setId(11); mes.setNome("NOV");ltMes.add(mes);
-		mes = new Mes();mes.setId(12); mes.setNome("DES");ltMes.add(mes);
+		mes = new Mes();mes.setId(12); mes.setNome("DEZ");ltMes.add(mes);
 		return ltMes;
 	}
 	
@@ -67,7 +67,7 @@ public class UtilsTools {
 			retorno = "novembro";
 			break;
 		case 12:
-			retorno = "desembro";
+			retorno = "dezembro";
 			break;
 
 		}
