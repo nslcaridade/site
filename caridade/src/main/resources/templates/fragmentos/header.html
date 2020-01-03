@@ -58,7 +58,7 @@
               Calendário
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarCalendario">
-              <a class="dropdown-item" href="/caridade/calendario/listar">2019</a>
+              <a class="dropdown-item" href="/caridade/calendario/listar/2019">2019</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -91,11 +91,13 @@
   -->
 </div>
 <script type="text/javascript">
-function is_img_car(file1, file2) {
+function is_img_car(file1, file2, file3) {
 	var img1 = document.createElement('img');
 	img1.src = file1;
 	var img2 = document.createElement('img');
 	img2.src = file2;
+	var img3 = document.createElement('img');
+	img3.src = file3;
 
 	img1.onload = function() {
 		document.getElementById("img_menu").src = file1;
@@ -107,7 +109,12 @@ function is_img_car(file1, file2) {
 		document.getElementById("img_site1").src = "../image/nsl_site.png";
 		document.getElementById("img_site2").src = "../image/youtube.png";
 	}
+	img3.onload = function() {
+		document.getElementById("img_menu").src = file3;
+		document.getElementById("img_site1").src = "../../image/nsl_site.png";
+		document.getElementById("img_site2").src = "../../image/youtube.png";
+	}
 }
-is_img_car("./image/caridade.PNG","../image/caridade.PNG");
+is_img_car("./image/caridade.PNG","../image/caridade.PNG","../../image/caridade.PNG");
 </script>
 </nav>
