@@ -20,7 +20,8 @@ public interface CalendarioCaridadeRepository  extends JpaRepository<CalendarioC
 			       " ID_BINGO," +
 			       " ID_PASSEIO," +
 			       " ID_FESTA," +
-			       " ID_VIDEO FROM db_nsl.calendario_caridade WHERE YEAR(DATA_CALENDARIO) = :ano ORDER BY DATA_CALENDARIO",nativeQuery = true)
+			       " ID_VIDEO," +
+			       " ID_RETIRO FROM db_nsl.calendario_caridade WHERE YEAR(DATA_CALENDARIO) = :ano ORDER BY DATA_CALENDARIO",nativeQuery = true)
 	@Qualifier
 	List<CalendarioCaridade> findByCalendaByAno(@Param("ano") Long ano);
 }

@@ -48,6 +48,18 @@ public class CalendarioCaridade {
 	@ManyToOne
 	@JoinColumn(name = "id_video")
 	private Videos videos;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_retiro")
+	private Retiro retiro;
+
+	public Retiro getRetiro() {
+		return retiro;
+	}
+
+	public void setRetiro(Retiro retiro) {
+		this.retiro = retiro;
+	}
 
 	public Long getIdCalendarioCaridade() {
 		return idCalendarioCaridade;
@@ -133,6 +145,7 @@ public class CalendarioCaridade {
 		result = prime * result + ((festa == null) ? 0 : festa.hashCode());
 		result = prime * result + ((idCalendarioCaridade == null) ? 0 : idCalendarioCaridade.hashCode());
 		result = prime * result + ((passeio == null) ? 0 : passeio.hashCode());
+		result = prime * result + ((retiro == null) ? 0 : retiro.hashCode());
 		result = prime * result + ((videos == null) ? 0 : videos.hashCode());
 		return result;
 	}
@@ -183,6 +196,11 @@ public class CalendarioCaridade {
 				return false;
 		} else if (!passeio.equals(other.passeio))
 			return false;
+		if (retiro == null) {
+			if (other.retiro != null)
+				return false;
+		} else if (!retiro.equals(other.retiro))
+			return false;
 		if (videos == null) {
 			if (other.videos != null)
 				return false;
@@ -195,7 +213,8 @@ public class CalendarioCaridade {
 	public String toString() {
 		return "CalendarioCaridade [idCalendarioCaridade=" + idCalendarioCaridade + ", descricao=" + descricao
 				+ ", dataCalendario=" + dataCalendario + ", confirmado=" + confirmado + ", bazar=" + bazar + ", bingo="
-				+ bingo + ", passeio=" + passeio + ", festa=" + festa + ", videos=" + videos + "]";
+				+ bingo + ", passeio=" + passeio + ", festa=" + festa + ", videos=" + videos + ", retiro=" + retiro
+				+ "]";
 	}
 
 }
