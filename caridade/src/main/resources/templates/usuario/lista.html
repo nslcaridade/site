@@ -32,9 +32,8 @@
 							<th data-column-id="nome" data-type="text" data-visible="true" data-filterable="true" data-width="20%" >NOME</th>
 							<th data-column-id="celular" data-type="text" data-visible="true" data-width="10%" >TELEFONE</th>
 							<th data-column-id="email" data-type="text" data-visible="true" data-width="10%" >E-MAIL</th>
-							<th data-column-id="cidade" data-type="text" data-visible="true" data-width="10%" >CIDADE</th>
 							<th data-column-id="dataNascimento" data-type="text" data-visible="true" data-width="10%" >ANIVERSÁRIO</th>
-							<th data-column-id="tipoSangue" data-type="text" data-visible="true" data-width="10%" >TIPO SANGUE</th>
+							<th data-column-id="commands" data-formatter="commands" data-visible="true" data-width="10%">DETALHE</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,14 +51,11 @@
 								<span th:text="${participante.email}"></span>
 							</td>
 							<td class="col">
-								<span th:text="${participante.cidade}"></span>
-							</td>
-							<td class="col">
 								<span th:text="${participante.dataNascimento}"></span>
 							</td>
 							<td class="col">
-								<span th:text="${participante.tipoSangue}"></span>
-							</td>
+								<button type="button" class="btn btn-xs btn-default command-edit" ></button>
+							</td >
 						</tr>
 					</tbody>
 				</table>
@@ -68,22 +64,57 @@
 			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
 		</div>
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-reveal data-close-on-click='true' data-animation-in='fade-in' data-animation-out='fade-out'>
+	  <div>
+	    <div class="modal-content" style="width: 600px; padding: 10px;border: 5px solid gray; margin: 0;" >
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<ul id="dadosParticipante" style="list-style-type: none">
+                <li data-participante data-participante-id="${participante.idUsuario}" data-participante-name="${participante.nome}">
+					<span >${participante.idUsuario}</span>
+					<span >${participante.nome}</span>
+					<span >${participante.celular}></span>
+					<span >${participante.email}></span>
+					<span >${participante.dataNascimento}></span>
+				</li>                           
+          	</ul>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+	        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<script src="../lib/jquery-1.11.1.min.js"></script>
 <!-- >script src="../js/bootstrap.js"></script-->
 <script src="../dist/jquery.bootgrid.js"></script>
 <script src="../dist/jquery.bootgrid.fa.js"></script>
 <script src="../js/bootstrap.bundle.js"></script>
-<script>
+<script th:inline="javascript">
+
 $(document).ready(function() {
-	$("#gridUser").bootgrid({
+	var grid = $("#gridUser").bootgrid({
 			formatters : {
-				"link" : function(column, row) {
-					return "<a href=\"#\">" + column.id + ": "
-							+ row.id + "</a>";
-				}
+				"commands": function(column, row){
+		            return "<button style=\"background-color:#77AFEA;font-size: 10px;\" type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.idUsuario + "\"><span class=\"fa fa-pencil\">detalhe</span></button> ";
+		        }
 			},
 			rowCount : [ -1, 10, 50, 75 ]
-		});
+		}).on("loaded.rs.jquery.bootgrid", function () {
+			/* Executes after data is loaded and rendered */
+				grid.find(".command-edit").on("click", function () {
+					window.location.href = "/caridade/usuario/atualiza/"+$(this).data("row-id");
+				}).end().find(".command-delete").on("click", function (e) {
+					alert("You pressed delete on row: " + $(this).data("row-id"));
+				});
+			});
 });
 </script>	
 	

@@ -1,18 +1,24 @@
 package br.com.caridade.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.caridade.dto.RelatorioDoacaoDTO;
 import br.com.caridade.model.DadosUsuario;
 import br.com.caridade.model.PastoralCaridade;
 import br.com.caridade.repository.DadosUsuarioRepository;
@@ -86,27 +92,24 @@ public class UsuarioController {
 		return mv;
 	}
     
-    @GetMapping("/atualiza")
-	public ModelAndView preparaAtualizacao() {
+    @GetMapping("/atualiza/{id}")
+	public  ModelAndView preparaAtualizacao(@PathVariable Long id, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("usuario/atualiza");
-		List<PastoralCaridade> ltPast = pastoralCaridadeRepository.findAllByOrderByNomeAsc();
+		Optional<PastoralCaridade> optPast = pastoralCaridadeRepository.findById(id);
+		List<PastoralCaridade> ltPast = new ArrayList<PastoralCaridade>();
+		ltPast.add(optPast.get());
 		mv.addObject("participante", ltPast);
 		mv.setStatus(HttpStatus.OK);
 		return mv;
 	}
     
-    @PostMapping("/atualiza")
+    @PostMapping("/atualiza/altera")
    	public ModelAndView atualizacao(@RequestBody List<PastoralCaridade> ltPast) {
    		ModelAndView mv = new ModelAndView();
    		mv.setViewName("usuario/atualiza");
    		for (PastoralCaridade pastoralCaridade : ltPast) {
-   			Optional<PastoralCaridade> findById =  pastoralCaridadeRepository.findById(pastoralCaridade.getIdUsuario());
-   			findById.get().setCelular(pastoralCaridade.getCelular());
-   			findById.get().setSemana(pastoralCaridade.getSemana());
-   			findById.get().setMissaAcolhida(pastoralCaridade.getMissaAcolhida());
-   			findById.get().setHorarioAcolhida(pastoralCaridade.getHorarioAcolhida());
-			pastoralCaridadeRepository.saveAndFlush(findById.get());
+			pastoralCaridadeRepository.saveAndFlush(pastoralCaridade);
 		}
    		mv.setStatus(HttpStatus.OK);
    		return mv;
