@@ -30,7 +30,7 @@ public interface PastoralCaridadeRepository extends JpaRepository<PastoralCarida
 			" gt,\r\n" + 
 			" order_gt,\r\n" + 
 			" semana,\r\n" + 
-			" status from db_nsl.pastoral_caridade where status = :status",nativeQuery = true)
+			" status from db_nsl.pastoral_caridade where status = :status order by nome",nativeQuery = true)
 	List<PastoralCaridade> findAllByAtivos(@Param("status")char status);
 
 }
