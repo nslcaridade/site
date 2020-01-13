@@ -68,12 +68,12 @@ public class HomeController {
 					}
 				}
 			}
-			mv.addObject("participantesQuinta",lstQuinta);
-			mv.addObject("participantesSabado",lstSabado);
-			mv.addObject("participantesDomingoM",lstDomingoM);
-			mv.addObject("participantesDomingoT",lstDomingoT);
-			mv.addObject("participantesDomingoN",lstDomingoN);
 		}
+		mv.addObject("participantesQuinta",lstQuinta);
+		mv.addObject("participantesSabado",lstSabado);
+		mv.addObject("participantesDomingoM",lstDomingoM);
+		mv.addObject("participantesDomingoT",lstDomingoT);
+		mv.addObject("participantesDomingoN",lstDomingoN);
 		
 		List<Mensagem> findById = mensagemRepository.findByTipo("oracao");
 		mv.addObject("oracao", findById);

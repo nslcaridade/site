@@ -11,7 +11,26 @@ import br.com.caridade.model.PastoralCaridade;
 
 public interface PastoralCaridadeRepository extends JpaRepository<PastoralCaridade, Long> {
 	List<PastoralCaridade> findByGtIsNotNullOrderByOrderGt();
-	List<PastoralCaridade> findBySemana(Long semana);
+	
+	@Query(value = "select id,\r\n" + 
+			" nome,\r\n" + 
+			" endereco,\r\n" + 
+			" complemento,\r\n" + 
+			" bairro,\r\n" + 
+			" cidade,\r\n" + 
+			" uf,\r\n" + 
+			" cep,\r\n" + 
+			" celular,\r\n" + 
+			" email,\r\n" + 
+			" data_nascimento,\r\n" + 
+			" tipo_sangue,\r\n" + 
+			" missa_acolhida,\r\n" + 
+			" horario_acolhida,\r\n" + 
+			" gt,\r\n" + 
+			" order_gt,\r\n" + 
+			" semana,\r\n" + 
+			" status from db_nsl.pastoral_caridade where semana = :semana and status = 'A' order by nome",nativeQuery = true)
+	List<PastoralCaridade> findBySemana(@Param("semana")Long semana);
 	List<PastoralCaridade> findAllByOrderByNomeAsc();
 	@Query(value = "select id,\r\n" + 
 			" nome,\r\n" + 

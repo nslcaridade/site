@@ -60,7 +60,7 @@ public final class RUTIL {
 		if ( diaParaProximo > 0 ) {
 			calendar.add(Calendar.DAY_OF_YEAR, diaParaProximo);
 		} else if ( diaParaProximo < 0 ) {
-			diaParaProximo = 7 - diaParaProximo;
+			diaParaProximo = 7 - Math.abs(diaParaProximo);
 			calendar.add(Calendar.DAY_OF_YEAR, diaParaProximo);
 		}
 		
