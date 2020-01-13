@@ -17,6 +17,9 @@ public final class Constantes {
 	public static final String  HORATDOMINGO = "11:00";
 	public static final String  HORAMDOMINGO = "09:00";
 	
+	public static final char ATIVO        = 'A';
+	public static final char INATIVO      = 'I';
+	
 	public static final String PATHIMAGEM = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/";
 	//public static final String PATHIMAGEM = "C:\\Users\\alexandre.duarte\\estudo\\site\\caridade\\src\\main\\resources\\static\\image";
 }

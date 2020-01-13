@@ -114,6 +114,13 @@
 		      				<option >5</option>
 						</select>
 					</th>
+					<th><h5>Status</h5>
+						<select id="status" name="status">
+							<option th:text="${participante.status}"></option>
+		      				<option >A</option>
+		      				<option >I</option>
+						</select>
+					</th>
 				</tr>
 			</thead>
 		</table>
@@ -173,7 +180,8 @@ $(document).ready(function() {
 					"missaAcolhida": $('#missa_acolhida').val(),
 					"horarioAcolhida": $('#horario_acolhida').val(),
 					"orderGt": 100,
-					"semana": $('#semana').val() }] ;
+					"semana": $('#semana').val(),
+					"status": $('#status').val()}] ;
 				$.ajax({
 					  type: "POST",
 					  url: "altera",

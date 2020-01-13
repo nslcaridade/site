@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.caridade.dto.RelatorioDoacaoDTO;
+import br.com.caridade.definitions.Constantes;
 import br.com.caridade.model.DadosUsuario;
 import br.com.caridade.model.PastoralCaridade;
 import br.com.caridade.repository.DadosUsuarioRepository;
@@ -54,7 +53,7 @@ public class UsuarioController {
 	public ModelAndView lista() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("usuario/lista");
-		List<PastoralCaridade> ltPast = pastoralCaridadeRepository.findAllByOrderByNomeAsc();
+		List<PastoralCaridade> ltPast = pastoralCaridadeRepository.findAllByAtivos(Constantes.ATIVO);
 		mv.addObject("participante", ltPast);
 		mv.setStatus(HttpStatus.OK);
 		return mv;
