@@ -196,6 +196,10 @@ git nslcaridade/alexandre.duarte@nslcaridade.com.br/Mylena@1
 
 4003 9011 UOL / Cloud
 
+Casa Silvana
+23211.11.16.0208.00.000.3
+2321111160208000003
+
 
 rede acesso speed "ssh -f -N cmopr@10.1.200.19 -D 8000"
 
