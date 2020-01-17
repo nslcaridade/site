@@ -23,13 +23,15 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.caridade.dto.DoacaoDTO;
 import br.com.caridade.dto.HistoricoDoacoesDTO;
 import br.com.caridade.dto.RelatorioDoacaoDTO;
+import br.com.caridade.dto.RelatorioDoacaoItensDTO;
+import br.com.caridade.dto.RelatorioDoacaoItensDTO.Mes;
+import br.com.caridade.dto.RelatorioDoacaoItensDTO.Mes.ItensDoados;
 import br.com.caridade.dto.RetornoDTO;
 import br.com.caridade.mensagem.RelatorioMensal;
 import br.com.caridade.model.Doacao;
 import br.com.caridade.model.HistoricoDoacao;
 import br.com.caridade.model.Instituicao;
 import br.com.caridade.model.Mensagem;
-import br.com.caridade.model.RelatorioDoacao;
 import br.com.caridade.model.TipoDoacao;
 import br.com.caridade.repository.DoacaoRepository;
 import br.com.caridade.repository.HistoricoDoacaoRepository;
@@ -38,7 +40,6 @@ import br.com.caridade.repository.RelatorioDoacaoRepository;
 import br.com.caridade.repository.TipoDoacaoRepository;
 import br.com.caridade.util.GravaRelatorioAnual;
 import br.com.caridade.util.GravaRelatorioMensal;
-import br.com.caridade.util.RUTIL;
 import br.com.caridade.util.UtilsTools;
 
 @Controller
@@ -264,6 +265,60 @@ public class DoacaoController {
 		  
 		return ResponseEntity.status(HttpStatus.OK).body(lstRelatorioDoacaoDTO);
  
+	}
+	
+	@GetMapping("/anualItens")
+	public ModelAndView anualItens() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("doacao/anualItens");
+		mv.setStatus(HttpStatus.OK);
+		return mv;
+	}
+	
+	@GetMapping("/anualItens/{ano}")
+	public ResponseEntity<List<RelatorioDoacaoItensDTO>> buscaDoacaoAnualItens(@PathVariable Long ano,HttpServletResponse response) {
+		List<RelatorioDoacaoItensDTO> lstRelatorioDoacaoDTO = new ArrayList<RelatorioDoacaoItensDTO>();
+		RelatorioDoacaoItensDTO relatorioDoacaoItensDTO = new RelatorioDoacaoItensDTO();
+		
+		Long codInst = new Long(0);
+		ItensDoados itensDoados = new ItensDoados();
+		Mes mes = new Mes();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("doacao/anualItens");
+		
+		List<Object[]> lRelatorio = historicoDoacaoRepository.findByRelatorioAnoQtdItens(ano.intValue());
+		
+		for (Object[] objects : lRelatorio) {
+			Long lAux = new Long(((int) objects[2]));
+			String nomeMes = new String((String) objects[1]);
+			if ( codInst == 0 || !codInst.equals(lAux) ) {
+				
+				if ( codInst > 0 ) {
+					lstRelatorioDoacaoDTO.add(relatorioDoacaoItensDTO);
+					relatorioDoacaoItensDTO = new RelatorioDoacaoItensDTO();
+				}
+				relatorioDoacaoItensDTO.setAno(ano.intValue());
+				relatorioDoacaoItensDTO.setCodInstituicao(new Long((int) objects[2]));
+				relatorioDoacaoItensDTO.setNome(((String) objects[3]));
+			}
+			codInst = new Long(((int) objects[2]));
+			itensDoados.setPeso(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+			itensDoados.setQuantidade(Long.valueOf(((BigDecimal) objects[5]).longValue()));
+			itensDoados.setTipo(((String) objects[6]));
+			mes.setDescricao(((String) objects[1]));
+			mes.getItensDoados().add(itensDoados);
+			relatorioDoacaoItensDTO.getMes().add(mes);
+			mes = new Mes();
+			itensDoados = new ItensDoados();
+		}
+		
+		if ( codInst > 0 ) {
+			lstRelatorioDoacaoDTO.add(relatorioDoacaoItensDTO);
+		}
+		
+		mv.setStatus(HttpStatus.OK);
+		return ResponseEntity.status(HttpStatus.OK).body(lstRelatorioDoacaoDTO);
 	}
 	
 	@GetMapping("/mensal")

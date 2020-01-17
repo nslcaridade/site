@@ -59,6 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				 							  "/doacao/mensal/**",
 				 							  "/doacao/anual/",
 				 							  "/doacao/anual/**",
+				 							  "/doacao/anualItens/",
+				 							  "/doacao/anualItens/**",
 				 							  "/instituicao/listar",
 				 							  "/Mensagem",
 				 							  "/Mensagem/**",
