@@ -106,7 +106,7 @@ public class GravaRelatorioMensal {
 		try {
 
 			//String fileName = "C:\\Users\\alexandre.duarte\\Documents\\relatorio_" + instituicao.getId() + ".pdf";
-			String fileName = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/relatorio_"+instituicao.getId()+".pdf";
+			String fileName = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/relatorio_"+instituicao.getCodInstituicao()+".pdf";
 			File arq = new File(fileName);
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();

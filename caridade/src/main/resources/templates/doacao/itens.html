@@ -52,9 +52,9 @@
 				<table id="grid" class="table table-condensed table-hover table-striped" data-selection="true" data-multi-select="true" data-row-select="true" data-keep-selection="true">
 					<thead>
 						<tr>
-							<th data-column-id="id" data-identifier="true" data-type="numeric" data-width="10%">ID</th>
-							<th data-column-id="idTipoDoacao" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Tipo Doacao</th>
-							<th data-column-id="item" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="20%">Produto</th>
+							<th data-column-id="id" data-identifier="true" data-type="numeric" data-visible="false" data-width="10%">ID</th>
+							<th data-column-id="tipoDoacao" data-order="asc" data-align="center" data-visible="false" data-header-align="center" data-filterable="true" data-width="20%">Tipo Doacao</th>
+							<th data-column-id="item" data-order="asc" data-align="center" data-header-align="center" data-filterable="true" data-width="80%">Produto</th>
 							<th data-column-id="pesoGramas" data-width="10%" data-visible="true" data-edit="true" data-input="true">Peso</th>
 						</tr>
 					</thead>
@@ -95,7 +95,7 @@ $(document).ready(function() {
 					 $('#qtdItem').val() !== "" ){
 				$("#grid").bootgrid("append",[{
 					id :idLine,
-					idTipoDoacao: $('#tipoDoacao').val(),
+					tipoDoacao: {'idTipoDoacao':$('#tipoDoacao').val()},
 					item : $('#item').val(),
 					pesoGramas : $('#pesoGramas').val()
 				}]);
@@ -114,6 +114,9 @@ $(document).ready(function() {
 					  data: JSON.stringify(dataSend),
 					  success: function() {
 						  alert("Registrado");
+					  },
+					  error: function(e){
+						  console.log('ERRO :'+JSON.stringify(e));
 					  }
 				});
 				$("#grid").bootgrid("clear");

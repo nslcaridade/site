@@ -269,119 +269,131 @@ import br.com.caridade.dto.RelatorioDoacaoDTO;
 	            		baseColor = new BaseColor(213,243,244);
 	            		baseColorCesta  = new BaseColor(201,191,170);
 	            	}
+	            	Long lJan = (relatorio.getJan() != null ? relatorio.getJan(): 0);
+	            	Long lFev = (relatorio.getFev() != null ? relatorio.getFev(): 0);
+	            	Long lMar = (relatorio.getMar() != null ? relatorio.getMar(): 0);
+	            	Long lAbr = (relatorio.getAbr() != null ? relatorio.getAbr(): 0);
+	            	Long lMai = (relatorio.getMai() != null ? relatorio.getMai(): 0);
+	            	Long lJun = (relatorio.getJun() != null ? relatorio.getJun(): 0);
+	            	Long lJul = (relatorio.getJul() != null ? relatorio.getJul(): 0);
+	            	Long lAgo = (relatorio.getAgo() != null ? relatorio.getAgo(): 0);
+	            	Long lSet = (relatorio.getSet() != null ? relatorio.getSet(): 0);
+	            	Long lOut = (relatorio.getOut() != null ? relatorio.getOut(): 0);
+	            	Long lNov = (relatorio.getNov() != null ? relatorio.getNov(): 0);
+	            	Long lDez = (relatorio.getDec() != null ? relatorio.getDec(): 0);
 	            	
-	            	totalAno = relatorio.getJan() + 
-	            			   relatorio.getFev() +
-	            			   relatorio.getMar() +
-	            			   relatorio.getAbr() +
-	            			   relatorio.getMai() +
-	            			   relatorio.getJun() +
-	            			   relatorio.getJul() +
-	            			   relatorio.getAgo() +
-	            			   relatorio.getSet() +
-	            			   relatorio.getOut() +
-	            			   relatorio.getNov() +
-	            			   relatorio.getDec() ;
+	            	totalAno = lJan +
+	            			   lFev +
+	            			   lMar +
+	            			   lAbr +
+	            			   lMai +
+	            			   lJun +
+	            			   lJul +
+	            			   lAgo +
+	            			   lSet +
+	            			   lOut +
+	            			   lNov +
+	            			   lDez ;
 	            	
-	            	totalAno12 = ( relatorio.getJan()/12 ) + 
-	            			     ( relatorio.getFev()/12 ) +
-	            			     ( relatorio.getMar()/12 ) +
-	            			     ( relatorio.getAbr()/12 ) +
-	            			     ( relatorio.getMai()/12 ) +
-	            			     ( relatorio.getJun()/12 ) +
-	            			     ( relatorio.getJul()/12 ) +
-	            			     ( relatorio.getAgo()/12 ) +
-	            			     ( relatorio.getSet()/12 ) +
-	            			     ( relatorio.getOut()/12 ) +
-	            			     ( relatorio.getNov()/12 ) +
-	            			     ( relatorio.getDec()/12 ) ;
+	            	totalAno12 = ( lJan/12 ) + 
+	            			     ( lFev/12 ) +
+	            			     ( lMar/12 ) +
+	            			     ( lAbr/12 ) +
+	            			     ( lMai/12 ) +
+	            			     ( lJun/12 ) +
+	            			     ( lJul/12 ) +
+	            			     ( lAgo/12 ) +
+	            			     ( lSet/12 ) +
+	            			     ( lOut/12 ) +
+	            			     ( lNov/12 ) +
+	            			     ( lDez/12 ) ;
 	            	
 	          		PdfPCell celulaNome = new PdfPCell(new Phrase(relatorio.getInstituicao(),forte));
 	          		celulaNome.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		celulaNome.setBackgroundColor(baseColor);
 	          		
 	          		
-	          		PdfPCell jan = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getJan()),f));
+	          		PdfPCell jan = new PdfPCell(new Phrase(UtilsTools.formatNumber(lJan),f));
 	          		jan.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		jan.setBackgroundColor(baseColor);
-	          		PdfPCell jan2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getJan()/12))),f));
+	          		PdfPCell jan2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lJan/12))),f));
 	          		jan2.setHorizontalAlignment(Element.ALIGN_CENTER);
           			jan2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell fev = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getFev()),f));
+	          		PdfPCell fev = new PdfPCell(new Phrase(UtilsTools.formatNumber(lFev),f));
 	          		fev.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		fev.setBackgroundColor(baseColor);
-	          		PdfPCell fev2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getFev()/12))),f));
+	          		PdfPCell fev2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lFev/12))),f));
 	          		fev2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		fev2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell mar = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getMar()),f));
+	          		PdfPCell mar = new PdfPCell(new Phrase(UtilsTools.formatNumber(lMar),f));
 	          		mar.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		mar.setBackgroundColor(baseColor);
-	          		PdfPCell mar2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getMar()/12))),f));
+	          		PdfPCell mar2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lMar/12))),f));
 	          		mar2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		mar2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell abr = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getAbr()),f));
+	          		PdfPCell abr = new PdfPCell(new Phrase(UtilsTools.formatNumber(lAbr),f));
 	          		abr.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		abr.setBackgroundColor(baseColor);
-	          		PdfPCell abr2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getAbr()/12))),f));
+	          		PdfPCell abr2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lAbr/12))),f));
 	          		abr2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		abr2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell mai = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getMai()),f));
+	          		PdfPCell mai = new PdfPCell(new Phrase(UtilsTools.formatNumber(lMai),f));
 	          		mai.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		mai.setBackgroundColor(baseColor);
-	          		PdfPCell mai2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getMai()/12))),f));
+	          		PdfPCell mai2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lMai/12))),f));
 	          		mai2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		mai2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell jun = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getJun()),f));
+	          		PdfPCell jun = new PdfPCell(new Phrase(UtilsTools.formatNumber(lJun),f));
 	          		jun.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		jun.setBackgroundColor(baseColor);
-	          		PdfPCell jun2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getJun()/12))),f));
+	          		PdfPCell jun2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lJun/12))),f));
 	          		jun2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		jun2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell jul = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getJul()),f));
+	          		PdfPCell jul = new PdfPCell(new Phrase(UtilsTools.formatNumber(lJul),f));
 	          		jul.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		jul.setBackgroundColor(baseColor);
-	          		PdfPCell jul2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getJul()/12))),f));
+	          		PdfPCell jul2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lJul/12))),f));
 	          		jul2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		jul2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell ago = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getAgo()),f));
+	          		PdfPCell ago = new PdfPCell(new Phrase(UtilsTools.formatNumber(lAgo),f));
 	          		ago.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		ago.setBackgroundColor(baseColor);
-	          		PdfPCell ago2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getAgo()/12))),f));
+	          		PdfPCell ago2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lAgo/12))),f));
 	          		ago2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		ago2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell set = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getSet()),f));
+	          		PdfPCell set = new PdfPCell(new Phrase(UtilsTools.formatNumber(lSet),f));
 	          		set.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		set.setBackgroundColor(baseColor);
-	          		PdfPCell set2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getSet()/12))),f));
+	          		PdfPCell set2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lSet/12))),f));
 	          		set2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		set2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell out = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getOut()),f));
+	          		PdfPCell out = new PdfPCell(new Phrase(UtilsTools.formatNumber(lOut),f));
 	          		out.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		out.setBackgroundColor(baseColor);
-	          		PdfPCell out2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getOut()/12))),f));
+	          		PdfPCell out2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lOut/12))),f));
 	          		out2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		out2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell nov = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getNov()),f));
+	          		PdfPCell nov = new PdfPCell(new Phrase(UtilsTools.formatNumber(lNov),f));
 	          		nov.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		nov.setBackgroundColor(baseColor);
-	          		PdfPCell nov2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getNov()/12))),f));
+	          		PdfPCell nov2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lNov/12))),f));
 	          		nov2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		nov2.setBackgroundColor(baseColorCesta);
 	          		
-	          		PdfPCell des = new PdfPCell(new Phrase(UtilsTools.formatNumber(relatorio.getDec()),f));
+	          		PdfPCell des = new PdfPCell(new Phrase(UtilsTools.formatNumber(lDez),f));
 	          		des.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		des.setBackgroundColor(baseColor);
-	          		PdfPCell des2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(relatorio.getDec()/12))),f));
+	          		PdfPCell des2 = new PdfPCell(new Phrase(UtilsTools.formatNumber(new Long(Math.abs(lDez/12))),f));
 	          		des2.setHorizontalAlignment(Element.ALIGN_CENTER);
 	          		des2.setBackgroundColor(baseColorCesta);
 	          		

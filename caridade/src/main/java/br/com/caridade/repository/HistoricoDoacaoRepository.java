@@ -16,9 +16,21 @@ public interface HistoricoDoacaoRepository  extends JpaRepository<HistoricoDoaca
 	//@Query(value = "from HistoricoDoacoes where data_doacao BETWEEN :startDate AND :endDate AND cod_instituicao = :codInstituicao")
 	//List<HistoricoDoacoes> findByBetweenDataDoacao(@Param("codInstituicao")int codInstituicao,@Param("startDate")LocalDate startDate,@Param("endDate")LocalDate endDate);
 	
-	@Query(value = "select cod_item, item, SUM(quantidade) as quantidade, SUM(peso_gramas)*SUM(quantidade) as peso_granas" + 
+	@Query(value = "select h.cod_doacao, item, SUM(quantidade) as quantidade, SUM(peso_gramas)*SUM(quantidade) as peso_granas" + 
 			"	from  historico_doacao as h, doacao as d " + 
-			"	where h.cod_doacao = d.cod_item and h.cod_instituicao = :codInstituicao and data_doacao BETWEEN :startDate AND :endDate group by d.cod_item", nativeQuery = true)
+			"	where h.cod_doacao = d.cod_doacao and h.cod_instituicao = :codInstituicao and data_doacao BETWEEN :startDate AND :endDate group by d.cod_doacao", nativeQuery = true)
 	List<Object[]> findByBetweenDataDoacao(@Param("codInstituicao")int codInstituicao,@Param("startDate")LocalDate startDate,@Param("endDate")LocalDate endDate);
+	
+	@Query(value = "select DATE_FORMAT(data_doacao, '%Y') as ano, MONTH(data_doacao) as mes ," + 
+			"   db_nsl.historico_doacao.cod_instituicao" + 
+			"   , nome ," +
+			" SUM((db_nsl.historico_doacao.quantidade * db_nsl.doacao.peso_gramas)/1000) " +
+			"from db_nsl.historico_doacao " + 
+			"inner join db_nsl.instituicao " + 
+			"on db_nsl.instituicao.cod_instituicao = db_nsl.historico_doacao.cod_instituicao " +
+			"inner join db_nsl.doacao " + 
+			"on db_nsl.doacao.cod_doacao = db_nsl.historico_doacao.cod_doacao " + 
+			"where DATE_FORMAT(data_doacao, '%Y') = :ano and db_nsl.doacao.id_tipo_doacao = 1 group by db_nsl.historico_doacao.cod_instituicao, MONTHNAME(data_doacao) order by db_nsl.historico_doacao.cod_instituicao", nativeQuery = true)
+	List<Object[]> findByRelatoiroAnoAlimentos(@Param("ano")int ano);
 
 }

@@ -30,7 +30,7 @@
 						<h5>Instituição</h5> 
 						<select id="instituicao" name="instituicao" class="w3-select w3-select w3-border w3-margin-bottom" required>
 							<option value="" >Selecione</option>
-							<option  th:each="instituicao: ${instituicoes}"  th:value="${instituicao.id}" th:data-instname="${instituicao.nome}" th:text="${instituicao.nome}" ></option>
+							<option  th:each="instituicao: ${instituicoes}"  th:value="${instituicao.codInstituicao}" th:data-instname="${instituicao.nome}" th:text="${instituicao.nome}" ></option>
 						</select>
 					</th>
 					<th>
@@ -49,7 +49,7 @@
 						<!-- <select id="doacao" name="doacao"
 						class="w3-select w3-select w3-border w3-margin-bottom" required>
 							<option value="" >Selecione</option>
-							<option th:each="doacao: ${itensDoacao}" th:value="${doacao.codItem}" th:data-doaname="${doacao.item}" th:text="${doacao.item}" ></option>
+							<option th:each="doacao: ${itensDoacao}" th:value="${doacao.codDoacao}" th:data-doaname="${doacao.item}" th:text="${doacao.item}" ></option>
 
 					</select> -->
 					<input type=hidden name=instname id=instname />
@@ -123,11 +123,12 @@ $('#tipoDoacao').change(function () {
 		select.removeChild(select.firstChild);
 	}
 	for (var i in doacoes) {
-	    if (doacoes.hasOwnProperty(i) && doacoes[i].idTipoDoacao == tdoaid ) {
+		//console.log('DEBUG - tipoDoacao:'+JSON.stringify(doacoes[i].tipoDoacao.idTipoDoacao));
+	    if (doacoes.hasOwnProperty(i) && doacoes[i].tipoDoacao.idTipoDoacao == tdoaid ) {
 			var option = document.createElement("option");
 	    	doacoesPorTipo.push(doacoes[i]);
 	    	option.text = doacoes[i].item;
-	    	option.value = doacoes[i].codItem;
+	    	option.value = doacoes[i].codDoacao;
 			select.appendChild(option);
 	    } 
 	}

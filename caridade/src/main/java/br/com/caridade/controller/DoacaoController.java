@@ -135,46 +135,130 @@ public class DoacaoController {
 		RelatorioDoacaoDTO relatorioDoacaoDTO = new RelatorioDoacaoDTO();
 		List<RelatorioDoacaoDTO> lstRelatorioDoacaoDTO = new ArrayList<RelatorioDoacaoDTO>();
 		mv.setViewName("doacao/ano");
-		List<RelatorioDoacao> findByAno = relatorioDoacaoRepository.findByAnoOrderByInstituicao(ano);
-		for (RelatorioDoacao relatorioDoacao : findByAno) {
-			relatorioDoacaoDTO = new RelatorioDoacaoDTO();
+		List<Object[]> lRelatorio = historicoDoacaoRepository.findByRelatoiroAnoAlimentos(ano.intValue());
+		relatorioDoacaoDTO = new RelatorioDoacaoDTO();
+		Long codInst = new Long(0);
+		Long totInst = new Long(0);
+		Long totGeralJan = new Long(0);
+		Long totGeralFev = new Long(0);
+		Long totGeralMar = new Long(0);
+		Long totGeralAbr = new Long(0);
+		Long totGeralMai = new Long(0);
+		Long totGeralJun = new Long(0);
+		Long totGeralJul = new Long(0);
+		Long totGeralAgo = new Long(0);
+		Long totGeralSet = new Long(0);
+		Long totGeralOut = new Long(0);
+		Long totGeralNov = new Long(0);
+		Long totGeralDez = new Long(0);
+		Long totGeral = new Long(0);
+		for (Object[] objects : lRelatorio) {
+			Long lAux = new Long(((int) objects[2]));
+			if ( codInst == 0 || !codInst.equals(lAux) ) {
+				
+				if ( codInst > 0 ) {
+					relatorioDoacaoDTO.setTotAno(totInst);
+					totGeral += totInst;
+					lstRelatorioDoacaoDTO.add(relatorioDoacaoDTO);
+					totInst = new Long(0);
+				}
+				
+				relatorioDoacaoDTO = new RelatorioDoacaoDTO();
+				relatorioDoacaoDTO.setCodInstituicao(new Long((int) objects[2]));
+				relatorioDoacaoDTO.setInstituicao(((String) objects[3]));
+			}
+			codInst = new Long(((int) objects[2]));
+			relatorioDoacaoDTO.setAno(ano);
+			totInst +=  Long.valueOf(((BigDecimal) objects[4]).longValue());
+			switch((int) objects[1]) {
+			case 1:
+				totGeralJan += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setJan(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 2:
+				totGeralFev += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setFev(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 3:
+				totGeralMar += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setMar(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 4:
+				totGeralAbr += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setAbr(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 5:
+				totGeralMai += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setMai(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 6:
+				totGeralJun += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setJun(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 7:
+				totGeralJul += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setJul(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 8:
+				totGeralAgo += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setAgo(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 9:
+				totGeralSet += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setSet(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 10:
+				totGeralOut += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setOut(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 11:
+				totGeralNov += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setNov(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			case 12:
+				totGeralDez += Long.valueOf(((BigDecimal) objects[4]).longValue());
+				relatorioDoacaoDTO.setDec(Long.valueOf(((BigDecimal) objects[4]).longValue()));
+				break;
+			}
 			
-			relatorioDoacaoDTO.setTotAno(relatorioDoacao.getJan()+
-										 relatorioDoacao.getFev()+
-										 relatorioDoacao.getMar()+
-										 relatorioDoacao.getAbr()+
-										 relatorioDoacao.getMai()+
-										 relatorioDoacao.getJun()+
-										 relatorioDoacao.getJul()+
-										 relatorioDoacao.getAgo()+
-										 relatorioDoacao.getSet()+
-										 relatorioDoacao.getOut()+
-										 relatorioDoacao.getNov()+
-										 relatorioDoacao.getDec());
-			
-			relatorioDoacaoDTO.setJan(relatorioDoacao.getJan());
-			relatorioDoacaoDTO.setFev(relatorioDoacao.getFev());
-			relatorioDoacaoDTO.setMar(relatorioDoacao.getMar());
-			relatorioDoacaoDTO.setAbr(relatorioDoacao.getAbr());
-			relatorioDoacaoDTO.setMai(relatorioDoacao.getMai());
-			relatorioDoacaoDTO.setJun(relatorioDoacao.getJun());
-			relatorioDoacaoDTO.setJul(relatorioDoacao.getJul());
-			relatorioDoacaoDTO.setAgo(relatorioDoacao.getAgo());
-			relatorioDoacaoDTO.setSet(relatorioDoacao.getSet());
-			relatorioDoacaoDTO.setOut(relatorioDoacao.getOut());
-			relatorioDoacaoDTO.setNov(relatorioDoacao.getNov());
-			relatorioDoacaoDTO.setDec(relatorioDoacao.getDec());
-			relatorioDoacaoDTO.setInstituicao(relatorioDoacao.getInstituicao());
+		}
+		if ( totInst > 0 ) {
+			relatorioDoacaoDTO.setTotAno(totInst);
+			totGeral += totInst;
 			lstRelatorioDoacaoDTO.add(relatorioDoacaoDTO);
 		}
-		if (! lstRelatorioDoacaoDTO.isEmpty() ) {
-			relatorioDoacaoDTO = RUTIL.somatoriaTotal(findByAno);
-			lstRelatorioDoacaoDTO.add(relatorioDoacaoDTO);
-		}
-			
+		
+		relatorioDoacaoDTO = new RelatorioDoacaoDTO();
+		relatorioDoacaoDTO.setInstituicao("TOTAL");
+		relatorioDoacaoDTO.setJan(totGeralJan);
+		relatorioDoacaoDTO.setFev(totGeralFev);
+		relatorioDoacaoDTO.setMar(totGeralMar);
+		relatorioDoacaoDTO.setAbr(totGeralAbr);
+		relatorioDoacaoDTO.setMai(totGeralMai);
+		relatorioDoacaoDTO.setJun(totGeralJun);
+		relatorioDoacaoDTO.setJul(totGeralJul);
+		relatorioDoacaoDTO.setAgo(totGeralAgo);
+		relatorioDoacaoDTO.setSet(totGeralSet);
+		relatorioDoacaoDTO.setOut(totGeralOut);
+		relatorioDoacaoDTO.setNov(totGeralNov);
+		relatorioDoacaoDTO.setDec(totGeralDez);
+		relatorioDoacaoDTO.setTotAno(totGeral);
+		lstRelatorioDoacaoDTO.add(relatorioDoacaoDTO);
+		
+		
+		/*
+		 * if (! lstRelatorioDoacaoDTO.isEmpty() ) { relatorioDoacaoDTO =
+		 * RUTIL.somatoriaTotal(findByAno);
+		 * lstRelatorioDoacaoDTO.add(relatorioDoacaoDTO); }
+		 * 
+		 * 
+		 * GravaRelatorioAnual grava = new GravaRelatorioAnual();
+		 * grava.record(lstRelatorioDoacaoDTO);
+		 */
 		
 		GravaRelatorioAnual grava = new GravaRelatorioAnual();
 		grava.record(lstRelatorioDoacaoDTO);
+		 
 		mv.setStatus(HttpStatus.OK);
 		mv.addObject("relatorioDoacao", lstRelatorioDoacaoDTO);
 		  

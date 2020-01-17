@@ -3,6 +3,7 @@ package br.com.caridade.dto;
 public class RelatorioDoacaoDTO {
 	
 	private Long ano;
+	private Long codInstituicao;
 	private String instituicao;
 	private Long jan;
 	private Long fev;
@@ -17,6 +18,12 @@ public class RelatorioDoacaoDTO {
 	private Long nov;
 	private Long dec;
 	private Long totAno;
+	public Long getCodInstituicao() {
+		return codInstituicao;
+	}
+	public void setCodInstituicao(Long codInstituicao) {
+		this.codInstituicao = codInstituicao;
+	}
 	public Long getAno() {
 		return ano;
 	}
@@ -114,6 +121,7 @@ public class RelatorioDoacaoDTO {
 		result = prime * result + ((abr == null) ? 0 : abr.hashCode());
 		result = prime * result + ((ago == null) ? 0 : ago.hashCode());
 		result = prime * result + ((ano == null) ? 0 : ano.hashCode());
+		result = prime * result + ((codInstituicao == null) ? 0 : codInstituicao.hashCode());
 		result = prime * result + ((dec == null) ? 0 : dec.hashCode());
 		result = prime * result + ((fev == null) ? 0 : fev.hashCode());
 		result = prime * result + ((instituicao == null) ? 0 : instituicao.hashCode());
@@ -151,6 +159,11 @@ public class RelatorioDoacaoDTO {
 			if (other.ano != null)
 				return false;
 		} else if (!ano.equals(other.ano))
+			return false;
+		if (codInstituicao == null) {
+			if (other.codInstituicao != null)
+				return false;
+		} else if (!codInstituicao.equals(other.codInstituicao))
 			return false;
 		if (dec == null) {
 			if (other.dec != null)
@@ -216,8 +229,9 @@ public class RelatorioDoacaoDTO {
 	}
 	@Override
 	public String toString() {
-		return "RelatorioDoacaoDTO [ano=" + ano + ", instituicao=" + instituicao + ", jan=" + jan + ", fev=" + fev
-				+ ", mar=" + mar + ", abr=" + abr + ", mai=" + mai + ", jun=" + jun + ", jul=" + jul + ", ago=" + ago
-				+ ", set=" + set + ", out=" + out + ", nov=" + nov + ", dec=" + dec + ", totAno=" + totAno + "]";
+		return "RelatorioDoacaoDTO [ano=" + ano + ", codInstituicao=" + codInstituicao + ", instituicao=" + instituicao
+				+ ", jan=" + jan + ", fev=" + fev + ", mar=" + mar + ", abr=" + abr + ", mai=" + mai + ", jun=" + jun
+				+ ", jul=" + jul + ", ago=" + ago + ", set=" + set + ", out=" + out + ", nov=" + nov + ", dec=" + dec
+				+ ", totAno=" + totAno + "]";
 	}
 }

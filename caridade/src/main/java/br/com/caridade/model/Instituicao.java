@@ -19,8 +19,8 @@ public class Instituicao {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	@Column(name = "cod_instituicao")
+	private Long codInstituicao;
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "ativo")
@@ -54,12 +54,12 @@ public class Instituicao {
 	@Column(name = "telefone_paroque")
 	private String telefoneParoque;
 
-	public Long getId() {
-		return id;
+	public Long getCodInstituicao() {
+		return codInstituicao;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCodInstituicao(Long codInstituicao) {
+		this.codInstituicao = codInstituicao;
 	}
 
 	public Long getAtivo() {
@@ -134,7 +134,7 @@ public class Instituicao {
 		result = prime * result + ((dataFundacao == null) ? 0 : dataFundacao.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((codInstituicao == null) ? 0 : codInstituicao.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((paroquea == null) ? 0 : paroquea.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
@@ -171,10 +171,10 @@ public class Instituicao {
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (codInstituicao == null) {
+			if (other.codInstituicao != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!codInstituicao.equals(other.codInstituicao))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -201,7 +201,7 @@ public class Instituicao {
 
 	@Override
 	public String toString() {
-		return "Instituicao [id=" + id + ", ativo=" + ativo + ", dataFundacao=" + dataFundacao + ", descricao="
+		return "Instituicao [codInstituicao=" + codInstituicao + ", ativo=" + ativo + ", dataFundacao=" + dataFundacao + ", descricao="
 				+ descricao + ", endereco=" + endereco + ", nome=" + nome + ", paroquea=" + paroquea + ", telefone="
 				+ telefone + ", telefoneParoque=" + telefoneParoque + "]";
 	}

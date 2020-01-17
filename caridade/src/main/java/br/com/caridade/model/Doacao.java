@@ -18,8 +18,8 @@ public class Doacao {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "cod_item")
-	private Long codItem;
+	@Column(name = "cod_doacao")
+	private Long codDoacao;
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "item")
@@ -29,15 +29,16 @@ public class Doacao {
 	@Column(name = "peso_gramas")
 	private double pesoGramas;
 	
-	@Column(name = "id_tipo_doacao")
-	private Long idTipoDoacao;
+	@ManyToOne
+	@JoinColumn(name = "id_tipo_doacao")
+	private TipoDoacao tipoDoacao;
 
-	public Long getCodItem() {
-		return codItem;
+	public Long getCodDoacao() {
+		return codDoacao;
 	}
 
-	public void setCodItem(Long codItem) {
-		this.codItem = codItem;
+	public void setCodDoacao(Long codDoacao) {
+		this.codDoacao = codDoacao;
 	}
 
 	public String getItem() {
@@ -56,24 +57,24 @@ public class Doacao {
 		this.pesoGramas = pesoGramas;
 	}
 
-	public Long getIdTipoDoacao() {
-		return idTipoDoacao;
+	public TipoDoacao getTipoDoacao() {
+		return tipoDoacao;
 	}
 
-	public void setIdTipoDoacao(Long idTipoDoacao) {
-		this.idTipoDoacao = idTipoDoacao;
+	public void setTipoDoacao(TipoDoacao tipoDoacao) {
+		this.tipoDoacao = tipoDoacao;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codItem == null) ? 0 : codItem.hashCode());
-		result = prime * result + ((idTipoDoacao == null) ? 0 : idTipoDoacao.hashCode());
+		result = prime * result + ((codDoacao == null) ? 0 : codDoacao.hashCode());
 		result = prime * result + ((item == null) ? 0 : item.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(pesoGramas);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((tipoDoacao == null) ? 0 : tipoDoacao.hashCode());
 		return result;
 	}
 
@@ -86,15 +87,10 @@ public class Doacao {
 		if (getClass() != obj.getClass())
 			return false;
 		Doacao other = (Doacao) obj;
-		if (codItem == null) {
-			if (other.codItem != null)
+		if (codDoacao == null) {
+			if (other.codDoacao != null)
 				return false;
-		} else if (!codItem.equals(other.codItem))
-			return false;
-		if (idTipoDoacao == null) {
-			if (other.idTipoDoacao != null)
-				return false;
-		} else if (!idTipoDoacao.equals(other.idTipoDoacao))
+		} else if (!codDoacao.equals(other.codDoacao))
 			return false;
 		if (item == null) {
 			if (other.item != null)
@@ -103,13 +99,18 @@ public class Doacao {
 			return false;
 		if (Double.doubleToLongBits(pesoGramas) != Double.doubleToLongBits(other.pesoGramas))
 			return false;
+		if (tipoDoacao == null) {
+			if (other.tipoDoacao != null)
+				return false;
+		} else if (!tipoDoacao.equals(other.tipoDoacao))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Doacao [codItem=" + codItem + ", item=" + item + ", pesoGramas=" + pesoGramas + ", idTipoDoacao="
-				+ idTipoDoacao + "]";
+		return "Doacao [codDoacao=" + codDoacao + ", item=" + item + ", pesoGramas=" + pesoGramas + ", tipoDoacao="
+				+ tipoDoacao + "]";
 	}
 
 }
