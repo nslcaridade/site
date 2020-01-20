@@ -106,7 +106,7 @@ $(document).ready(function() {
 			  //data: JSON.parse(dataSend),
 			  success: function(resultado) {
 				  strJson = resultado;
-				  //console.log('DEBUG - strJson:'+JSON.stringify(strJson));
+				  console.log(JSON.stringify(strJson));
 				  var iCount = 0;
 				  for (var i = 0; i < resultado.length; i++) {
 						//console.log('DEBUG - length itens doados:'+resultado[i].itensDoados.length);

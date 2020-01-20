@@ -1,0 +1,59 @@
+<html !DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset=UTF-8>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample code - Traversing an HTML Table with JavaScript and DOM Interfaces</title>
+<script>
+var strJson=[{"ano":2020,"codInstituicao":3,"nome":"COMUNIDADE NEFTAI","mes":[{"descricao":"Jan","itensDoados":[{"peso":182,"quantidade":170,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":4,"nome":"ALAR","mes":[{"descricao":"Jan","itensDoados":[{"peso":378,"quantidade":624,"tipo":"alimentos"}]},{"descricao":"Jan","itensDoados":[{"peso":0,"quantidade":4,"tipo":"higiene"}]},{"descricao":"Jan","itensDoados":[{"peso":11,"quantidade":20,"tipo":"limpeza"}]}]},{"ano":2020,"codInstituicao":8,"nome":"CAPELA DO ALTO","mes":[{"descricao":"Jan","itensDoados":[{"peso":248,"quantidade":73,"tipo":"alimentos"}]},{"descricao":"Jan","itensDoados":[{"peso":0,"quantidade":6,"tipo":"higiene"}]},{"descricao":"Jan","itensDoados":[{"peso":0,"quantidade":9,"tipo":"vestuário"}]}]},{"ano":2020,"codInstituicao":9,"nome":"MISSÃO DE RUA PERPÉTUO SOCORRO","mes":[{"descricao":"Jan","itensDoados":[{"peso":132,"quantidade":10,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":10,"nome":"IDE E VIDA","mes":[{"descricao":"Jan","itensDoados":[{"peso":106,"quantidade":8,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":11,"nome":"FILHOS DA MISERICÓRDIA","mes":[{"descricao":"Jan","itensDoados":[{"peso":25,"quantidade":62,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":14,"nome":"SÃO PATRÍCIO","mes":[{"descricao":"Jan","itensDoados":[{"peso":132,"quantidade":10,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":15,"nome":"SANTA CECÍLIA","mes":[{"descricao":"Jan","itensDoados":[{"peso":132,"quantidade":10,"tipo":"alimentos"}]},{"descricao":"Jan","itensDoados":[{"peso":0,"quantidade":7,"tipo":"vestuário"}]}]},{"ano":2020,"codInstituicao":17,"nome":"JARDIM MUNHOZ","mes":[{"descricao":"Jan","itensDoados":[{"peso":132,"quantidade":10,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":18,"nome":"JOANA D'ARC","mes":[{"descricao":"Jan","itensDoados":[{"peso":132,"quantidade":10,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":19,"nome":"SANT'ANA","mes":[{"descricao":"Jan","itensDoados":[{"peso":132,"quantidade":10,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":20,"nome":"RAINHA SANTA ISABEL","mes":[{"descricao":"Jan","itensDoados":[{"peso":0,"quantidade":11,"tipo":"vestuário"}]},{"descricao":"Jan","itensDoados":[{"peso":147,"quantidade":11,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":21,"nome":"ARESAMA","mes":[{"descricao":"Jan","itensDoados":[{"peso":146,"quantidade":10,"tipo":"alimentos"}]},{"descricao":"Jan","itensDoados":[{"peso":0,"quantidade":6,"tipo":"vestuário"}]}]},{"ano":2020,"codInstituicao":22,"nome":"GOAS","mes":[{"descricao":"Jan","itensDoados":[{"peso":0,"quantidade":9,"tipo":"vestuário"}]}]},{"ano":2020,"codInstituicao":23,"nome":"SANTA TEREZINHA - VICENTINO","mes":[{"descricao":"Jan","itensDoados":[{"peso":132,"quantidade":10,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":24,"nome":"IMPERIAL","mes":[{"descricao":"Jan","itensDoados":[{"peso":147,"quantidade":11,"tipo":"alimentos"}]},{"descricao":"Jan","itensDoados":[{"peso":0,"quantidade":7,"tipo":"vestuário"}]}]},{"ano":2020,"codInstituicao":25,"nome":"RECICLAGEM","mes":[{"descricao":"Jan","itensDoados":[{"peso":102,"quantidade":7,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":33,"nome":"Eventual - Jair (RCC)","mes":[{"descricao":"Jan","itensDoados":[{"peso":14,"quantidade":1,"tipo":"alimentos"}]}]},{"ano":2020,"codInstituicao":888,"nome":"EVENTUAL","mes":[{"descricao":"Jan","itensDoados":[{"peso":29,"quantidade":2,"tipo":"alimentos"}]}]}];
+    function start() {
+        // get the reference for the body
+        var body = document.getElementsByTagName("body")[0];
+
+        // creates a <table> element and a <tbody> element
+        var tbl     = document.createElement("table");
+        var tblBody = document.createElement("tbody");
+
+        // creating all cells
+        for (var i = 0; i < strJson.length; i++) {
+            // creates a table row
+            var row = document.createElement("tr")
+			var cell = document.createElement("td");
+			var subCol = 1 + strJson[i].mes.length;
+			cell.setAttribute("rowspan",subCol);
+			var cellText = document.createTextNode(strJson[i].nome+":"+subCol);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+			tblBody.appendChild(row);
+			for ( var m = 0 ; m < strJson[i].mes.length; m++){
+				var rowM = document.createElement("tr")
+				var cellM = document.createElement("td");
+				var subColM = 1 + strJson[i].mes[m].itensDoados.length;
+				cellM.setAttribute("rowspan",subCol);
+				var cellMText = document.createTextNode(strJson[i].mes[m].descricao);
+				cellM.appendChild(cellMText);
+				rowM.appendChild(cellM);
+				tblBody.appendChild(rowM);
+				/*for ( var d = 0 ; d < strJson[i].mes[m].itensDoados.length; d++ ) {
+					var rowD = document.createElement("tr")
+					var cellD = document.createElement("td");
+					var cellDText = document.createTextNode(strJson[i].mes[m].itensDoados[d].tipo);
+					cellD.appendChild(cellDText);
+					rowD.appendChild(cellD);
+					tblBody.appendChild(rowD);
+				}*/
+			}
+        }
+
+        // put the <tbody> in the <table>
+        tbl.appendChild(tblBody);
+        // appends <table> into <body>
+        body.appendChild(tbl);
+        // sets the border attribute of tbl to 2;
+        tbl.setAttribute("border", "2");
+    }
+</script>
+</head>
+<body onload="start()">
+</body>
+</html>

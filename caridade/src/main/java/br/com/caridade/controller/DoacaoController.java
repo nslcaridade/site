@@ -295,22 +295,30 @@ public class DoacaoController {
 			if ( codInst == 0 || !codInst.equals(lAux) ) {
 				
 				if ( codInst > 0 ) {
-					lstRelatorioDoacaoDTO.add(relatorioDoacaoItensDTO);
+					relatorioDoacaoItensDTO.setNome(((String) objects[3]));
 					relatorioDoacaoItensDTO = new RelatorioDoacaoItensDTO();
+				} else {
+					relatorioDoacaoItensDTO.getMes().add(mes);
 				}
 				relatorioDoacaoItensDTO.setAno(ano.intValue());
 				relatorioDoacaoItensDTO.setCodInstituicao(new Long((int) objects[2]));
-				relatorioDoacaoItensDTO.setNome(((String) objects[3]));
+				lstRelatorioDoacaoDTO.add(relatorioDoacaoItensDTO);
+				mes = new Mes();
+				itensDoados = new ItensDoados();
+			} else {
+				relatorioDoacaoItensDTO.getMes().add(mes);
+				mes = new Mes();
 			}
+			
+			mes.setDescricao(((String) objects[1]));
 			codInst = new Long(((int) objects[2]));
+			
 			itensDoados.setPeso(Long.valueOf(((BigDecimal) objects[4]).longValue()));
 			itensDoados.setQuantidade(Long.valueOf(((BigDecimal) objects[5]).longValue()));
 			itensDoados.setTipo(((String) objects[6]));
-			mes.setDescricao(((String) objects[1]));
 			mes.getItensDoados().add(itensDoados);
-			relatorioDoacaoItensDTO.getMes().add(mes);
-			mes = new Mes();
 			itensDoados = new ItensDoados();
+			
 		}
 		
 		if ( codInst > 0 ) {

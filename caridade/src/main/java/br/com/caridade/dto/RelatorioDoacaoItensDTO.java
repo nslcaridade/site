@@ -15,6 +15,7 @@ public class RelatorioDoacaoItensDTO {
 		private List<ItensDoados> itensDoados;
 		
 		public Mes() {
+			descricao = "";
 			itensDoados = new ArrayList<ItensDoados>();
 		}
 		
@@ -67,7 +68,7 @@ public class RelatorioDoacaoItensDTO {
 
 		@Override
 		public String toString() {
-			return "Mes [descricao=" + descricao + ", itensDoados=" + itensDoados + "]";
+			return "{\"descricao\":\"" + descricao + "\", \"itensDoados\":" + itensDoados + "}";
 		}
 
 		public static class ItensDoados {
@@ -130,7 +131,7 @@ public class RelatorioDoacaoItensDTO {
 			}
 			@Override
 			public String toString() {
-				return "ItensDoados [peso=" + peso + ", quantidade=" + quantidade + ", tipo=" + tipo + "]";
+				return "{\"peso\":" + peso + ", \"quantidade\":" + quantidade + ", \"tipo\":\"" + tipo + "\"}";
 			}
 		}
 		
@@ -205,8 +206,7 @@ public class RelatorioDoacaoItensDTO {
 	}
 	@Override
 	public String toString() {
-		return "RelatorioDoacaoItensDTO [ano=" + ano + ", codInstituicao=" + codInstituicao + ", nome=" + nome
-				+ ", mes=" + mes + "]";
+		return "{\"ano\":" + ano + ", \"codInstituicao\":" + codInstituicao + ", \"nome\":\"" + nome + "\", \"mes\":" + mes + "}";
 	}
 
 }
