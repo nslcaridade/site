@@ -283,6 +283,7 @@ public class DoacaoController {
 		Long codInst = new Long(0);
 		ItensDoados itensDoados = new ItensDoados();
 		Mes mes = new Mes();
+		String nomeInstituicao = "";
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("doacao/anualItens");
@@ -295,24 +296,23 @@ public class DoacaoController {
 			if ( codInst == 0 || !codInst.equals(lAux) ) {
 				
 				if ( codInst > 0 ) {
-					relatorioDoacaoItensDTO.setNome(((String) objects[3]));
-					relatorioDoacaoItensDTO = new RelatorioDoacaoItensDTO();
-				} else {
+					relatorioDoacaoItensDTO.setNome(nomeInstituicao);
 					relatorioDoacaoItensDTO.getMes().add(mes);
+					relatorioDoacaoItensDTO.setCodInstituicao(codInst);
+					relatorioDoacaoItensDTO.setAno(ano.intValue());
+					lstRelatorioDoacaoDTO.add(relatorioDoacaoItensDTO);
+					relatorioDoacaoItensDTO = new RelatorioDoacaoItensDTO();
+					mes = new Mes();
 				}
-				relatorioDoacaoItensDTO.setAno(ano.intValue());
-				relatorioDoacaoItensDTO.setCodInstituicao(new Long((int) objects[2]));
-				lstRelatorioDoacaoDTO.add(relatorioDoacaoItensDTO);
-				mes = new Mes();
-				itensDoados = new ItensDoados();
-			} else {
+			}
+			if ( !mes.getDescricao().isEmpty() && ! nomeMes.equals(mes.getDescricao())) {
 				relatorioDoacaoItensDTO.getMes().add(mes);
 				mes = new Mes();
+				itensDoados = new ItensDoados();
 			}
-			
+			nomeInstituicao = ((String) objects[3]);
 			mes.setDescricao(((String) objects[1]));
 			codInst = new Long(((int) objects[2]));
-			
 			itensDoados.setPeso(Long.valueOf(((BigDecimal) objects[4]).longValue()));
 			itensDoados.setQuantidade(Long.valueOf(((BigDecimal) objects[5]).longValue()));
 			itensDoados.setTipo(((String) objects[6]));
@@ -322,6 +322,10 @@ public class DoacaoController {
 		}
 		
 		if ( codInst > 0 ) {
+			relatorioDoacaoItensDTO.setNome(nomeInstituicao);
+			relatorioDoacaoItensDTO.getMes().add(mes);
+			relatorioDoacaoItensDTO.setCodInstituicao(codInst);
+			relatorioDoacaoItensDTO.setAno(ano.intValue());
 			lstRelatorioDoacaoDTO.add(relatorioDoacaoItensDTO);
 		}
 		

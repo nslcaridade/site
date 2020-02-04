@@ -36,39 +36,35 @@
 		</table>
 		<div class="row">
 			<div class="col-md-12">
-				<table id="gridRel" class="table table-condensed table-hover table-striped" data-row-select="true" data-keep-selection="true">
-					<thead>
-						<tr>
-							<th data-column-id="id" data-identifier="true" data-type="numeric" data-visible="false" data-width="5%">ID</th>
-							<th data-column-id="ano" data-type="numeric" data-visible="false" data-width="5%">ANO</th>
-							<th data-column-id="entidade" data-type="text" data-visible="true" data-filterable="true" data-width="20%" >INSTITUIÇÃO</th>
-							<th data-column-id="mes" data-type="numeric" data-visible="true" data-width="5%">MES</th>
-							<th data-column-id="tipo" data-type="text" data-visible="true" data-filterable="true" data-width="20%" >TIPO</th>
-							<th data-column-id="quantidade" data-type="text" data-visible="true" data-filterable="true" data-width="20%" >QUANTIDADE</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-				<div class="row">
-					<div class="col-md-5"></div>
-					<div class="col-md-2">
-						<div class="heart" id="AjaxLoader" ></div>
-					</div>
-					<div class="col-md-5"></div>
-				</div>
+			<table id="gridRel" class="table table-condensed table-hover table-striped" data-row-select="true" data-keep-selection="true">
+			</table>
 			</div>
-			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-5"></div>
+			<div class="col-md-2">
+				<div class="heart" id="AjaxLoader" ></div>
+			</div>
+			<div class="col-md-5"></div>
 		</div>
 	</div>
 </body>
 <script src="../lib/jquery-1.11.1.min.js"></script>
-	<!-- >script src="../js/bootstrap.js"></script-->
 	<script src="../dist/jquery.bootgrid.js"></script>
 	<script src="../dist/jquery.bootgrid.fa.js"></script>
 	<script src="../js/bootstrap.bundle.js"></script>
 	<script src="../js/jquery.rowspanizer.js"></script>
 <script>
+iRowColM = 0;
+
+function calculaItensMes(strJsonM){
+	//console.log(JSON.stringify(strJsonM));
+	iRowColM = 0;
+	for ( var m = 0 ; m < strJsonM.length; m++){
+		iRowColM += strJsonM[m].itensDoados.length;
+	}
+}
+
 for( y = 2017; y <= 2500 ; y++){
 	var optn = document.createElement("OPTION");
 	optn.text = y;
@@ -80,58 +76,99 @@ for( y = 2017; y <= 2500 ; y++){
 }
 
 $(document).ready(function() {
-	$('#AjaxLoader').hide(); 
-	$(document).ready(function() {
-		$("#gridRel").bootgrid({
-				formatters : {
-					"link" : function(column, row) {
-						return "<a href=\"#\">" + column.id + ": "
-								+ row.id + "</a>";
-					}
-				},
-				rowCount : [ -1, 10, 50, 75 ]
-			});
-	});
-	
+	$('#AjaxLoader').hide();
 	$('#ano').change(function() {
+		$('#AjaxLoader').show();
 		var anoSelecionado = $(this).children("option:selected").val();
-		$("#gridRel").bootgrid("clear");
-		//console.log('anoSelecionado:'+anoSelecionado);
-		$('#AjaxLoader').show();  
+		if ( document.getElementById("gridRel") ){
+			var tableFull = document.getElementById("gridRel");
+			tableFull.remove();
+		}
 		$.ajax({
-			  type: "GET",
-			  url: "anualItens/"+anoSelecionado,
-			  contentType: "application/json; charset=utf-8",
-			  //data: {anoSelecionado},
-			  //data: JSON.parse(dataSend),
-			  success: function(resultado) {
-				  strJson = resultado;
-				  console.log(JSON.stringify(strJson));
-				  var iCount = 0;
-				  for (var i = 0; i < resultado.length; i++) {
-						//console.log('DEBUG - length itens doados:'+resultado[i].itensDoados.length);
-						for (var y = 0; y < resultado[i].mes.length; y++) {
-							for (var a = 0; a < resultado[i].mes[y].itensDoados.length; a++) {
-								$("#gridRel").bootgrid("append",[{
-									id : iCount,
-									ano : resultado[i].ano,
-									mes : resultado[i].mes[y].descricao,
-									entidade: resultado[i].nome,
-									quantidade: resultado[i].mes[y].itensDoados[a].quantidade,
-									tipo: resultado[i].mes[y].itensDoados[a].tipo
-								}]);
-								iCount++;
-							}
-						}
+			type: "GET",
+			url: "anualItens/"+anoSelecionado,
+			contentType: "application/json; charset=utf-8",
+			success: function(resultado) {
+			strJson = resultado;
+			var iCount = 0;
+ 		    var body = document.getElementsByTagName("body")[0];
+
+	        var tbl = document.createElement("table");
+	        tbl.setAttribute("id", "gridRel");
+	        tbl.setAttribute("class", 'table table-condensed table-hover table-striped');
+	        var tblBody = document.createElement("tbody");
+			var iRowTot = 0;
+			var tblThInst   = document.createElement("th");
+			tblThInst.setAttribute("style", 'border:1px solid black;background-color: #DFEFF1');
+			var thTextInst = document.createTextNode("Instituição");
+			tblThInst.appendChild(thTextInst);
+			var tblThMes   = document.createElement("th");
+			tblThMes.setAttribute("style", 'border:1px solid black;background-color: #DFEFF1');
+			var thTextMes = document.createTextNode("Mês");
+			tblThMes.appendChild(thTextMes);
+			var tblThTp   = document.createElement("th");
+			tblThTp.setAttribute("style", 'border:1px solid black;background-color: #DFEFF1');
+			var thTextTp = document.createTextNode("Tipo e Quantidade");
+			tblThTp.appendChild(thTextTp);
+					
+			tblBody.appendChild(tblThInst);
+			tblBody.appendChild(tblThMes);
+			tblBody.appendChild(tblThTp);
+					
+					
+	        for (var i = 0; i < strJson.length; i++) {
+	            // creates a table row
+	        	var row = document.createElement("tr")
+				var cell = document.createElement("td");
+	            if ( i % 2 == 0 )
+	            	cell.setAttribute("style", 'border:1px solid black;background-color: #EAEAEA');
+	            else
+	            	cell.setAttribute("style", 'border:1px solid black;background-color: #F6F6F6');
+				var subCol = 1+strJson[i].mes.length;
+				calculaItensMes(strJson[i].mes);
+				iRowTot = subCol + iRowColM;
+				cell.setAttribute("rowspan",iRowTot);
+				var cellText = document.createTextNode(strJson[i].nome);
+	            cell.appendChild(cellText);
+				row.appendChild(cell);
+				tblBody.appendChild(row);
+	            
+				for ( var m = 0 ; m < strJson[i].mes.length; m++){
+					var rowM = document.createElement("tr")
+					var cellM = document.createElement("td");
+					if ( m % 2 == 0 )
+						cellM.setAttribute("style", 'border:1px solid black;background-color: #EAEAEA');
+		            else
+		            	cellM.setAttribute("style", 'border:1px solid black;background-color: #F6F6F6');
+					var subColM = 1+strJson[i].mes[m].itensDoados.length;
+					cellM.setAttribute("rowspan",subColM);
+					var cellMText = document.createTextNode(strJson[i].mes[m].descricao);
+					cellM.appendChild(cellMText);
+					rowM.appendChild(cellM);
+					tblBody.appendChild(rowM);
+					
+					for ( var d = 0 ; d < strJson[i].mes[m].itensDoados.length; d++ ) {
+						var rowD = document.createElement("tr")
+						var cellD = document.createElement("td");
+					    cellD.setAttribute("style", 'border:1px solid black;background-color: #F6F6F6');
+						var cellDText = document.createTextNode(strJson[i].mes[m].itensDoados[d].tipo+ " = "+ strJson[i].mes[m].itensDoados[d].quantidade);
+						cellD.appendChild(cellDText);
+						rowD.appendChild(cellD);
+						tblBody.appendChild(rowD);
 					}
-				  //$("#gridRel").rowspanizer({columns: [2,3,4]});
-				  $('#AjaxLoader').hide();
-			  } ,
-			  error: function(e){
+
+				}
+
+		        tbl.appendChild(tblBody);
+		        body.appendChild(tbl);
+		        tbl.setAttribute("border", "0");
+		    }
+			$('#AjaxLoader').hide();
+			},
+			error: function(e){
 				console.log('ERRO:' + JSON.stringify(e));
-			  }
+			}
 		});
-		
 	}); 
 });
 
