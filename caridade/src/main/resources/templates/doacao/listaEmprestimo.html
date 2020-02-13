@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>NSL</title>
+<link rel="shortcut icon" th:href="@{../image/caridade.ico}" />
+<link href="../css/bootstrap.css" rel="stylesheet" />
+<link href="../dist/jquery.bootgrid.css" rel="stylesheet" />
+<link href="../css/menu-customer.css" rel="stylesheet" />
+<link href="../css/fontes-customer.css" rel="stylesheet" />
+<script type="text/javascript" src="../js/moderniz.2.8.1.js"></script>
+
+</head>
+<body>
+	<header>
+		<div th:replace="fragmentos/header :: cabecalho"></div>
+	</header>
+	<header id="header" class="navbar navbar-default navbar-fixed-top">
+		<div th:replace="fragmentos/header :: menu"></div>
+	</header>
+
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- div class="table-responsive"-->
+				<table id="gridUserGt" class="table table-condensed table-hover table-striped" data-row-select="true" data-keep-selection="true">
+					<thead>
+						<tr>
+							<th data-column-id="item" data-type="text" data-visible="true" data-filterable="true" data-width="20%" >ITEM</th>
+							<th data-column-id="descricao" data-type="text" data-visible="true" data-filterable="true" data-width="20%" >INFORMAÇÃO</th>
+							<th data-column-id="nome" data-type="text" data-visible="true" data-filterable="true" data-width="20%" >RESPONSÁVEL</th>
+							<th data-column-id="celular" data-type="text" data-visible="true" data-width="10%" >TELEFONE</th>
+							<th data-column-id="dataEmprestimo" data-type="text" data-visible="true" data-width="10%" >DATA DO EMPRESTIMO</th>
+							<th data-column-id="dataDevolucao" data-type="text" data-visible="true" data-width="10%" >DATA DA DEVOLUÇÃO</th>
+							<th data-column-id="entrege" data-type="text" data-visible="true" data-width="10%" >STATUS</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="emprestimo: ${emprestimo}">
+							<td class="col">
+								<span th:text="${emprestimo.doacao.item}"></span>
+							</td>
+							<td class="col">
+								<span th:text="${emprestimo.descricao}"></span>
+							</td>
+							<td class="col">
+								<span th:text="${emprestimo.pastoralCaridade.nome}"></span>
+							</td>
+							<td class="col">
+								<span th:text="${emprestimo.pastoralCaridade.celular}"></span>
+							</td>
+							<td class="col">
+								<span th:text="${emprestimo.dataEmprestimo}"></span>
+							</td>
+							<td class="col">
+								<span th:text="${emprestimo.dataDevolucao}"></span>
+							</td>
+							<td class="col">
+								<span th:if="${emprestimo.entregue == 0}" th:text="PENDENTE"></span>
+								<span th:if="${emprestimo.entregue == 1}" th:text="ENTREGUE"></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- /div-->
+			</div>
+			<div id="saida" class="col-md-3 visible-md visible-lg"></div>
+		</div>
+	</div>
+<script src="../lib/jquery-1.11.1.min.js"></script>
+<!-- >script src="../js/bootstrap.js"></script-->
+<script src="../dist/jquery.bootgrid.js"></script>
+<script src="../dist/jquery.bootgrid.fa.js"></script>
+<script src="../js/bootstrap.bundle.js"></script>
+<script>
+$(document).ready(function() {
+	$("#gridUserGt").bootgrid({
+			formatters : {
+				"link" : function(column, row) {
+					return "<a href=\"#\">" + column.id + ": "
+							+ row.id + "</a>";
+				}
+			},
+			rowCount : [ -1, 10, 50, 75 ]
+		});
+});
+</script>		
+	
+<!-- div th:replace="fragmentos/footer :: rodape"></div-->
+</body>
+</html>

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.caridade.definitions.Constantes;
 import br.com.caridade.dto.DoacaoDTO;
 import br.com.caridade.dto.HistoricoDoacoesDTO;
 import br.com.caridade.dto.RelatorioDoacaoDTO;
@@ -29,13 +30,17 @@ import br.com.caridade.dto.RelatorioDoacaoItensDTO.Mes.ItensDoados;
 import br.com.caridade.dto.RetornoDTO;
 import br.com.caridade.mensagem.RelatorioMensal;
 import br.com.caridade.model.Doacao;
+import br.com.caridade.model.Emprestimo;
 import br.com.caridade.model.HistoricoDoacao;
 import br.com.caridade.model.Instituicao;
 import br.com.caridade.model.Mensagem;
+import br.com.caridade.model.PastoralCaridade;
 import br.com.caridade.model.TipoDoacao;
 import br.com.caridade.repository.DoacaoRepository;
+import br.com.caridade.repository.EmprestimoRepository;
 import br.com.caridade.repository.HistoricoDoacaoRepository;
 import br.com.caridade.repository.InstituicaoRepository;
+import br.com.caridade.repository.PastoralCaridadeRepository;
 import br.com.caridade.repository.RelatorioDoacaoRepository;
 import br.com.caridade.repository.TipoDoacaoRepository;
 import br.com.caridade.util.GravaRelatorioAnual;
@@ -62,12 +67,28 @@ public class DoacaoController {
 	@Autowired
 	TipoDoacaoRepository tipoDoacaoRepository;
 	
+	@Autowired
+    PastoralCaridadeRepository pastoralCaridadeRepository;
+	
+	@Autowired
+	EmprestimoRepository emprestimoRepository;
+	
 	@GetMapping("/listar")
 	public ModelAndView lista() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("doacao/listar");
 		List<Doacao> findAll = doacaoRepository.findAll();
 		mv.addObject("doacao", findAll);
+		mv.setStatus(HttpStatus.OK);
+		return mv;
+	}
+	
+	@GetMapping("/listaEmprestimo")
+	public ModelAndView listaEmprestimo() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("doacao/listaEmprestimo");
+		List<Emprestimo> findAll = emprestimoRepository.findAll();
+		mv.addObject("emprestimo", findAll);
 		mv.setStatus(HttpStatus.OK);
 		return mv;
 	}
@@ -84,6 +105,34 @@ public class DoacaoController {
 		List<Doacao> findAll2 = doacaoRepository.findAll();
 		mv.addObject("itensDoacao", findAll2);
 		mv.setStatus(HttpStatus.OK);
+		return mv;
+	}
+	
+	@GetMapping("/emprestimo")
+	public ModelAndView buscaInstituicaoAndDoacaoAndParticipante() {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("doacao/emprestimo");
+		List<PastoralCaridade> ltPast = pastoralCaridadeRepository.findAllByAtivos(Constantes.ATIVO);
+		mv.addObject("participante", ltPast);
+		
+		TipoDoacao tipoDoacao = new TipoDoacao();
+		tipoDoacao.setIdTipoDoacao(new Long(Constantes.EMPRESTIMO));
+		List<Doacao> findAll2 = doacaoRepository.findByTipoDoacao(tipoDoacao);
+		mv.addObject("doacao", findAll2);
+		mv.setStatus(HttpStatus.OK);
+		return mv;
+	}
+	
+	@PostMapping("/emprestimo/inserir")
+	public ModelAndView insereEmprestimo(@RequestBody List<Emprestimo> ltEmp) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("doacao/preparar");
+		mv.setStatus(HttpStatus.OK);
+		for (Emprestimo emprestimo : ltEmp) {
+			emprestimoRepository.saveAndFlush(emprestimo);
+		}
+		
 		return mv;
 	}
 	

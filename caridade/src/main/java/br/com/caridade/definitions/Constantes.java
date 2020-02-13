@@ -7,6 +7,8 @@ public final class Constantes {
 	public static final int QUINTA       = 5;
 	public static final int SABADO       = 7;
 	public static final int DOMINGO      = 0;
+	
+	public static final int EMPRESTIMO   = 10;
 
 	public static final String SQUARTA   = "Quarta";
 	public static final String SQUINTA   = "Quinta";
