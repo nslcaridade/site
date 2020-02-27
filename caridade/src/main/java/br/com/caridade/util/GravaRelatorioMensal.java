@@ -33,8 +33,8 @@ public class GravaRelatorioMensal {
 		
 		PdfPTable table = new PdfPTable(1);
 		table.setWidthPercentage(50);
-		Image img = Image.getInstance("C:\\Users\\Alexandre\\git\\site\\caridade\\src\\main\\resources\\static\\image\\caridade.PNG");
-		//Image img = Image.getInstance("/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/caridade.PNG");
+		//Image img = Image.getInstance("C:\\Users\\Alexandre\\git\\site\\caridade\\src\\main\\resources\\static\\image\\caridade.PNG");
+		Image img = Image.getInstance("/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/caridade.PNG");
 		img.scalePercent(4);
 		//img.setAbsolutePosition(300f, 555f);//PARA COURIER
 		PdfPCell itens = new PdfPCell(img, false);
@@ -122,8 +122,8 @@ public class GravaRelatorioMensal {
 
 		try {
 
-			String fileName = "C:\\Users\\alexandre\\Documents\\relatorio_" + instituicao.getCodInstituicao() + ".pdf";
-			//String fileName = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/relatorio_"+instituicao.getCodInstituicao()+".pdf";
+			//String fileName = "C:\\Users\\alexandre\\Documents\\relatorio_" + instituicao.getCodInstituicao() + ".pdf";
+			String fileName = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/relatorio_"+instituicao.getCodInstituicao()+".pdf";
 			File arq = new File(fileName);
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
