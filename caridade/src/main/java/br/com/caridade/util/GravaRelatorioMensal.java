@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import com.itextpdf.io.source.ByteArrayOutputStream;
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -26,6 +28,21 @@ import br.com.caridade.mensagem.RelatorioMensal;
 import br.com.caridade.model.Instituicao;
 
 public class GravaRelatorioMensal {
+	
+	public static PdfPTable doImage() throws BadElementException, MalformedURLException, IOException {
+		
+		PdfPTable table = new PdfPTable(1);
+		table.setWidthPercentage(50);
+		Image img = Image.getInstance("C:\\Users\\Alexandre\\git\\site\\caridade\\src\\main\\resources\\static\\image\\caridade.PNG");
+		//Image img = Image.getInstance("/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/caridade.PNG");
+		img.scalePercent(4);
+		//img.setAbsolutePosition(300f, 555f);//PARA COURIER
+		PdfPCell itens = new PdfPCell(img, false);
+		itens.setBorder(Rectangle.NO_BORDER);
+		itens.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table.addCell(itens);
+		return table;
+	}
 
 	public static PdfPTable doHeader() throws DocumentException {
 		//PdfPTable table = new PdfPTable(new float[] { 14f, 8f, 5f });
@@ -105,8 +122,8 @@ public class GravaRelatorioMensal {
 
 		try {
 
-			//String fileName = "C:\\Users\\alexandre.duarte\\Documents\\relatorio_" + instituicao.getId() + ".pdf";
-			String fileName = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/relatorio_"+instituicao.getCodInstituicao()+".pdf";
+			String fileName = "C:\\Users\\alexandre\\Documents\\relatorio_" + instituicao.getCodInstituicao() + ".pdf";
+			//String fileName = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/relatorio_"+instituicao.getCodInstituicao()+".pdf";
 			File arq = new File(fileName);
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -115,14 +132,8 @@ public class GravaRelatorioMensal {
 			PdfWriter.getInstance(document, new FileOutputStream(arq));
 			// PdfWriter.getInstance(document, ps);
 			document.open();
-
 			document.add(new Paragraph(""));
-			//Image img = Image.getInstance("C:\\Users\\alexandre.duarte\\Documents\\workspace-sts-3.9.8.RELEASE\\caridade\\src\\main\\resources\\static\\image\\caridade.PNG");
-			Image img = Image.getInstance("/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/caridade.PNG");
-			img.scalePercent(8);
-			// img.setAbsolutePosition(300f, 555f);//PARA COURIER
-			img.setAbsolutePosition(150f, 800f);
-			document.add(img);
+			document.add(doImage());
 
 			Font f1 = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
 			f1.setColor(BaseColor.BLACK);
@@ -173,12 +184,12 @@ public class GravaRelatorioMensal {
 				celulaQtd.setBackgroundColor(baseColor);
 				lQtd += relatoriMensal.getQuantidade();
 
-				/*
-				 * PdfPCell celulaPeso = new PdfPCell(new
-				 * Phrase(UtilsTools.formatNumber(relatoriMensal.getPeso()), forte));
-				 * celulaPeso.setHorizontalAlignment(Element.ALIGN_CENTER);
-				 * celulaPeso.setBackgroundColor(baseColor); lPeso += relatoriMensal.getPeso();
-				 */
+				
+				//PdfPCell celulaPeso = new PdfPCell(new
+				//Phrase(UtilsTools.formatNumber(relatoriMensal.getPeso()), forte));
+				//celulaPeso.setHorizontalAlignment(Element.ALIGN_CENTER);
+				//celulaPeso.setBackgroundColor(baseColor); lPeso += relatoriMensal.getPeso();
+				 
 
 				table.addCell(celulaItem);
 				table.addCell(celulaQtd);

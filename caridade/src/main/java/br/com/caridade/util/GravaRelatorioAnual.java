@@ -5,12 +5,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 
 import com.itextpdf.io.source.ByteArrayOutputStream;
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -50,6 +52,20 @@ import br.com.caridade.dto.RelatorioDoacaoDTO;
 	 * 
 	 * System.out.println("Gravou"); return; }
 	 */
+	public static PdfPTable doImage() throws BadElementException, MalformedURLException, IOException {
+		
+		PdfPTable table = new PdfPTable(1);
+		table.setWidthPercentage(50);
+		Image img = Image.getInstance("C:\\Users\\Alexandre\\git\\site\\caridade\\src\\main\\resources\\static\\image\\caridade.PNG");
+		//Image img = Image.getInstance("/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/caridade.PNG");
+		img.scalePercent(4);
+		//img.setAbsolutePosition(300f, 555f);//PARA COURIER
+		PdfPCell itens = new PdfPCell(img, false);
+		itens.setBorder(Rectangle.NO_BORDER);
+		itens.setHorizontalAlignment(Element.ALIGN_CENTER);
+		table.addCell(itens);
+		return table;
+	}
 	
 	public static PdfPTable doHeader(Long ano) throws DocumentException {
 		
@@ -189,8 +205,8 @@ import br.com.caridade.dto.RelatorioDoacaoDTO;
 		document.setPageSize(PageSize.A4.rotate());
 	      try {
 
-	              //String fileName = "C:\\Users\\alexandre.duarte\\Documents\\relatorio.pdf";
-	              String fileName = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/relatorio.pdf";
+	              String fileName = "C:\\Users\\alexandre\\Documents\\relatorio.pdf";
+	              //String fileName = "/home/disdi/disdi.uh-app.com.br/webapps/caridade/relatorio.pdf";
 	              File arq = new File(fileName);
 	              
 	              ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -208,12 +224,7 @@ import br.com.caridade.dto.RelatorioDoacaoDTO;
 			 * ImageDataFactory.create(imagemArq); Image img = new Image(dataImg);
 			 */
 	              document.add(new Paragraph(""));
-	              //Image img = Image.getInstance("C:\\Users\\alexandre.duarte\\Documents\\workspace-sts-3.9.8.RELEASE\\caridade\\src\\main\\resources\\static\\image\\caridade.PNG");
-	              Image img = Image.getInstance("/home/disdi/disdi.uh-app.com.br/webapps/caridade/WEB-INF/classes/static/image/caridade.PNG");
-	              img.scalePercent(8);
-	              //img.setAbsolutePosition(300f, 555f);//PARA COURIER
-	              img.setAbsolutePosition(280f, 545f);
-	              document.add(img);
+	              document.add(doImage());
 				 
 	              
 	              Iterator<RelatorioDoacaoDTO> itRel = ltRel.iterator();
